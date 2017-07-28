@@ -1,0 +1,108 @@
+.navbar-custom {
+  background: #fff;
+  font-family: 'Josefin Sans', sans-serif;
+  text-transform: uppercase;
+  font-weight: 500;
+  border: none;
+}
+.navbar-custom .navbar-brand {
+  color: black;
+}
+.navbar-custom, .navbar-brand:hover,
+.navbar-custom, .navbar-brand:focus,
+.navbar-custom, .navbar-brand:active,
+.navbar-custom, .navbar-brand.active {
+  color: #f1b200;
+}
+.navbar-custom .navbar-nav {
+  letter-spacing: 1px;
+}
+.navbar-custom .navbar-nav li a {
+  color: black;
+}
+.navbar-custom .navbar-nav li a:hover {
+  color: #f1b200;
+}
+.navbar-custom .navbar-nav li a:focus,
+.navbar-custom .navbar-nav li a:active {
+  color: black;
+}
+.navbar-custom .navbar-nav li.active a{
+  color: orange;
+  background: black;
+}
+.navbar-custom .navbar-nav li.active a:hover,
+.navbar-custom .navbar-nav li.active a:focus,
+.navbar-custom .navbar-nav li.active a:active {
+  color: orange;
+  background: black;
+}
+.navbar-custom .navbar-toggle {
+  color: black;
+  background-color: white;
+  text-transform: uppercase;
+  font-size: 10px;
+  border-color: black;
+}
+.navbar-custom .navbar-toggle:hover,
+.navbar-custom .navbar-toggle:focus {
+  background-color: #white;
+  color: #f1b200;
+  border-color: #f1b200;
+}
+@media (min-width:768px) {
+  .navbar-custom {
+    padding: 25px 0;
+    -webkit-transition: padding 0.3s;
+    -moz-transition: padding 0.3s;
+    transition: padding 0.3s;
+  }
+  .navbar-custom .navbar-brand {
+    font-size: 2em;
+    -webkit-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    transition: all 0.3s;
+  }
+  .navbar-custom.affix {
+    padding: 10px 0;
+  }
+  .navbar-custom.affix .navbar-brand{
+    font-size: 2em;
+  }
+}
+header {
+  text-align: center;
+  background: #fff;
+  color: black;
+}
+header .container {
+  padding-top:50px;
+  padding-bottom: 25px;
+}
+header img {
+  display: block;
+  margin: 0 auto 20px;
+}
+header .intro-text .name {
+  display: block;
+  font-family: 'Bellefair', serif;
+  text-transform: uppercase;
+  font-weight: 100;
+  font-size: 3em;
+}
+header .intro-text .skills {
+  font-size: 1.25em;
+  font-weight: 300;
+}
+body {
+  font-family: 'Lato', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+}
+
+p {
+  font-size: 18px;
+  font-family: 'Bellefair', serif;
+}
+p.small{
+  font-size: 16px;
+}
