@@ -1,0 +1,243 @@
+/*stylesheet for the resume section*/
+
+.resume-wrapper {
+    color: black;
+    font-size: 14px;
+    padding:30px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    max-width: 960px;
+    margin: 0 auto;
+    position: relative;
+    box-shadow: 0px 2px 4px rgba(0,0,0,.1);    
+    overflow:hidden;
+}
+.resume-wrapper h1, h2, h3, h4, h5, h6 {
+    font-weight: 300;
+}
+.resume-wrapper a {
+    color: #627F4C;
+    -webkit-transition: all 0.4s ease-in-out;
+    -moz-transition: all 0.4s ease-in-out;
+    -ms-transition: all 0.4s ease-in-out;
+    -o-transition: all 0.4s ease-in-out;
+}
+.resume-wrapper p{
+    line-height: 1.5;
+}
+.resume-wrapper .sidebar-wrapper {
+    background: #627F4C;
+    position: absolute;
+    right: 0;
+    width: 240px;
+    height: 100%;
+    min-height: 800px;
+    color: white;
+}
+.resume-wrapper .sidebar-wrapper a{
+    color: white;
+}
+.resume-wrapper .sidebar-wrapper .profile-container {
+    padding: 30px;
+    text-align: center;
+    background-color:#627F4C;
+}
+.resume-wrapper .sidebar-wrapper img{
+    max-width: 100%;
+    border-radius: 50%
+}
+.resume-wrapper .sidebar-wrapper .name {
+    font-size: 25px;
+    font-weight: 500;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+.resume-wrapper .sidebar-wrapper .tagline {
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.resume-wrapper .sidebar-wrapper .profile {
+    margin-bottom: 40px;
+}
+.resume-wrapper .sidebar-wrapper .contact-list .fa{
+    margin-right:5px;
+    font-size: 18px;
+    vertical-align: middle;
+}
+.resume-wrapper .sidebar-wrapper .contact-list li{
+    margin-bottom: 15px;
+}
+.resume-wrapper .sidebar-wrapper .contact-list .email .fa {
+    font-size: 14px;
+}
+.resume-wrapper .sidebar-wrapper .container-block {
+    padding: 30px;
+}
+.resume-wrapper .sidebar-wrapper .container-block-title{
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+.resume-wrapper .sidebar-wrapper .degree {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.resume-wrapper .sidebar-wrapper .education-container .item{
+    margin-bottom: 15px;
+}
+.resume-wrapper .sidebar-wrapper .education-container .item:last-child {
+    margin-bottom:0;
+}
+.resume-wrapper .sidebar-wrapper .education-container .meta{
+    font-weight: 300;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+.resume-wrapper .sidebar-wrapper .education-container .time{
+    font-weight: 300;
+    margin-bottom: 0px;
+}
+.resume-wrapper .sidebar-wrapper .interests-list{
+    margin-bottom: 0;
+}
+.resume-wrapper .sidebar-wrapper .interests-list li{
+    margin-bottom: 10px;
+}
+.resume-wrapper .sidebar-wrapper .interests-list li:last-child{
+    margin-bottom: 0;
+}
+.resume-wrapper .main-wrapper {
+    background: white;
+    padding: 0px;
+    padding-right: 270px;
+}
+.resume-wrapper .main-wrapper .section-title {
+    text-transform: uppercase;
+    font-size: 20px;
+    font-weight: 300;
+    color: black;
+    position: relative;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.resume-wrapper .main-wrapper .section-title .fa{
+    width: 30px;
+    height: 30px;
+    margin-right: 8px;
+    display: inline-block;
+    color: black;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    -moz-background-clip:padding;
+    -webkit-background-clip: padding-box;
+    background-clip: padding-box;
+    background: white;
+    text-align: center;
+    padding-top: 8px;
+    font-size: 16px;
+    position: relative;
+    top:-2px;
+}
+.resume-wrapper .main-wrapper .section {
+    margin-bottom: 60px;
+    padding: 0 0;
+}
+.resume-wrapper .main-wrapper .experiences-section .item{
+    margin-bottom: 30px;
+}
+.resume-wrapper .main-wrapper .upper-row{
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2px;
+}
+.resume-wrapper .main-wrapper .job-title{
+    color: black;
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0;
+    font-weight: 300;
+}
+.resume-wrapper .main-wrapper .time{
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: black;
+}
+.resume-wrapper .main-wrapper .company {
+    margin-bottom: 10px;
+    color: black;
+}
+.resume-wrapper .main-wrapper .project-title{
+    font-size: 16px;
+    font-weight: 300;
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.resume-wrapper .main-wrapper .projects-section .intro{
+    margin-bottom: 30px;
+}
+.resume-wrapper .main-wrapper .projects-section .item{
+    margin-bottom: 15px;
+}
+.resume-wrapper .main-wrapper .projects-section .project-tagline{
+    font-size: 16px;
+}
+.resume-wrapper .skillset .item {
+    margin-bottom: 15px;
+    overflow: hidden;
+}
+.resume-wrapper .skillset .level-title {
+    font-size: 14px;
+    margin-top: 0;
+    margin-bottom: 12px;
+}
+.resume-wrapper .skillset .level-bar {
+    font-size: 12px;
+    background: #f5f5f5;
+}
+.resume-wrapper .skillset .level-bar-inner{
+    height: 12px;
+    background: #627F4C;
+}
+
+@media (max-width: 767px)
+{
+    .resume-wrapper .sidebar-wrapper {
+        position: static;
+        width: inherit;
+    }
+    .resume-wrapper .main-wrapper {
+        padding: 30px;
+    }
+    .resume-wrapper .main-wrapper .time{
+        position:static;
+        display: block;
+        margin-top: 5px;
+    }
+    .resume-wrapper .main-wrapper .upper-row{
+        margin-bottom: 0;
+    }
+}
+@media (min-width: 992px)
+{
+    .resume-wrapper .skillset .level-title {
+        display: inline-block;
+        float: left;
+        width: 30px;
+        margin-bottom: 0;
+    }
+    .resume-wrapper .skillset .level-bar {
+        display: inline-block;
+        width: 70%;
+        float: left;
+        position: relative;
+        top: 1px;
+    }
+}
