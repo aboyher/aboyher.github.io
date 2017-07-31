@@ -327,6 +327,10 @@ color: black;
 .btn-success .badge {
     color: orange;
 }
+#downloadbtn{
+    background-color: white;
+    color:#627F4C;
+}
 
 
 
