@@ -225,7 +225,7 @@
         margin-bottom: 0;
     }
 }
-@media (min-width: 992px)
+/*@media (min-width: 992px)
 {
     .resume-wrapper .skillset .level-title {
         display: inline-block;
@@ -240,4 +240,4 @@
         position: relative;
         top: 1px;
     }
-}
+}*/
