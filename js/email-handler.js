@@ -1,6 +1,6 @@
 // get all data in form and return object
 function getFormData() {
-    var form = document.getElementById("contact");
+    var form = document.getElementById("contactForm");
   var elements = form.elements; // all form elements
   var fields = Object.keys(elements).map(function(k) {
     if(elements[k].name !== undefined) {
@@ -53,7 +53,7 @@ function handleFormSubmit(event) {  // handles form submit withtout any jquery
     xhr.onreadystatechange = function() {
         console.log( xhr.status, xhr.statusText )
         console.log(xhr.responseText);
-        document.getElementById('contact').style.display = 'none'; // hide form
+        document.getElementById('contactForm').style.display = 'none'; // hide form
         document.getElementById('thankyou_message').style.display = 'block';
         
         
