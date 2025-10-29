@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart TV Profile Button Prototype</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="page-header">
+        <h1>Dedicated Profile Button for Smart TV Remotes</h1>
+        <p>A medium-fidelity prototype exploring improved profile switching on streaming devices</p>
+        <p class="author">Created by Adam Boyher</p>
+    </header>
+    <div class="container">
+        <!-- Smart TV Screen -->
+        <div class="tv-container">
+            <div class="tv-frame">
+                <div id="tv-screen" class="tv-screen">
+                    <!-- Home Screen -->
+                    <div id="home-screen" class="screen active">
+                        <div class="top-bar">
+                            <div class="left-section">
+                                <div class="current-profile focusable" id="profile-badge">
+                                    <span id="current-profile-name">Profile 1</span>
+                                </div>
+                                <div class="main-menu">
+                                    <div class="menu-tab active focusable" data-tab="home">Home</div>
+                                    <div class="menu-tab focusable" data-tab="browse">Browse</div>
+                                    <div class="menu-tab focusable" data-tab="my-list">My List</div>
+                                    <div class="menu-tab focusable" data-tab="settings">Settings</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="content-rows">
+                            <div class="content-row">
+                                <h2>Continue Watching</h2>
+                                <div class="content-items">
+                                    <div class="content-item focusable" data-show="show-1">
+                                        <div class="item-title">Show 1</div>
+                                    </div>
+                                    <div class="content-item focusable" data-show="show-2">
+                                        <div class="item-title">Show 2</div>
+                                    </div>
+                                    <div class="content-item focusable" data-show="show-3">
+                                        <div class="item-title">Show 3</div>
+                                    </div>
+                                    <div class="content-item focusable" data-show="show-4">
+                                        <div class="item-title">Show 4</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="content-row">
+                                <h2>Trending Now</h2>
+                                <div class="content-items">
+                                    <div class="content-item focusable" data-show="show-5">
+                                        <div class="item-title">Show 5</div>
+                                    </div>
+                                    <div class="content-item focusable" data-show="show-6">
+                                        <div class="item-title">Show 6</div>
+                                    </div>
+                                    <div class="content-item focusable" data-show="show-7">
+                                        <div class="item-title">Show 7</div>
+                                    </div>
+                                    <div class="content-item focusable" data-show="show-8">
+                                        <div class="item-title">Show 8</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Playing Screen -->
+                    <div id="playing-screen" class="screen">
+                        <div class="player-container">
+                            <div class="video-player">
+                                <div class="playing-indicator">
+                                    <div class="play-icon">▶</div>
+                                    <h2 id="playing-title">Now Playing</h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Show Detail Screen -->
+                    <div id="show-detail-screen" class="screen">
+                        <div class="show-detail-content">
+                            <div class="show-hero">
+                                <h1 id="show-title">Show Title</h1>
+                                <div class="show-actions">
+                                    <button class="action-btn primary focusable">▶ Play</button>
+                                </div>
+                            </div>
+                            <div class="episodes-section">
+                                <h2>Episodes</h2>
+                                <div class="episode-list">
+                                    <div class="episode-item focusable">
+                                        <div class="episode-number">1</div>
+                                        <div class="episode-info">
+                                            <div class="episode-title">Episode 1</div>
+                                            <div class="episode-duration">45 min</div>
+                                        </div>
+                                    </div>
+                                    <div class="episode-item focusable">
+                                        <div class="episode-number">2</div>
+                                        <div class="episode-info">
+                                            <div class="episode-title">Episode 2</div>
+                                            <div class="episode-duration">42 min</div>
+                                        </div>
+                                    </div>
+                                    <div class="episode-item focusable">
+                                        <div class="episode-number">3</div>
+                                        <div class="episode-info">
+                                            <div class="episode-title">Episode 3</div>
+                                            <div class="episode-duration">48 min</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Quick Switch Overlay (NEW FEATURE) -->
+                    <div id="profile-overlay" class="profile-overlay">
+                        <div class="overlay-content">
+                            <h2>Switch Profile</h2>
+                            <div class="profile-quick-grid">
+                                <div class="profile-quick-card focusable" data-profile="Profile 1">
+                                    <div class="profile-avatar">1</div>
+                                    <p>Profile 1</p>
+                                </div>
+                                <div class="profile-quick-card focusable" data-profile="Profile 2">
+                                    <div class="profile-avatar">2</div>
+                                    <p>Profile 2</p>
+                                </div>
+                            </div>
+                            <p class="overlay-hint">Press profile button again to close</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Remote Control -->
+        <div class="remote-container">
+            <div class="remote">
+                <!-- Top buttons: Profile and Power -->
+                <div class="remote-top">
+                    <button id="profile-btn" class="profile-btn" title="Quick Profile Switch">
+                        <span class="material-icons profile-icon">person</span>
+                    </button>
+                    <div class="power-btn"><span class="material-icons">power_settings_new</span></div>
+                </div>
+
+                <div class="remote-dpad">
+                    <button class="dpad-btn dpad-up">▲</button>
+                    <button class="dpad-btn dpad-left">◀</button>
+                    <button id="ok-btn" class="dpad-btn dpad-center">OK</button>
+                    <button class="dpad-btn dpad-right">▶</button>
+                    <button class="dpad-btn dpad-down">▼</button>
+                </div>
+
+                <div class="remote-nav-row">
+                    <button id="back-btn" class="nav-btn"><span class="material-icons">arrow_back</span></button>
+                    <button id="home-btn" class="nav-btn"><span class="material-icons">home</span></button>
+                </div>
+
+                <div class="remote-playback-row">
+                    <button class="playback-btn"><span class="material-icons">play_arrow</span></button>
+                    <button class="vol-btn"><span class="material-icons">add</span></button>
+                </div>
+
+                <div class="remote-bottom-row">
+                    <button class="mute-btn"><span class="material-icons">volume_off</span></button>
+                    <button class="vol-btn"><span class="material-icons">remove</span></button>
+                </div>
+            </div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <h3>Tasks:</h3>
+                <div id="profile1-tasks">
+                    <p><strong>Task 1:</strong> Navigate to a show and play it using the arrow buttons and OK button.</p>
+                    <p><strong>Task 2:</strong> Switch to Profile 2 using only the arrow buttons and BACK button.</p>
+                </div>
+                <div id="profile2-tasks" style="display: none;">
+                    <p><strong>Task 1:</strong> Navigate to a show and play it.</p>
+                    <p><strong>Task 2:</strong> Switch back to Profile 1 using the <span style="color: #4CAF50;">PROFILE</span> button.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

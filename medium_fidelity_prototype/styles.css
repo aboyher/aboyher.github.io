@@ -1,0 +1,926 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Courier New', monospace;
+    background: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.page-header {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 40px;
+    max-width: 1000px;
+    border: 2px solid #000000;
+    padding: 20px;
+    background: #ffffff;
+}
+
+.page-header h1 {
+    font-size: 2em;
+    font-weight: normal;
+    margin-bottom: 15px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.page-header p {
+    font-size: 1em;
+    color: #666666;
+    margin-bottom: 10px;
+}
+
+.page-header .author {
+    font-size: 0.9em;
+    color: #999999;
+    font-style: normal;
+}
+
+.container {
+    display: flex;
+    gap: 40px;
+    max-width: 1400px;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+/* TV Container */
+.tv-container {
+    flex: 2;
+    max-width: 900px;
+    min-width: 600px;
+}
+
+.tv-frame {
+    background: #ffffff;
+    padding: 12px;
+    border-radius: 0;
+    box-shadow: none;
+    border: 3px solid #000000;
+}
+
+.tv-screen {
+    background: #f9f9f9;
+    aspect-ratio: 16/9;
+    min-height: 350px;
+    border-radius: 0;
+    position: relative;
+    overflow: hidden;
+    pointer-events: none;
+    border: 2px solid #000000;
+}
+
+.tv-screen * {
+    pointer-events: none;
+    cursor: default;
+}
+
+/* Screen Management */
+.screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.screen.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Top Bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.left-section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+}
+
+.current-profile {
+    background: #ffffff;
+    padding: 8px 16px;
+    border-radius: 0;
+    color: #000000;
+    font-size: 0.95em;
+    font-weight: normal;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: 2px solid #000000;
+}
+
+.current-profile:hover {
+    background: #f0f0f0;
+}
+
+.current-profile.focused {
+    background: #ffffff;
+    border: 3px solid #000000 !important;
+    transform: scale(1.05);
+}
+
+.logo {
+    color: #e50914;
+    font-size: 2em;
+    font-weight: bold;
+    margin: 0;
+}
+
+/* Screen Header */
+.screen-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.screen-header h1 {
+    color: #e50914;
+    font-size: 2.5em;
+    font-weight: bold;
+}
+
+/* Content Rows (Home Screen) */
+.content-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.content-row h2 {
+    color: white;
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.content-items {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding: 10px;
+    margin: -10px;
+}
+
+.content-item {
+    min-width: 150px;
+    height: 90px;
+    background: #ffffff;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000000;
+    font-size: 0.85em;
+    font-weight: normal;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex-shrink: 0;
+    border: 2px solid #000000;
+}
+
+.content-item:hover {
+    transform: scale(1.05);
+    background: #f0f0f0;
+}
+
+.content-item.focused {
+    border: 4px solid #000000 !important;
+    transform: scale(1.08) !important;
+    z-index: 10 !important;
+    background: #e0e0e0 !important;
+}
+
+/* Profile Overlay (NEW FEATURE) */
+.profile-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #f9f9f9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    z-index: 1000;
+    border: 2px solid #000000;
+}
+
+.profile-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.overlay-content {
+    text-align: center;
+}
+
+.overlay-content h2 {
+    color: white;
+    font-size: 2.5em;
+    margin-bottom: 40px;
+}
+
+.profile-quick-grid {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin-bottom: 30px;
+}
+
+.profile-quick-card {
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+    background: transparent;
+}
+
+.profile-quick-card:hover {
+    transform: scale(1.05);
+}
+
+.profile-quick-card.focused {
+    transform: scale(1.1);
+    outline: none !important;
+    background: transparent !important;
+}
+
+.profile-quick-card .profile-avatar {
+    width: 100px;
+    height: 100px;
+    background: #ffffff;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    color: #000000;
+    font-weight: normal;
+    margin: 0 auto 15px;
+    border: 2px solid #000000;
+    transition: all 0.2s;
+}
+
+.profile-quick-card:hover .profile-avatar {
+    border-width: 3px;
+    background: #f0f0f0;
+}
+
+.profile-quick-card.focused .profile-avatar {
+    border-width: 5px !important;
+    background: #ffffff !important;
+}
+
+.profile-quick-card p {
+    color: white;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+
+.overlay-hint {
+    color: #888;
+    font-size: 1em;
+    margin-top: 20px;
+}
+
+/* Main Menu Tabs */
+.main-menu {
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+
+.menu-tab {
+    color: #666;
+    font-size: 1em;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 5px 10px;
+    position: relative;
+    border-radius: 0;
+    border: 1px solid transparent;
+}
+
+.menu-tab:hover {
+    color: #000000;
+}
+
+.menu-tab.focused {
+    color: #000000;
+    background: #ffffff;
+    border: 2px solid #000000 !important;
+}
+
+.menu-tab.active {
+    color: #000000;
+    font-weight: bold;
+}
+
+.menu-tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -18px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #000000;
+}
+
+/* Content Items with Titles */
+.item-title {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    font-size: 0.9em;
+    font-weight: normal;
+    text-shadow: none;
+}
+
+/* Focusable Elements */
+.focusable {
+    position: relative;
+    transition: all 0.2s;
+}
+
+.focusable.focused {
+    outline: 3px solid #000000;
+    outline-offset: 3px;
+    transform: scale(1.05);
+    z-index: 10;
+    background: #e0e0e0;
+}
+
+/* Override for profile cards - cleaner focus */
+.profile-quick-card.focusable.focused {
+    outline: none !important;
+    box-shadow: none !important;
+    background: transparent !important;
+    transform: scale(1.1) !important;
+}
+
+/* Playing Screen */
+.player-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    padding: 40px;
+}
+
+.video-player {
+    width: 100%;
+    height: 60%;
+    background: #ffffff;
+    border-radius: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: none;
+    border: 3px solid #000000;
+}
+
+.playing-indicator {
+    text-align: center;
+}
+
+@keyframes fadeInOut {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.play-icon {
+    font-size: 5em;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.playing-indicator h2 {
+    color: #000000;
+    font-size: 2em;
+    font-weight: normal;
+}
+
+
+/* Show Detail Screen */
+.show-detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.show-hero {
+    background: transparent;
+    padding: 30px;
+    border-radius: 0;
+    border: none;
+}
+
+.show-hero h1 {
+    color: #000000;
+    font-size: 2.5em;
+    margin-bottom: 15px;
+}
+
+.show-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    color: #ccc;
+    font-size: 1em;
+}
+
+.show-meta span {
+    padding: 5px 12px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.show-hero p {
+    color: #ddd;
+    font-size: 1.1em;
+    line-height: 1.6;
+    margin-bottom: 25px;
+    max-width: 80%;
+}
+
+.show-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.action-btn {
+    padding: 12px 25px;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    background: #000000;
+    color: #ffffff;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+}
+
+.action-btn.primary {
+    background: #ffffff;
+    color: #000000;
+}
+
+.action-btn:hover {
+    transform: scale(1.05);
+    background: #333333;
+}
+
+.action-btn.primary:hover {
+    background: #cccccc;
+}
+
+.action-btn.focused {
+    outline: 4px solid #000000 !important;
+    outline-offset: 3px;
+    transform: scale(1.08);
+    background: #e0e0e0;
+}
+
+.action-btn.primary.focused {
+    background: #cccccc;
+    outline: 4px solid #000000 !important;
+}
+
+/* Episodes Section */
+.episodes-section h2 {
+    color: #000000;
+    font-size: 1.5em;
+    margin-bottom: 20px;
+}
+
+.episode-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.episode-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #ffffff;
+    padding: 15px 20px;
+    border-radius: 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+    border: 2px solid #000000;
+}
+
+.episode-item:hover {
+    background: #f0f0f0;
+    transform: translateX(10px);
+}
+
+.episode-item.focused {
+    background: #e0e0e0;
+    border: 3px solid #000000 !important;
+    transform: translateX(10px) scale(1.02);
+}
+
+.episode-number {
+    font-size: 1.8em;
+    font-weight: normal;
+    color: #000000;
+    min-width: 40px;
+}
+
+.episode-info {
+    flex: 1;
+}
+
+.episode-title {
+    color: #000000;
+    font-size: 1.1em;
+    font-weight: normal;
+    margin-bottom: 5px;
+}
+
+.episode-duration {
+    color: #666666;
+    font-size: 0.9em;
+}
+
+/* Click Counter */
+.click-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(229, 9, 20, 0.8);
+    color: white;
+    padding: 15px 30px;
+    border-radius: 8px;
+    font-size: 1.2em;
+}
+
+/* Remote Control */
+.remote-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.remote {
+    background: #ffffff;
+    padding: 30px 25px;
+    border-radius: 30px;
+    box-shadow: none;
+    width: 250px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    border: 3px solid #000000;
+}
+
+.remote-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+.power-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #000000;
+    color: #000000;
+    font-size: 1.4em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.power-btn:hover {
+    background: #f0f0f0;
+}
+
+/* Profile Button - Apple TV Style */
+.profile-btn {
+    width: 45px;
+    height: 45px;
+    padding: 0;
+    border: 3px solid #000000;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #000000;
+    font-size: 1.1em;
+    font-weight: normal;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s;
+    box-shadow: none;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        border-width: 3px;
+    }
+    50% {
+        border-width: 4px;
+    }
+}
+
+.profile-btn:hover {
+    transform: scale(1.1);
+}
+
+.profile-btn:active {
+    transform: scale(0.95);
+}
+
+.profile-icon {
+    font-size: 1.2em;
+}
+
+.material-icons {
+    color: #000000;
+    font-size: inherit;
+    vertical-align: middle;
+}
+
+.btn-label {
+    display: none;
+}
+
+/* D-Pad */
+.remote-dpad {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 5px;
+    padding: 10px;
+}
+
+.dpad-btn {
+    width: 60px;
+    height: 60px;
+    border: 2px solid #000000;
+    border-radius: 0;
+    background: #ffffff;
+    color: #000000;
+    font-size: 1.5em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.dpad-btn:hover {
+    background: #f0f0f0;
+}
+
+.dpad-btn:active {
+    background: #e0e0e0;
+}
+
+.dpad-up { grid-column: 2; grid-row: 1; }
+.dpad-left { grid-column: 1; grid-row: 2; }
+.dpad-center {
+    grid-column: 2;
+    grid-row: 2;
+    background: #e0e0e0;
+    font-size: 1em;
+    font-weight: normal;
+}
+.dpad-right { grid-column: 3; grid-row: 2; }
+.dpad-down { grid-column: 2; grid-row: 3; }
+
+/* Navigation Row (Back and Home) */
+.remote-nav-row {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.nav-btn {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #000000;
+    border-radius: 0;
+    background: #ffffff;
+    color: #000000;
+    font-size: 0.85em;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.nav-btn:hover {
+    background: #f0f0f0;
+}
+
+.nav-btn:active {
+    background: #e0e0e0;
+}
+
+/* Playback Row (Play/Pause and Vol+) */
+.remote-playback-row {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.playback-btn {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #000000;
+    border-radius: 0;
+    background: #ffffff;
+    color: #000000;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.playback-btn:hover {
+    background: #f0f0f0;
+}
+
+.playback-btn:active {
+    background: #e0e0e0;
+}
+
+/* Bottom Row (Mute and Vol-) */
+.remote-bottom-row {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
+}
+
+.mute-btn {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #000000;
+    border-radius: 0;
+    background: #ffffff;
+    color: #000000;
+    font-size: 0.85em;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.mute-btn:hover {
+    background: #f0f0f0;
+}
+
+.mute-btn:active {
+    background: #e0e0e0;
+}
+
+.vol-btn {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #000000;
+    border-radius: 0;
+    background: #ffffff;
+    color: #000000;
+    font-size: 0.85em;
+    font-weight: normal;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.vol-btn:hover {
+    background: #f0f0f0;
+}
+
+.vol-btn:active {
+    background: #e0e0e0;
+}
+
+/* Instructions */
+.instructions {
+    display: none;
+}
+
+/* Tasks Popup */
+.tasks-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #ffffff;
+    color: #000000;
+    padding: 40px 50px;
+    border-radius: 0;
+    z-index: 10000;
+    box-shadow: none;
+    border: 3px solid #000000;
+    max-width: 600px;
+    pointer-events: auto;
+}
+
+.tasks-popup h3 {
+    color: #000000;
+    margin-bottom: 25px;
+    font-size: 1.5em;
+    font-weight: normal;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.tasks-popup p {
+    margin-bottom: 15px;
+    line-height: 1.8;
+    font-size: 1em;
+}
+
+.tasks-popup strong {
+    color: #000000;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.tasks-popup-close {
+    margin-top: 30px;
+    padding: 12px 30px;
+    background: #ffffff;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 0;
+    font-size: 1em;
+    font-weight: normal;
+    cursor: pointer;
+    width: 100%;
+    transition: background 0.2s;
+    pointer-events: auto;
+}
+
+.tasks-popup-close:hover {
+    background: #f0f0f0;
+}
+
+.tasks-popup-close:active {
+    background: #e0e0e0;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+    .container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .remote-container {
+        flex-direction: row;
+        width: 100%;
+        max-width: 900px;
+    }
+
+    .instructions {
+        flex: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .remote-container {
+        flex-direction: column;
+    }
+
+    .profile-quick-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
