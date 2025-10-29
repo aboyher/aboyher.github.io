@@ -1,27 +1,104 @@
-# [Start Bootstrap](http://startbootstrap.com/) - [Freelancer](http://startbootstrap.com/template-overviews/freelancer/)
+# Smart TV Profile Button Prototype
 
-[Freelancer](http://startbootstrap.com/template-overviews/freelancer/) is a one page freelancer portfolio theme for [Bootstrap](http://getbootstrap.com/) created by [Start Bootstrap](http://startbootstrap.com/). This theme features several content sections, a responsive portfolio grid with hover effects, full page portfolio item modals, and a working PHP contact form.
+A medium-fidelity interactive prototype demonstrating a dedicated profile button solution for smart TV remotes and streaming devices.
 
-## Getting Started
+## The Problem
 
-To begin using this template, choose one of the following options to get started:
-* [Download the latest release on Start Bootstrap](http://startbootstrap.com/template-overviews/freelancer/)
-* Clone the repo: `git clone https://github.com/BlackrockDigital/startbootstrap-freelancer.git`
-* Fork the repo
+Current smart TVs and streaming devices require users to navigate through multiple screens (6+ clicks) to switch user profiles:
+1. Click MENU button
+2. Navigate to Settings
+3. Select Account
+4. Select Manage Profiles
+5. Select desired profile
+6. Confirm selection
 
-## Bugs and Issues
+This creates friction in multi-user households where profile switching is a common task.
 
-Have a bug or an issue with this template? [Open a new issue](https://github.com/BlackrockDigital/startbootstrap-freelancer/issues) here on GitHub or leave a comment on the [template overview page at Start Bootstrap](http://startbootstrap.com/template-overviews/freelancer/).
+## The Solution
 
-## Creator
+A **dedicated PROFILE button** on the remote control that:
+- Works universally across all streaming apps
+- Instantly brings up a profile selection overlay from ANY screen
+- Reduces profile switching from 6+ clicks to just 2 clicks
+- Provides immediate visual feedback
 
-Start Bootstrap was created by and is maintained by **[David Miller](http://davidmiller.io/)**, Owner of [Blackrock Digital](http://blackrockdigital.io/).
+## Features
 
-* https://twitter.com/davidmillerskt
-* https://github.com/davidtmiller
+### Interactive Prototype Includes:
 
-Start Bootstrap is based on the [Bootstrap](http://getbootstrap.com/) framework created by [Mark Otto](https://twitter.com/mdo) and [Jacob Thorton](https://twitter.com/fat).
+1. **Simulated Smart TV Interface**
+   - Netflix-style streaming app (StreamFlix)
+   - Home screen with content rows
+   - Settings navigation
+   - Profile selection screens
 
-## Copyright and License
+2. **Functional Remote Control**
+   - Dedicated PROFILE button (highlighted in green)
+   - Standard navigation buttons (D-pad, OK, Back, Home, Menu)
+   - Playback controls
+   - Volume controls
 
-Copyright 2013-2016 Blackrock Digital LLC. Code released under the [MIT](https://github.com/BlackrockDigital/startbootstrap-freelancer/blob/gh-pages/LICENSE) license.
+3. **Two Profile-Switching Methods**
+   - **NEW WAY**: Press Profile button → Select profile (2 clicks)
+   - **OLD WAY**: Menu → Settings → Account → Profiles → Select (6+ clicks)
+
+4. **Live Click Counter**
+   - Tracks clicks when using traditional method
+   - Demonstrates the efficiency gain of the new approach
+
+5. **Profile Quick Switch Overlay**
+   - Appears instantly from any screen
+   - Shows all available profiles
+   - Can be dismissed by clicking profile button again or pressing ESC
+
+## How to Use
+
+1. Open `index.html` in a web browser
+2. Try both methods:
+   - **Quick method**: Click the green PROFILE button on the remote
+   - **Traditional method**: Click MENU → Settings → Account → Manage Profiles → Select Profile
+
+3. **Keyboard Shortcuts**:
+   - `P` - Toggle profile overlay
+   - `H` - Go home
+   - `ESC` - Close overlay or go back
+
+## User Profiles Available
+
+- Sarah
+- Mike
+- Kids
+- Guest (default)
+
+## Technical Details
+
+- Pure HTML, CSS, and JavaScript
+- No external dependencies
+- Responsive design
+- Works on desktop and tablet browsers
+
+## Design Rationale
+
+This prototype demonstrates:
+- **Discoverability**: The profile button is clearly labeled and visually distinct
+- **Efficiency**: Reduces task completion time by 67%
+- **Consistency**: Works the same way across all screens and apps
+- **Feedback**: Provides immediate visual and textual confirmation
+- **Error Prevention**: Overlay can be easily dismissed without disrupting viewing
+
+## For Course Evaluation
+
+This medium-fidelity prototype can be used to:
+- Demonstrate the concept to stakeholders
+- Conduct usability testing
+- Gather user feedback on the interaction design
+- Compare efficiency metrics between old and new methods
+- Support design decision documentation
+
+## Future Enhancements
+
+- Add voice control integration
+- Include parental control indicators
+- Add profile creation flow
+- Implement profile switching animations
+- Add usage analytics tracking
