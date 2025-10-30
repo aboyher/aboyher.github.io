@@ -48,10 +48,42 @@ body {
 .container {
     display: flex;
     gap: 40px;
-    max-width: 1400px;
+    max-width: 1600px;
     width: 100%;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
+}
+
+/* Tasks List (always visible on left) */
+.tasks-list {
+    background: #ffffff;
+    border: 3px solid #000000;
+    padding: 20px;
+    min-width: 280px;
+    max-width: 320px;
+    order: 0;
+}
+
+.tasks-list h3 {
+    color: #000000;
+    font-size: 1.3em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-bottom: 2px solid #000000;
+    padding-bottom: 10px;
+}
+
+.tasks-list p {
+    color: #000000;
+    font-size: 0.95em;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.tasks-list strong {
+    font-weight: bold;
 }
 
 /* TV Container */
@@ -59,6 +91,7 @@ body {
     flex: 2;
     max-width: 900px;
     min-width: 600px;
+    order: 1;
 }
 
 .tv-frame {
@@ -72,12 +105,13 @@ body {
 .tv-screen {
     background: #f9f9f9;
     aspect-ratio: 16/9;
-    min-height: 350px;
     border-radius: 0;
     position: relative;
     overflow: hidden;
     pointer-events: none;
     border: 2px solid #000000;
+    height: 100%;
+    width: 100%;
 }
 
 .tv-screen * {
@@ -95,8 +129,9 @@ body {
     opacity: 0;
     visibility: hidden;
     transition: opacity 0.3s, visibility 0.3s;
-    padding: 30px;
-    overflow-y: auto;
+    padding: 2%;
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
 .screen.active {
@@ -109,8 +144,8 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 30px;
-    padding-bottom: 15px;
+    margin-bottom: 2%;
+    padding-bottom: 1%;
     border-bottom: 2px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -167,21 +202,21 @@ body {
 .content-rows {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 2%;
 }
 
 .content-row h2 {
     color: white;
-    font-size: 1.5em;
-    margin-bottom: 15px;
+    font-size: 1.3em;
+    margin-bottom: 1%;
 }
 
 .content-items {
     display: flex;
-    gap: 15px;
-    overflow-x: auto;
-    padding: 10px;
-    margin: -10px;
+    gap: 1.5%;
+    overflow-x: hidden;
+    padding: 1%;
+    margin: -1%;
 }
 
 .content-item {
@@ -211,6 +246,7 @@ body {
     transform: scale(1.08) !important;
     z-index: 10 !important;
     background: #e0e0e0 !important;
+    outline: none !important;
 }
 
 /* Profile Overlay (NEW FEATURE) */
@@ -241,7 +277,7 @@ body {
 }
 
 .overlay-content h2 {
-    color: white;
+    color: #000000;
     font-size: 2.5em;
     margin-bottom: 40px;
 }
@@ -298,13 +334,13 @@ body {
 }
 
 .profile-quick-card p {
-    color: white;
+    color: #000000;
     font-size: 1.2em;
     margin-top: 10px;
 }
 
 .overlay-hint {
-    color: #888;
+    color: #000000;
     font-size: 1em;
     margin-top: 20px;
 }
@@ -393,12 +429,13 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    padding: 40px;
+    gap: 3%;
+    padding: 4%;
+    box-sizing: border-box;
 }
 
 .video-player {
-    width: 100%;
+    width: 90%;
     height: 60%;
     background: #ffffff;
     border-radius: 0;
@@ -420,14 +457,14 @@ body {
 }
 
 .play-icon {
-    font-size: 5em;
+    font-size: 4em;
     color: #000000;
-    margin-bottom: 20px;
+    margin-bottom: 2%;
 }
 
 .playing-indicator h2 {
     color: #000000;
-    font-size: 2em;
+    font-size: 1.6em;
     font-weight: normal;
 }
 
@@ -436,20 +473,22 @@ body {
 .show-detail-content {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 2%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .show-hero {
     background: transparent;
-    padding: 30px;
+    padding: 2%;
     border-radius: 0;
     border: none;
 }
 
 .show-hero h1 {
     color: #000000;
-    font-size: 2.5em;
-    margin-bottom: 15px;
+    font-size: 1.8em;
+    margin-bottom: 1%;
 }
 
 .show-meta {
@@ -521,22 +560,22 @@ body {
 /* Episodes Section */
 .episodes-section h2 {
     color: #000000;
-    font-size: 1.5em;
-    margin-bottom: 20px;
+    font-size: 1.3em;
+    margin-bottom: 1.5%;
 }
 
 .episode-list {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 1%;
 }
 
 .episode-item {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 2%;
     background: #ffffff;
-    padding: 15px 20px;
+    padding: 1.5% 2%;
     border-radius: 0;
     cursor: pointer;
     transition: all 0.2s;
@@ -556,10 +595,10 @@ body {
 }
 
 .episode-number {
-    font-size: 1.8em;
+    font-size: 1.5em;
     font-weight: normal;
     color: #000000;
-    min-width: 40px;
+    min-width: 8%;
 }
 
 .episode-info {
@@ -568,14 +607,14 @@ body {
 
 .episode-title {
     color: #000000;
-    font-size: 1.1em;
+    font-size: 1em;
     font-weight: normal;
-    margin-bottom: 5px;
+    margin-bottom: 0.5%;
 }
 
 .episode-duration {
     color: #666666;
-    font-size: 0.9em;
+    font-size: 0.85em;
 }
 
 /* Click Counter */
@@ -596,17 +635,18 @@ body {
     display: flex;
     flex-direction: column;
     gap: 20px;
+    order: 2;
 }
 
 .remote {
     background: #ffffff;
-    padding: 30px 25px;
+    padding: 27px 22.5px;
     border-radius: 30px;
     box-shadow: none;
-    width: 250px;
+    width: 225px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 22.5px;
     border: 3px solid #000000;
 }
 
@@ -618,13 +658,13 @@ body {
 }
 
 .power-btn {
-    width: 45px;
-    height: 45px;
+    width: 40.5px;
+    height: 40.5px;
     border-radius: 50%;
     background: #ffffff;
     border: 2px solid #000000;
     color: #000000;
-    font-size: 1.4em;
+    font-size: 1.26em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -638,14 +678,14 @@ body {
 
 /* Profile Button - Apple TV Style */
 .profile-btn {
-    width: 45px;
-    height: 45px;
+    width: 40.5px;
+    height: 40.5px;
     padding: 0;
     border: 3px solid #000000;
     border-radius: 50%;
     background: #ffffff;
     color: #000000;
-    font-size: 1.1em;
+    font-size: 0.99em;
     font-weight: normal;
     cursor: pointer;
     display: flex;
@@ -691,18 +731,18 @@ body {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
-    gap: 5px;
-    padding: 10px;
+    gap: 4.5px;
+    padding: 9px;
 }
 
 .dpad-btn {
-    width: 60px;
-    height: 60px;
+    width: 54px;
+    height: 54px;
     border: 2px solid #000000;
     border-radius: 0;
     background: #ffffff;
     color: #000000;
-    font-size: 1.5em;
+    font-size: 1.35em;
     cursor: pointer;
     transition: background 0.2s;
 }
@@ -730,18 +770,18 @@ body {
 /* Navigation Row (Back and Home) */
 .remote-nav-row {
     display: flex;
-    gap: 10px;
+    gap: 9px;
     justify-content: space-between;
 }
 
 .nav-btn {
     flex: 1;
-    padding: 12px;
+    padding: 10.8px;
     border: 2px solid #000000;
     border-radius: 0;
     background: #ffffff;
     color: #000000;
-    font-size: 0.85em;
+    font-size: 0.765em;
     font-weight: normal;
     cursor: pointer;
     transition: background 0.2s;
@@ -758,18 +798,18 @@ body {
 /* Playback Row (Play/Pause and Vol+) */
 .remote-playback-row {
     display: flex;
-    gap: 10px;
+    gap: 9px;
     justify-content: space-between;
 }
 
 .playback-btn {
     flex: 1;
-    padding: 12px;
+    padding: 10.8px;
     border: 2px solid #000000;
     border-radius: 0;
     background: #ffffff;
     color: #000000;
-    font-size: 1.3em;
+    font-size: 1.17em;
     cursor: pointer;
     transition: background 0.2s;
 }
@@ -785,18 +825,18 @@ body {
 /* Bottom Row (Mute and Vol-) */
 .remote-bottom-row {
     display: flex;
-    gap: 10px;
+    gap: 9px;
     justify-content: space-between;
 }
 
 .mute-btn {
     flex: 1;
-    padding: 12px;
+    padding: 10.8px;
     border: 2px solid #000000;
     border-radius: 0;
     background: #ffffff;
     color: #000000;
-    font-size: 0.85em;
+    font-size: 0.765em;
     font-weight: normal;
     cursor: pointer;
     transition: background 0.2s;
@@ -812,12 +852,12 @@ body {
 
 .vol-btn {
     flex: 1;
-    padding: 12px;
+    padding: 10.8px;
     border: 2px solid #000000;
     border-radius: 0;
     background: #ffffff;
     color: #000000;
-    font-size: 0.85em;
+    font-size: 0.765em;
     font-weight: normal;
     cursor: pointer;
     transition: background 0.2s;
@@ -916,11 +956,273 @@ body {
 }
 
 @media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .page-header {
+        padding: 15px;
+        margin-bottom: 20px;
+    }
+
+    .page-header h1 {
+        font-size: 1.3em;
+    }
+
+    .page-header p {
+        font-size: 0.85em;
+    }
+
+    .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        max-width: 100%;
+    }
+
+    .tasks-list {
+        order: 0;
+        width: 100%;
+        max-width: 100%;
+        min-width: 100%;
+        padding: 15px;
+    }
+
+    .tasks-list h3 {
+        font-size: 1.1em;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
+    }
+
+    .tasks-list p {
+        font-size: 0.85em;
+        margin-bottom: 12px;
+        line-height: 1.5;
+    }
+
+    .tv-container {
+        max-width: 100%;
+        min-width: 100%;
+        order: 1;
+    }
+
+    .tv-frame {
+        padding: 6px;
+    }
+
+    .tv-screen {
+        min-height: 200px;
+        font-size: 0.7em;
+        padding: 10px;
+    }
+
+    .top-bar {
+        flex-direction: row;
+        gap: 8px;
+        align-items: center;
+        padding-bottom: 8px;
+        margin-bottom: 15px;
+    }
+
+    .left-section {
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .current-profile {
+        font-size: 0.65em;
+        padding: 4px 8px;
+    }
+
+    .main-menu {
+        gap: 8px;
+    }
+
+    .menu-tab {
+        font-size: 0.7em;
+        padding: 3px 6px;
+    }
+
+    .menu-tab.active::after {
+        bottom: -10px;
+        height: 2px;
+    }
+
+    .content-row {
+        margin-bottom: 15px;
+    }
+
+    .content-row h2 {
+        font-size: 0.85em;
+        margin-bottom: 8px;
+    }
+
+    .content-item {
+        min-width: 85px;
+        height: 50px;
+        font-size: 0.65em;
+        border-width: 1px;
+    }
+
+    .item-title {
+        font-size: 0.65em;
+        bottom: 5px;
+        left: 5px;
+        right: 5px;
+    }
+
+    .content-items {
+        gap: 8px;
+        padding: 5px;
+        margin: -5px;
+    }
+
+    .show-hero {
+        padding: 15px;
+    }
+
+    .show-hero h1 {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+
+    .action-btn {
+        padding: 8px 12px;
+        font-size: 0.8em;
+    }
+
+    .show-actions {
+        gap: 8px;
+    }
+
+    .episodes-section h2 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+    }
+
+    .episode-item {
+        padding: 8px 12px;
+        font-size: 0.75em;
+        border-width: 1px;
+    }
+
+    .episode-number {
+        font-size: 1.1em;
+        min-width: 30px;
+    }
+
+    .episode-title {
+        font-size: 0.85em;
+    }
+
+    .episode-duration {
+        font-size: 0.75em;
+    }
+
+    .episode-list {
+        gap: 8px;
+    }
+
     .remote-container {
+        order: 2;
+        width: 100%;
+        max-width: 300px;
         flex-direction: column;
     }
 
+    .remote {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+        padding: 20px 15px;
+        gap: 15px;
+    }
+
+    .dpad-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2em;
+    }
+
+    .profile-btn,
+    .power-btn {
+        width: 38px;
+        height: 38px;
+        font-size: 1.2em;
+    }
+
+    .nav-btn,
+    .playback-btn,
+    .mute-btn,
+    .vol-btn {
+        padding: 10px;
+        font-size: 0.75em;
+    }
+
+    .profile-overlay {
+        padding: 3%;
+    }
+
+    .overlay-content h2 {
+        font-size: 1em;
+        margin-bottom: 3%;
+    }
+
     .profile-quick-grid {
-        grid-template-columns: repeat(2, 1fr);
+        gap: 5%;
+        flex-direction: row;
+        margin-bottom: 2%;
+    }
+
+    .profile-quick-card .profile-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5em;
+        margin-bottom: 8px;
+    }
+
+    .profile-quick-card p {
+        font-size: 0.75em;
+        margin-top: 5px;
+    }
+
+    .overlay-hint {
+        font-size: 0.7em;
+        margin-top: 2%;
+    }
+
+    .tasks-popup {
+        padding: 20px;
+        max-width: 90%;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .tasks-popup h3 {
+        font-size: 1.1em;
+        margin-bottom: 15px;
+    }
+
+    .tasks-popup p {
+        font-size: 0.85em;
+        margin-bottom: 12px;
+    }
+
+    .tasks-popup-close {
+        margin-top: 20px;
+        padding: 14px 20px;
+        font-size: 1em;
+    }
+
+    .video-player {
+        height: 50%;
+    }
+
+    .play-icon {
+        font-size: 3em;
+    }
+
+    .playing-indicator h2 {
+        font-size: 1.3em;
     }
 }

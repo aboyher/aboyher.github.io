@@ -2,8 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Smart TV Profile Button Prototype</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="styles.css">
@@ -15,6 +14,19 @@
         <p class="author">Created by Adam Boyher</p>
     </header>
     <div class="container">
+        <!-- Tasks List -->
+        <div class="tasks-list">
+            <h3>Tasks</h3>
+            <div id="profile1-tasks-list">
+                <p><strong>Task 1:</strong> Navigate to a show and play it using the arrow buttons and OK button.</p>
+                <p><strong>Task 2:</strong> Switch to Profile 2 using only the arrow buttons and BACK button.</p>
+            </div>
+            <div id="profile2-tasks-list" style="display: none;">
+                <p><strong>Task 1:</strong> Navigate to a show and play it.</p>
+                <p><strong>Task 2:</strong> Switch back to Profile 1 using the <span style="font-weight: bold;">PROFILE</span> button.</p>
+            </div>
+        </div>
+
         <!-- Smart TV Screen -->
         <div class="tv-container">
             <div class="tv-frame">

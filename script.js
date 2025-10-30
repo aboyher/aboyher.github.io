@@ -474,55 +474,26 @@ function updateProfileDisplay() {
     // Hide profile button when Profile 1 is active
     const profileBtn = document.getElementById('profile-btn');
 
+    // Show/hide tasks based on current profile
+    const profile1TasksList = document.getElementById('profile1-tasks-list');
+    const profile2TasksList = document.getElementById('profile2-tasks-list');
+
     if (currentProfile === 'Profile 1') {
         profileBtn.style.visibility = 'hidden';
+        if (profile1TasksList) profile1TasksList.style.display = 'block';
+        if (profile2TasksList) profile2TasksList.style.display = 'none';
     } else {
         profileBtn.style.visibility = 'visible';
+        if (profile1TasksList) profile1TasksList.style.display = 'none';
+        if (profile2TasksList) profile2TasksList.style.display = 'block';
     }
 }
 
-// Show tasks popup
+// Show tasks (no longer needed as popup - tasks always visible)
 function showTasksPopup() {
-    const tvScreen = document.getElementById('tv-screen');
-
-    // Create overlay
-    const overlay = document.createElement('div');
-    overlay.style.cssText = `
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.8);
-        z-index: 9999;
-        pointer-events: auto;
-    `;
-
-    // Get tasks content based on current profile
-    const tasksContent = currentProfile === 'Profile 1'
-        ? document.getElementById('profile1-tasks').innerHTML
-        : document.getElementById('profile2-tasks').innerHTML;
-
-    // Create popup
-    const popup = document.createElement('div');
-    popup.className = 'tasks-popup';
-    popup.innerHTML = `
-        <h3>Tasks</h3>
-        ${tasksContent}
-        <button class="tasks-popup-close">Got it!</button>
-    `;
-
-    tvScreen.appendChild(overlay);
-    tvScreen.appendChild(popup);
-
-    // Close popup
-    const closePopup = () => {
-        popup.remove();
-        overlay.remove();
-    };
-
-    popup.querySelector('.tasks-popup-close').addEventListener('click', closePopup);
-    overlay.addEventListener('click', closePopup);
+    // Tasks are now always visible in the sidebar
+    // This function is kept for compatibility but does nothing
+    return;
 }
 
 // Update click counter
