@@ -1,210 +1,1750 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Smart TV Profile Button Prototype</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <title>Capital U – Interactive Prototype</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap");
+
+    :root {
+      --bg: #050b1a;
+      --bg-grad-top: #0ea5e9;
+      --bg-grad-bottom: #f97316;
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --primary: #00c2ff;
+      --primary-dark: #0d99d5;
+      --accent-green: #22c55e;
+      --accent-red: #ff5f6d;
+      --accent-teal: #06b6d4;
+      --text-main: #0b1224;
+      --text-muted: #4b5563;
+      --radius-pill: 999px;
+      --radius-soft: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", "Space Grotesk", system-ui, -apple-system,
+        BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
+      background: radial-gradient(circle at 20% 10%, rgba(6, 182, 212, 0.45), transparent 35%),
+        radial-gradient(circle at 80% 0%, rgba(249, 115, 22, 0.4), transparent 38%),
+        linear-gradient(135deg, #0b1120, #0f172a 45%, #0b1224);
+      color: var(--text-main);
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .app-shell {
+      width: 390px;
+      max-width: 100%;
+      height: 844px;
+      max-height: 100vh;
+      border-radius: 32px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(236, 245, 255, 0.92));
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+    }
+
+    .status-bar {
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 4px 16px;
+      font-size: 11px;
+      color: #0f172a;
+      background: linear-gradient(180deg, #e0f2fe, #e5e7eb);
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+    }
+
+    .notch {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 20px;
+      background: #e2e8f0;
+      border-radius: 999px;
+      box-shadow: 0 2px 4px rgba(148, 163, 184, 0.6);
+      z-index: 1;
+    }
+
+    .screen {
+      position: absolute;
+      inset: 32px 0 0 0;
+      padding: 16px 16px 20px;
+      display: none;
+      overflow-y: auto;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(240, 249, 255, 0.9));
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    .app-title {
+      text-align: center;
+      font-weight: 700;
+      font-size: 22px;
+      letter-spacing: 0.06em;
+      margin-bottom: 4px;
+      color: #0b1224;
+      text-transform: uppercase;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .xp-card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      border: 1px solid rgba(14, 165, 233, 0.35);
+      color: var(--text-main);
+      box-shadow: 0 16px 36px rgba(6, 182, 212, 0.15);
+    }
+
+    .xp-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-main);
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .xp-bar-bg {
+      width: 100%;
+      height: 8px;
+      border-radius: 999px;
+      background: #e2e8f0;
+      overflow: hidden;
+    }
+
+    .xp-bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #22c55e, #06b6d4, #22d3ee);
+      transition: width 0.25s ease-out;
+    }
+
+    .xp-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 10px;
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.14), rgba(99, 102, 241, 0.16));
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      color: var(--text-main);
+      margin-top: 6px;
+      letter-spacing: 0.02em;
+    }
+
+    .xp-next {
+      font-size: 10px;
+      color: var(--text-muted);
+      text-align: right;
+      margin-top: -16px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 18px;
+      padding: 12px 12px 10px;
+      color: var(--text-main);
+      margin-bottom: 12px;
+      border: 1px solid rgba(14, 165, 233, 0.12);
+      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+    }
+
+    .card-title {
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: 0.01em;
+    }
+
+    .lb-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      margin-bottom: 4px;
+    }
+
+    .lb-row:nth-child(2n) {
+      background: #eef2ff;
+    }
+
+    .lb-row:nth-child(2n+1) {
+      background: #f3f4ff;
+    }
+
+    .lb-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .lb-rank {
+      width: 18px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 11px;
+      color: #4b5563;
+    }
+
+    .lb-name {
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    .lb-sub {
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .lb-xp {
+      font-weight: 600;
+      font-size: 12px;
+      color: #1d4ed8;
+    }
+
+    .lb-footer {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .lb-link {
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .nav-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 10px 0 8px;
+    }
+
+    .nav-btn {
+      border-radius: var(--radius-pill);
+      border: none;
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: #0b1224;
+      box-shadow: 0 10px 24px rgba(6, 182, 212, 0.25);
+      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, opacity 0.2s;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #ffffff, #e0f2fe);
+      border: 1px solid rgba(14, 165, 233, 0.32);
+    }
+
+    .nav-btn.primary {
+      background: linear-gradient(135deg, #22d3ee, #0ea5e9);
+      color: #031926;
+    }
+
+    .nav-btn.green {
+      background: linear-gradient(135deg, #34d399, #22c55e);
+      color: #032114;
+      box-shadow: 0 10px 24px rgba(34, 197, 94, 0.25);
+    }
+
+    .nav-btn.teal {
+      background: linear-gradient(135deg, #a5b4fc, #6366f1);
+      color: #f8fafc;
+      box-shadow: 0 10px 24px rgba(99, 102, 241, 0.24);
+    }
+
+    .nav-btn.locked {
+      background: #1f2937;
+      box-shadow: none;
+      opacity: 0.5;
+      cursor: default;
+    }
+
+    .nav-btn:active:not(.locked) {
+      transform: translateY(1px) scale(0.995);
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.35);
+    }
+
+    .nav-btn span.lock-icon {
+      font-size: 14px;
+    }
+
+    .minty-row {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      align-items: flex-start;
+    }
+
+    .minty-avatar {
+      width: 46px;
+      height: 46px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffe082 0, #ffca28 45%, #f59e0b 100%);
+      border: 3px solid #facc15;
+      position: relative;
+      box-shadow: 0 4px 10px rgba(250, 204, 21, 0.5);
+      flex-shrink: 0;
+    }
+
+    .minty-face {
+      position: absolute;
+      inset: 10px;
+      border-radius: 999px;
+      background: #fffbeb;
+      border: 2px solid #f59e0b;
+    }
+
+    .minty-face::before,
+    .minty-face::after {
+      content: "";
+      position: absolute;
+      top: 14px;
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #111827;
+    }
+
+    .minty-face::before {
+      left: 11px;
+    }
+
+    .minty-face::after {
+      right: 11px;
+    }
+
+    .minty-smile {
+      position: absolute;
+      bottom: 11px;
+      left: 50%;
+      width: 18px;
+      height: 9px;
+      border-radius: 0 0 18px 18px;
+      border: 2px solid transparent;
+      border-bottom-color: #111827;
+      transform: translateX(-50%);
+    }
+
+    .minty-leaf {
+      position: absolute;
+      top: -9px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 26px;
+      height: 16px;
+    }
+
+    .minty-leaf::before,
+    .minty-leaf::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      width: 12px;
+      height: 16px;
+      border-radius: 999px 999px 12px 12px;
+      background: linear-gradient(135deg, #4ade80, #16a34a);
+      border: 1px solid rgba(22, 163, 74, 0.8);
+    }
+
+    .minty-leaf::before {
+      left: 0;
+      transform: rotate(-14deg);
+    }
+
+    .minty-leaf::after {
+      right: 0;
+      transform: rotate(14deg);
+    }
+
+    .minty-bubble {
+      background: var(--accent-green);
+      color: #ecfdf3;
+      border-radius: 18px;
+      padding: 9px 11px;
+      font-size: 12px;
+      position: relative;
+      flex: 1;
+    }
+
+    .minty-bubble::before {
+      content: "";
+      position: absolute;
+      left: -6px;
+      bottom: 12px;
+      border-width: 7px;
+      border-style: solid;
+      border-color: transparent var(--accent-green) transparent transparent;
+    }
+
+    .minty-caption {
+      font-size: 10px;
+      color: #d1fae5;
+      margin-top: 3px;
+    }
+
+    .back-link {
+      font-size: 11px;
+      color: #1d4ed8;
+      margin-bottom: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      opacity: 0.9;
+    }
+
+    .back-link:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+
+    /* SmartBudget */
+
+    .goal-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      border: 1px solid #e5e7eb;
+      color: var(--text-main);
+      font-size: 12px;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    .goal-title {
+      font-weight: 600;
+      font-size: 13px;
+      margin-bottom: 2px;
+    }
+
+    .goal-meta {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+
+    .goal-bar-bg {
+      width: 100%;
+      height: 6px;
+      border-radius: var(--radius-pill);
+      background: #e5e7eb;
+      overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    .goal-bar-fill {
+      height: 100%;
+      width: 0;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(90deg, #22c55e, #bbf7d0);
+    }
+
+    .goal-btn-row {
+      display: flex;
+      gap: 6px;
+    }
+
+    .goal-btn {
+      flex: 1;
+      border-radius: var(--radius-pill);
+      border: 1px solid #d1d5db;
+      padding: 7px 8px;
+      font-size: 11px;
+      font-weight: 500;
+      cursor: pointer;
+      background: #f9fafb;
+      color: #111827;
+    }
+
+    .goal-btn.primary {
+      background: var(--primary);
+      border-color: var(--primary-dark);
+      color: #eff6ff;
+    }
+
+    .goal-btn:active {
+      transform: translateY(1px);
+    }
+
+    /* Coin Quest */
+
+    .cq-logo {
+      width: 120px;
+      margin: 6px auto 10px;
+      border-radius: 24px;
+      padding: 8px 8px 10px;
+      background: linear-gradient(180deg, #eef2ff, #dbeafe);
+      box-shadow: 0 8px 24px rgba(148, 163, 184, 0.35);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cq-title {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: #e5e7eb;
+    }
+
+    .cq-body {
+      font-size: 13px;
+      color: #111827;
+      text-align: center;
+      margin: 4px 0 10px;
+    }
+
+    .cq-btn-row {
+      display: flex;
+      gap: 10px;
+      margin: 6px 0 4px;
+    }
+
+    .cq-btn {
+      flex: 1;
+      border-radius: var(--radius-pill);
+      border: none;
+      padding: 9px 0;
+      font-size: 12px;
+      font-weight: 600;
+      color: #ffffff;
+      cursor: pointer;
+      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.45);
+    }
+
+    .cq-btn.red {
+      background: linear-gradient(180deg, #ef4444, #b91c1c);
+    }
+
+    .cq-btn.green {
+      background: linear-gradient(180deg, #22c55e, #15803d);
+    }
+
+    .cq-helper {
+      font-size: 11px;
+      color: var(--text-muted);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .cq-outcome-card {
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid #e5e7eb;
+      color: var(--text-main);
+      margin-top: 10px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      background: #eef2ff;
+      color: #312e81;
+      border: 1px solid #c7d2fe;
+      margin-bottom: 6px;
+    }
+
+    .cq-outcome-title {
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+
+    .cq-outcome-copy {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .cq-forecast {
+      display: grid;
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .cq-forecast-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+    }
+
+    .cq-forecast-bar {
+      flex: 1;
+      height: 6px;
+      border-radius: var(--radius-pill);
+      background: #e5e7eb;
+      overflow: hidden;
+    }
+
+    .cq-forecast-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #34d399, #10b981);
+      transition: width 0.2s ease-out;
+    }
+
+    .cq-actions {
+      display: flex;
+      gap: 8px;
+    }
+
+    .cq-actions button {
+      flex: 1;
+      border-radius: var(--radius-pill);
+      border: 1px solid #d1d5db;
+      padding: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #f9fafb;
+    }
+
+    .cq-actions button.primary {
+      background: #2563eb;
+      color: #eff6ff;
+      border-color: #1d4ed8;
+    }
+
+    /* Fantasy Finance */
+
+    .info-text {
+      font-size: 12px;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+
+    .stat-card {
+      background: #ffffff;
+      border-radius: 14px;
+      padding: 10px 10px 8px;
+      border: 1px solid #e5e7eb;
+      color: var(--text-main);
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+
+    .stat-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+    }
+
+    .stat-tag {
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: #ecfeff;
+      color: #0f766e;
+      border: 1px solid #a5f3fc;
+      font-size: 10px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 3px;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+    }
+
+    .stat-value {
+      font-weight: 600;
+    }
+
+    .stat-value.positive {
+      color: #15803d;
+    }
+
+    .stat-value.negative {
+      color: #b91c1c;
+    }
+
+    .ff-panel {
+      background: linear-gradient(180deg, #d7f5d8, #b7e4b6);
+      border-radius: 18px;
+      padding: 12px;
+      border: 1px solid #9fd49d;
+      color: #0b2e16;
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.15);
+    }
+
+    .ff-banner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: linear-gradient(180deg, #0f3f1f, #14532d);
+      color: #ecfdf3;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+    }
+
+    .ff-week-badge {
+      background: rgba(255, 255, 255, 0.16);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+    }
+
+    .ff-menu-row {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-bottom: 10px;
+    }
+
+    .ff-menu-btn {
+      border: 1px solid rgba(20, 83, 45, 0.35);
+      background: rgba(255, 255, 255, 0.4);
+      border-radius: 10px;
+      padding: 8px 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: #0f3f1f;
+      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
+      cursor: pointer;
+    }
+
+    .ff-mini-btns {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px;
+      margin: 6px 0 10px;
+    }
+
+    .ff-mini-btn {
+      border: 1px dashed rgba(20, 83, 45, 0.35);
+      background: rgba(255, 255, 255, 0.65);
+      border-radius: 10px;
+      padding: 6px;
+      font-size: 11px;
+      font-weight: 600;
+      color: #0f3f1f;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+      cursor: pointer;
+    }
+
+    .ff-lineup-card {
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(241, 253, 242, 0.9));
+      border-radius: 14px;
+      padding: 10px 12px 12px;
+      border: 1px solid #b7e4b6;
+      color: #0b2e16;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+    }
+
+    .ff-line {
+      margin-bottom: 10px;
+    }
+
+    .ff-label {
+      font-size: 11px;
+      color: #14532d;
+      margin-bottom: 4px;
+      font-weight: 700;
+    }
+
+    .chip-row {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .chip {
+      padding: 7px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid #b7e4b6;
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 11px;
+      cursor: pointer;
+      color: #0f172a;
+    }
+
+    .chip.active {
+      background: linear-gradient(180deg, #22c55e, #16a34a);
+      color: #ecfdf3;
+      border-color: #15803d;
+      box-shadow: 0 8px 18px rgba(34, 197, 94, 0.3);
+    }
+
+    .ff-profile-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px solid #b7e4b6;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+      color: #0b2e16;
+    }
+
+    .ff-profile-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 6px 8px;
+      font-size: 11px;
+    }
+
+    .ff-profile-label {
+      color: #14532d;
+      font-weight: 700;
+    }
+
+    .ff-list {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0;
+      display: grid;
+      gap: 4px;
+      font-size: 11px;
+    }
+
+    .ff-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 6px;
+    }
+
+    .ff-pill {
+      background: rgba(15, 63, 31, 0.08);
+      border: 1px solid #b7e4b6;
+      border-radius: var(--radius-pill);
+      padding: 4px 8px;
+      font-size: 10px;
+      color: #0f3f1f;
+    }
+
+    .ff-league-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px solid #b7e4b6;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+      color: #0b2e16;
+    }
+
+    .ff-league-list {
+      list-style: none;
+      padding: 0;
+      margin: 6px 0 0;
+      display: grid;
+      gap: 4px;
+    }
+
+    .ff-league-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .ff-radio {
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      border: 2px solid #15803d;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #ecfdf3;
+    }
+
+    .ff-radio::after {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #15803d;
+      opacity: 0;
+    }
+
+    .ff-league-item.active .ff-radio::after {
+      opacity: 1;
+    }
+
+    .ff-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .ff-actions button {
+      flex: 1;
+      border-radius: var(--radius-pill);
+      border: none;
+      padding: 9px 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      color: #0f3f1f;
+      background: rgba(255, 255, 255, 0.85);
+      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
+      border: 1px solid #b7e4b6;
+    }
+
+    .ff-actions button.primary {
+      background: linear-gradient(180deg, #16a34a, #15803d);
+      color: #ecfdf3;
+      border-color: #15803d;
+    }
+
+    .ff-rank-card {
+      background: rgba(255, 255, 255, 0.9);
+      border-radius: 14px;
+      padding: 10px 12px;
+      border: 1px solid #b7e4b6;
+      color: #0b2e16;
+      margin-bottom: 10px;
+      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+    }
+
+    .ff-standings {
+      background: rgba(15, 63, 31, 0.08);
+      border: 1px dashed #15803d;
+      border-radius: 12px;
+      padding: 10px;
+      margin-bottom: 10px;
+      color: #0f3f1f;
+      font-size: 12px;
+    }
+
+    .ff-standings .card-title {
+      color: #0f3f1f;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .ff-standings ul {
+      list-style: decimal;
+      padding-left: 16px;
+      margin: 4px 0 0;
+      display: grid;
+      gap: 2px;
+    }
+
+    .ff-matchup {
+      font-size: 12px;
+      color: #0f3f1f;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px dashed #16a34a;
+      border-radius: 12px;
+      padding: 10px;
+      margin-top: 8px;
+    }
+
+    /* Toast / unlock banner */
+
+    .toast {
+      position: absolute;
+      left: 50%;
+      bottom: 14px;
+      transform: translateX(-50%);
+      padding: 8px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      background: rgba(22, 163, 74, 0.95);
+      color: #ecfdf3;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease-out;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
+
+    /* Simple scrollbar styling */
+    .screen::-webkit-scrollbar {
+      width: 6px;
+    }
+    .screen::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .screen::-webkit-scrollbar-thumb {
+      background: #1f2933;
+      border-radius: 999px;
+    }
+  </style>
 </head>
 <body>
-    <header class="page-header">
-        <h1>Dedicated Profile Button for Smart TV Remotes</h1>
-        <p>A medium-fidelity prototype exploring improved profile switching on streaming devices</p>
-        <p class="author">Created by Adam Boyher</p>
-    </header>
-    <div class="container">
-        <!-- Tasks List -->
-        <div class="tasks-list">
-            <h3>Tasks</h3>
-            <div id="profile1-tasks-list">
-                <p><strong>Task 1:</strong> Navigate to a show and play it using the arrow buttons and OK button.</p>
-                <p><strong>Task 2:</strong> Switch to Profile 2 using only the arrow buttons and BACK button.</p>
-            </div>
-            <div id="profile2-tasks-list" style="display: none;">
-                <p><strong>Task 1:</strong> Navigate to a show and play it.</p>
-                <p><strong>Task 2:</strong> Switch back to Profile 1 using the <span style="font-weight: bold;">PROFILE</span> button.</p>
-            </div>
-        </div>
-
-        <!-- Smart TV Screen -->
-        <div class="tv-container">
-            <div class="tv-frame">
-                <div id="tv-screen" class="tv-screen">
-                    <!-- Home Screen -->
-                    <div id="home-screen" class="screen active">
-                        <div class="top-bar">
-                            <div class="left-section">
-                                <div class="current-profile focusable" id="profile-badge">
-                                    <span id="current-profile-name">Profile 1</span>
-                                </div>
-                                <div class="main-menu">
-                                    <div class="menu-tab active focusable" data-tab="home">Home</div>
-                                    <div class="menu-tab focusable" data-tab="browse">Browse</div>
-                                    <div class="menu-tab focusable" data-tab="my-list">My List</div>
-                                    <div class="menu-tab focusable" data-tab="settings">Settings</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="content-rows">
-                            <div class="content-row">
-                                <h2>Continue Watching</h2>
-                                <div class="content-items">
-                                    <div class="content-item focusable" data-show="show-1">
-                                        <div class="item-title">Show 1</div>
-                                    </div>
-                                    <div class="content-item focusable" data-show="show-2">
-                                        <div class="item-title">Show 2</div>
-                                    </div>
-                                    <div class="content-item focusable" data-show="show-3">
-                                        <div class="item-title">Show 3</div>
-                                    </div>
-                                    <div class="content-item focusable" data-show="show-4">
-                                        <div class="item-title">Show 4</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="content-row">
-                                <h2>Trending Now</h2>
-                                <div class="content-items">
-                                    <div class="content-item focusable" data-show="show-5">
-                                        <div class="item-title">Show 5</div>
-                                    </div>
-                                    <div class="content-item focusable" data-show="show-6">
-                                        <div class="item-title">Show 6</div>
-                                    </div>
-                                    <div class="content-item focusable" data-show="show-7">
-                                        <div class="item-title">Show 7</div>
-                                    </div>
-                                    <div class="content-item focusable" data-show="show-8">
-                                        <div class="item-title">Show 8</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Playing Screen -->
-                    <div id="playing-screen" class="screen">
-                        <div class="player-container">
-                            <div class="video-player">
-                                <div class="playing-indicator">
-                                    <div class="play-icon">▶</div>
-                                    <h2 id="playing-title">Now Playing</h2>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Show Detail Screen -->
-                    <div id="show-detail-screen" class="screen">
-                        <div class="show-detail-content">
-                            <div class="show-hero">
-                                <h1 id="show-title">Show Title</h1>
-                                <div class="show-actions">
-                                    <button class="action-btn primary focusable">▶ Play</button>
-                                </div>
-                            </div>
-                            <div class="episodes-section">
-                                <h2>Episodes</h2>
-                                <div class="episode-list">
-                                    <div class="episode-item focusable">
-                                        <div class="episode-number">1</div>
-                                        <div class="episode-info">
-                                            <div class="episode-title">Episode 1</div>
-                                            <div class="episode-duration">45 min</div>
-                                        </div>
-                                    </div>
-                                    <div class="episode-item focusable">
-                                        <div class="episode-number">2</div>
-                                        <div class="episode-info">
-                                            <div class="episode-title">Episode 2</div>
-                                            <div class="episode-duration">42 min</div>
-                                        </div>
-                                    </div>
-                                    <div class="episode-item focusable">
-                                        <div class="episode-number">3</div>
-                                        <div class="episode-info">
-                                            <div class="episode-title">Episode 3</div>
-                                            <div class="episode-duration">48 min</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Profile Quick Switch Overlay (NEW FEATURE) -->
-                    <div id="profile-overlay" class="profile-overlay">
-                        <div class="overlay-content">
-                            <h2>Switch Profile</h2>
-                            <div class="profile-quick-grid">
-                                <div class="profile-quick-card focusable" data-profile="Profile 1">
-                                    <div class="profile-avatar">1</div>
-                                    <p>Profile 1</p>
-                                </div>
-                                <div class="profile-quick-card focusable" data-profile="Profile 2">
-                                    <div class="profile-avatar">2</div>
-                                    <p>Profile 2</p>
-                                </div>
-                            </div>
-                            <p class="overlay-hint">Press profile button again to close</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Remote Control -->
-        <div class="remote-container">
-            <div class="remote">
-                <!-- Top buttons: Profile and Power -->
-                <div class="remote-top">
-                    <button id="profile-btn" class="profile-btn" title="Quick Profile Switch">
-                        <span class="material-icons profile-icon">person</span>
-                    </button>
-                    <div class="power-btn"><span class="material-icons">power_settings_new</span></div>
-                </div>
-
-                <div class="remote-dpad">
-                    <button class="dpad-btn dpad-up">▲</button>
-                    <button class="dpad-btn dpad-left">◀</button>
-                    <button id="ok-btn" class="dpad-btn dpad-center">OK</button>
-                    <button class="dpad-btn dpad-right">▶</button>
-                    <button class="dpad-btn dpad-down">▼</button>
-                </div>
-
-                <div class="remote-nav-row">
-                    <button id="back-btn" class="nav-btn"><span class="material-icons">arrow_back</span></button>
-                    <button id="home-btn" class="nav-btn"><span class="material-icons">home</span></button>
-                </div>
-
-                <div class="remote-playback-row">
-                    <button class="playback-btn"><span class="material-icons">play_arrow</span></button>
-                    <button class="vol-btn"><span class="material-icons">add</span></button>
-                </div>
-
-                <div class="remote-bottom-row">
-                    <button class="mute-btn"><span class="material-icons">volume_off</span></button>
-                    <button class="vol-btn"><span class="material-icons">remove</span></button>
-                </div>
-            </div>
-
-            <!-- Instructions -->
-            <div class="instructions">
-                <h3>Tasks:</h3>
-                <div id="profile1-tasks">
-                    <p><strong>Task 1:</strong> Navigate to a show and play it using the arrow buttons and OK button.</p>
-                    <p><strong>Task 2:</strong> Switch to Profile 2 using only the arrow buttons and BACK button.</p>
-                </div>
-                <div id="profile2-tasks" style="display: none;">
-                    <p><strong>Task 1:</strong> Navigate to a show and play it.</p>
-                    <p><strong>Task 2:</strong> Switch back to Profile 1 using the <span style="color: #4CAF50;">PROFILE</span> button.</p>
-                </div>
-            </div>
-        </div>
+  <div class="app-shell">
+    <div class="notch"></div>
+    <div class="status-bar">
+      <span>9:41</span>
+      <span>Capital U</span>
+      <span>▂▂▂ 74%</span>
     </div>
 
-    <script src="script.js"></script>
+    <!-- HOME / LEADERBOARD -->
+    <section id="screen-home" class="screen active">
+      <h1 class="app-title">Capital U</h1>
+      <p class="subtitle">Season 1 · Week 5</p>
+
+      <div class="xp-card">
+        <div class="xp-row">
+          <span id="xp-level-label">Level 7 · Money Mentor</span>
+          <span id="xp-amount-label">1,620 / 2,400 XP</span>
+        </div>
+        <div class="xp-bar-bg">
+          <div id="xp-bar-fill" class="xp-bar-fill"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
+          <div id="xp-chip" class="xp-chip">+0 XP today</div>
+          <div class="xp-next" id="xp-next-label">Next unlock: Fantasy Finance</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">Friends Leaderboard</div>
+
+        <div class="lb-row">
+          <div class="lb-left">
+            <div class="lb-rank">1</div>
+            <div>
+              <div class="lb-name">Emma</div>
+              <div class="lb-sub">Coin Quest streak · 9 days</div>
+            </div>
+          </div>
+          <div class="lb-xp">2,450 XP</div>
+        </div>
+
+        <div class="lb-row">
+          <div class="lb-left">
+            <div class="lb-rank">2</div>
+            <div>
+              <div class="lb-name">Olivia</div>
+              <div class="lb-sub">SmartBudget · 3 goals</div>
+            </div>
+          </div>
+          <div class="lb-xp">1,980 XP</div>
+        </div>
+
+        <div class="lb-row" id="lb-you-row">
+          <div class="lb-left">
+            <div class="lb-rank">3</div>
+            <div>
+              <div class="lb-name">You</div>
+              <div class="lb-sub" id="lb-you-sub">Fantasy Finance · 2–1 record</div>
+            </div>
+          </div>
+          <div class="lb-xp" id="lb-you-xp">1,620 XP</div>
+        </div>
+
+        <div class="lb-row">
+          <div class="lb-left">
+            <div class="lb-rank">4</div>
+            <div>
+              <div class="lb-name">Ryan</div>
+              <div class="lb-sub">New to Coin Quest</div>
+            </div>
+          </div>
+          <div class="lb-xp">980 XP</div>
+        </div>
+
+        <div class="lb-footer">
+          <span id="lb-global-label">Global: #128 this week</span>
+          <a href="javascript:void(0)" class="lb-link">View classroom board</a>
+        </div>
+      </div>
+
+      <div class="nav-row">
+        <button class="nav-btn primary" data-target="screen-smartbudget">
+          SmartBudget
+        </button>
+        <button class="nav-btn green" data-target="screen-coinquest">
+          Coin Quest
+        </button>
+      </div>
+      <button id="nav-fantasy-btn" class="nav-btn teal" style="width:100%;margin-top:4px;" data-target="screen-fantasy">
+        Fantasy Finance Football
+      </button>
+
+      <div class="minty-row">
+        <div class="minty-avatar">
+          <div class="minty-face"></div>
+          <div class="minty-smile"></div>
+          <div class="minty-leaf"></div>
+        </div>
+        <div class="minty-bubble">
+          <strong>Fantasy Finance</strong> is ready—set your lineup and simulate
+          a matchup. Finish a Coin Quest or add to a savings goal to climb the
+          leaderboard faster.
+          <div class="minty-caption">Minty · Your money coach</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SMARTBUDGET -->
+    <section id="screen-smartbudget" class="screen">
+      <div class="back-link" data-target="screen-home">← Back to Home</div>
+      <h1 class="app-title">Capital U</h1>
+      <p class="subtitle" style="margin-bottom:10px;">SmartBudget Coach</p>
+
+      <button class="nav-btn primary" style="width:100%;margin-bottom:12px;">
+        Create New Goal
+      </button>
+
+      <div class="goal-card">
+        <div class="goal-title">Save $150 for new sneakers</div>
+        <div class="goal-meta" id="goal1-meta">Goal: $150 · Saved: $63</div>
+        <div class="goal-bar-bg">
+          <div id="goal1-bar" class="goal-bar-fill" style="width:42%;"></div>
+        </div>
+        <div class="goal-btn-row">
+          <button id="goal1-add" class="goal-btn primary">
+            Add $15 this week (+40 XP)
+          </button>
+          <button class="goal-btn">Adjust plan</button>
+        </div>
+      </div>
+
+      <div class="goal-card">
+        <div class="goal-title">Emergency cushion</div>
+        <div class="goal-meta">Goal: $300 · Saved: $90 · New</div>
+        <div class="goal-bar-bg">
+          <div class="goal-bar-fill" style="width:30%;"></div>
+        </div>
+      </div>
+
+      <div class="minty-row">
+        <div class="minty-avatar">
+          <div class="minty-face"></div>
+          <div class="minty-smile"></div>
+          <div class="minty-leaf"></div>
+        </div>
+        <div class="minty-bubble">
+          Can you save <strong>$15 per week</strong> for your sneakers? I’ll keep
+          track and turn your progress into <strong>XP</strong>.
+          <div class="minty-caption">SmartBudget XP · +40 if you tap the button</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COIN QUEST -->
+    <section id="screen-coinquest" class="screen">
+      <div class="back-link" data-target="screen-home">← Back to Home</div>
+      <h1 class="app-title">Coin Quest</h1>
+      <p class="subtitle" style="color:#4b5563;">Birthday Money · Chapter 1</p>
+
+      <div class="cq-logo">
+        <div class="minty-avatar" style="width:40px;height:40px;border-width:2px;box-shadow:none;">
+          <div class="minty-face"></div>
+          <div class="minty-smile"></div>
+          <div class="minty-leaf"></div>
+        </div>
+        <div class="cq-title">COIN QUEST</div>
+      </div>
+
+      <p class="cq-body">
+        You just got <strong>$20</strong> for your birthday. What do you want to
+        do with it?
+      </p>
+
+      <div class="cq-btn-row">
+        <button id="cq-spend" class="cq-btn red">
+          Spend it (+40 XP)
+        </button>
+        <button id="cq-save" class="cq-btn green">
+          Save it (+150 XP)
+        </button>
+      </div>
+      <p class="cq-helper">
+        Choose what you’d really do. There’s no wrong answer—just different paths.
+      </p>
+
+      <div class="minty-row">
+        <div class="minty-avatar">
+          <div class="minty-face"></div>
+          <div class="minty-smile"></div>
+          <div class="minty-leaf"></div>
+        </div>
+        <div class="minty-bubble">
+          I’ll show you how this choice affects your savings over the next month.
+          Finish the quest and you’ll jump up the leaderboard.
+          <div class="minty-caption">+XP based on your decision</div>
+        </div>
+      </div>
+
+      <div id="cq-outcome" class="cq-outcome-card" style="display:none;">
+        <div class="pill" id="cq-pill">Forecast unlocked</div>
+        <div class="cq-outcome-title" id="cq-outcome-title">See how your $20 grows</div>
+        <div class="cq-outcome-copy" id="cq-outcome-copy">
+          We’ll show your savings over the next four weeks once you make a choice.
+        </div>
+
+        <div class="cq-forecast" id="cq-forecast">
+          <div class="cq-forecast-row">
+            <span>Week 1</span>
+            <div class="cq-forecast-bar"><div class="cq-forecast-fill" id="cq-week-1"></div></div>
+            <span id="cq-week-1-label">$0</span>
+          </div>
+          <div class="cq-forecast-row">
+            <span>Week 2</span>
+            <div class="cq-forecast-bar"><div class="cq-forecast-fill" id="cq-week-2"></div></div>
+            <span id="cq-week-2-label">$0</span>
+          </div>
+          <div class="cq-forecast-row">
+            <span>Week 3</span>
+            <div class="cq-forecast-bar"><div class="cq-forecast-fill" id="cq-week-3"></div></div>
+            <span id="cq-week-3-label">$0</span>
+          </div>
+          <div class="cq-forecast-row">
+            <span>Week 4</span>
+            <div class="cq-forecast-bar"><div class="cq-forecast-fill" id="cq-week-4"></div></div>
+            <span id="cq-week-4-label">$0</span>
+          </div>
+        </div>
+
+        <div class="cq-actions">
+          <button id="cq-reset">Try a different choice</button>
+          <button id="cq-commit" class="primary">Commit plan to SmartBudget (+25 XP)</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- FANTASY FINANCE -->
+    <section id="screen-fantasy" class="screen">
+      <div class="back-link" data-target="screen-home">← Back to Home</div>
+      <h1 class="app-title">Capital U</h1>
+      <p class="subtitle" style="margin-bottom:10px;">Fantasy Finance Football</p>
+
+      <button class="nav-btn teal" style="width:100%;margin-bottom:12px;">
+        Draft Your Team
+      </button>
+
+      <p class="info-text">
+        Draft your money team, lock in a lineup, and simulate your weekly matchup. Inspired by retro fantasy dashboards.
+      </p>
+
+      <div class="ff-panel">
+        <div class="ff-banner">
+          Fantasy Finance League
+          <span class="ff-week-badge">Week <span id="ff-week-label">5</span></span>
+        </div>
+
+        <div class="ff-menu-row">
+          <button class="ff-menu-btn">Make League</button>
+          <button class="ff-menu-btn">Join League</button>
+          <button class="ff-menu-btn">Manage</button>
+        </div>
+
+        <div class="ff-profile-card">
+          <div class="card-title" style="font-size:12px;margin-bottom:6px;">Edit My FFS Team</div>
+          <div class="ff-profile-grid">
+            <div><span class="ff-profile-label">Team:</span> Scott’s Savvy Savers</div>
+            <div><span class="ff-profile-label">QB Name (Age):</span> Scott W. (47)</div>
+            <div><span class="ff-profile-label">Coaches:</span> Wife, Broker, Banker, Father</div>
+            <div><span class="ff-profile-label">Play Style/Risk:</span> Med-High Risk</div>
+            <div><span class="ff-profile-label">Gain Level:</span> High</div>
+            <div><span class="ff-profile-label">Risk Level:</span> Medium</div>
+          </div>
+          <div class="ff-pill-row">
+            <span class="ff-pill">Offense Line: US Index</span>
+            <span class="ff-pill">Wide Receivers: Nvidia, Netflix</span>
+            <span class="ff-pill">Running Backs: Coca-Cola, Kroger</span>
+            <span class="ff-pill">Tight Ends: Microsoft, Pfizer</span>
+          </div>
+          <div class="ff-pill-row" style="margin-top:6px;">
+            <span class="ff-pill">Defense Line: TIPS, CD Ladder</span>
+            <span class="ff-pill">Defense Backs: Bonds, Index</span>
+            <span class="ff-pill">Special Teams: Gold, Oil, Private Equity</span>
+          </div>
+        </div>
+
+        <div class="ff-league-card">
+          <div class="card-title" style="font-size:12px;margin-bottom:6px;">Leagues</div>
+          <div class="ff-mini-btns">
+            <button class="ff-mini-btn">Stock Players</button>
+            <button class="ff-mini-btn">Bond Players</button>
+            <button class="ff-mini-btn">Cash Players</button>
+            <button class="ff-mini-btn">Other Players</button>
+          </div>
+          <div class="ff-profile-label" style="margin-bottom:4px;">League to edit</div>
+          <ul class="ff-league-list">
+            <li class="ff-league-item active"><span class="ff-radio"></span> CS6750 HciFF$</li>
+            <li class="ff-league-item"><span class="ff-radio"></span> Church: Faith Fantasy Finance$</li>
+            <li class="ff-league-item"><span class="ff-radio"></span> Family, Friends, & Finance$ (FFF)</li>
+            <li class="ff-league-item"><span class="ff-radio"></span> Billionaire Wannabes FFS</li>
+          </ul>
+        </div>
+
+        <div class="ff-rank-card">
+          <div class="stat-header">
+            <span style="font-weight:700;font-size:12px;">Your Money Squad</span>
+            <span class="stat-tag" id="ff-rank-tag">Week 5 · 3rd among friends</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label">Total gain</span>
+            <span class="stat-value positive" id="ff-total">+5.7%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label" id="ff-offense-label">Offense (tech)</span>
+            <span class="stat-value positive" id="ff-offense">+8.3%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label" id="ff-defense-label">Defense (bonds)</span>
+            <span class="stat-value" id="ff-defense">+1.2%</span>
+          </div>
+          <div class="stat-row">
+            <span class="stat-label" id="ff-special-label">Flex (cash)</span>
+            <span class="stat-value negative" id="ff-special">−0.1%</span>
+          </div>
+        </div>
+
+        <div class="ff-standings">
+          <div class="card-title" style="font-size:12px;">League Standings</div>
+          <ul>
+            <li>Scott’s Savers (3.2% / 2 sales)</li>
+            <li>Money Mike (1.2% / 1 sale)</li>
+            <li>You · Adam’s Accts (10.5% / 5 sales)</li>
+            <li>Season rank: Top 3 of 8</li>
+          </ul>
+        </div>
+
+        <div class="ff-matchup" id="ff-matchup-legacy">
+          <div style="font-weight:700;margin-bottom:6px;">Matchup Breakdown</div>
+          <div>WK <span id="ff-week-label-legacy">5</span> Matchup: You vs. Money Mike</div>
+          <div>Offense: <span id="ff-match-off">8.3%</span> vs 5.2%</div>
+          <div>Defense: <span id="ff-match-def">1.2%</span> vs 0.9%</div>
+          <div>Special: <span id="ff-match-spec">-0.1%</span> vs -0.4%</div>
+          <div style="margin-top:6px;">Totals: <span id="ff-match-total">9.4%</span> vs 5.7%</div>
+        </div>
+      </div>
+
+      <div class="minty-row">
+        <div class="minty-avatar">
+          <div class="minty-face"></div>
+          <div class="minty-smile"></div>
+          <div class="minty-leaf"></div>
+        </div>
+        <div class="minty-bubble">
+          Your tech “offense” scored big, but your bond “defense” kept your score
+          from swinging too wildly. That balance is called
+          <strong>diversification</strong>.
+          <div class="minty-caption">+250 XP when you win a simulated matchup</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+  </div>
+
+  <script>
+    // Simple global state for the prototype
+    const state = {
+      xp: 1620,
+      xpTarget: 2400,
+      xpToday: 0,
+      fantasyUnlocked: true,
+      unlockThreshold: 1800,
+      coinQuestChoice: null,
+      sneakerGoal: 150,
+      sneakerSaved: 63,
+      fantasyLineup: {
+        offense: "tech",
+        defense: "bonds",
+        flex: "index"
+      },
+      lineupLocked: false,
+      matchupWeek: 5
+    };
+
+    const coinScenarios = {
+      spend: {
+        pill: "Fast fun, slower progress",
+        title: "You grabbed the instant win",
+        copy: "You bought a game pass. Fun today, but your sneakers goal stays put. Try committing a little of that gift to your goal.",
+        forecast: [0, 0, 0, 0],
+        xp: 40,
+        xpLabel: "Coin Quest · saw the trade-off",
+        deposit: 5
+      },
+      save: {
+        pill: "Builder move",
+        title: "You stashed the $20",
+        copy: "You saved the full $20 and add $1 each week from chores. You’ll have enough for your sneakers in just a few weeks.",
+        forecast: [20, 28, 36, 44],
+        xp: 150,
+        xpLabel: "Coin Quest · saver bonus",
+        deposit: 12
+      }
+    };
+
+    const ffOptions = {
+      offense: {
+        tech: { label: "Tech Titans", return: 6.5, risk: 3.2 },
+        green: { label: "Green Future", return: 4.1, risk: 2.6 },
+        dividend: { label: "Dividend Dash", return: 3.2, risk: 1.9 }
+      },
+      defense: {
+        bonds: { label: "Bond Shield", return: 2.0, risk: 1.1 },
+        cash: { label: "Cash Cushion", return: 0.8, risk: 0.6 },
+        value: { label: "Value Line", return: 1.4, risk: 1.2 }
+      },
+      flex: {
+        index: { label: "Index All-Stars", return: 3.9, risk: 1.8 },
+        energy: { label: "Energy Rush", return: 5.1, risk: 3.1 },
+        health: { label: "Health Heroes", return: 3.4, risk: 1.9 }
+      }
+    };
+
+    const screens = document.querySelectorAll(".screen");
+    const toastEl = document.getElementById("toast");
+
+    function showScreen(id) {
+      screens.forEach((s) => s.classList.remove("active"));
+      document.getElementById(id).classList.add("active");
+    }
+
+    function showToast(message) {
+      toastEl.textContent = message;
+      toastEl.classList.add("show");
+      setTimeout(() => {
+        toastEl.classList.remove("show");
+      }, 2200);
+    }
+
+    function formatXP(x) {
+      return x.toLocaleString() + " XP";
+    }
+
+    function formatMoney(amount) {
+      return "$" + amount.toFixed(0);
+    }
+
+    function formatPercent(value) {
+      const sign = value >= 0 ? "+" : "";
+      return sign + value.toFixed(1) + "%";
+    }
+
+    function setStatValue(el, value) {
+      el.classList.remove("positive", "negative");
+      if (value > 0) el.classList.add("positive");
+      if (value < 0) el.classList.add("negative");
+      el.textContent = formatPercent(value);
+    }
+
+    function updateXP(delta, sourceLabel) {
+      state.xp += delta;
+      state.xpToday += delta;
+      if (state.xp < 0) state.xp = 0;
+      if (state.xp > state.xpTarget) state.xp = state.xpTarget;
+
+      // Update UI
+      const xpAmountLabel = document.getElementById("xp-amount-label");
+      xpAmountLabel.textContent =
+        state.xp.toLocaleString() + " / " + state.xpTarget.toLocaleString() + " XP";
+
+      const pct = (state.xp / state.xpTarget) * 100;
+      document.getElementById("xp-bar-fill").style.width = pct + "%";
+
+      const xpChip = document.getElementById("xp-chip");
+      xpChip.textContent = "+" + state.xpToday + " XP today";
+
+      document.getElementById("lb-you-xp").textContent = formatXP(state.xp);
+
+      // Simple "rank" change if XP > 1900
+      const youRow = document.getElementById("lb-you-row");
+      if (state.xp >= 1900) {
+        youRow.querySelector(".lb-rank").textContent = "2";
+        document.getElementById("lb-global-label").textContent =
+          "Global: #96 this week";
+      }
+
+      // Fantasy Finance stays unlocked and nudges you to play
+      const fantasyBtn = document.getElementById("nav-fantasy-btn");
+      const xpNextLabel = document.getElementById("xp-next-label");
+      fantasyBtn.classList.remove("locked");
+      fantasyBtn.innerHTML = "Fantasy Finance Football";
+      xpNextLabel.textContent = "Tip: Win a Fantasy matchup for bonus XP";
+
+      if (sourceLabel) {
+        showToast("+" + delta + " XP · " + sourceLabel);
+      }
+    }
+
+    function renderSneakerGoal() {
+      const pct = Math.min(100, (state.sneakerSaved / state.sneakerGoal) * 100);
+      document.getElementById("goal1-bar").style.width = pct + "%";
+      document.getElementById(
+        "goal1-meta"
+      ).textContent = `Goal: $${state.sneakerGoal} · Saved: $${state.sneakerSaved}`;
+    }
+
+    function renderCoinQuest(choice) {
+      state.coinQuestChoice = choice;
+      const data = coinScenarios[choice];
+      const outcomeCard = document.getElementById("cq-outcome");
+
+      document.getElementById("cq-pill").textContent = data.pill;
+      document.getElementById("cq-outcome-title").textContent = data.title;
+      document.getElementById("cq-outcome-copy").textContent = data.copy;
+
+      const maxVal = Math.max(...data.forecast, 1);
+      data.forecast.forEach((value, idx) => {
+        const pct = (value / maxVal) * 100;
+        const bar = document.getElementById(`cq-week-${idx + 1}`);
+        const label = document.getElementById(`cq-week-${idx + 1}-label`);
+        bar.style.width = pct + "%";
+        label.textContent = formatMoney(value);
+      });
+
+      outcomeCard.style.display = "block";
+      updateXP(data.xp, data.xpLabel);
+    }
+
+    function resetCoinQuest() {
+      state.coinQuestChoice = null;
+      document.getElementById("cq-outcome").style.display = "none";
+      [1, 2, 3, 4].forEach((week) => {
+        document.getElementById(`cq-week-${week}`).style.width = "0%";
+        document.getElementById(`cq-week-${week}-label`).textContent = "$0";
+      });
+    }
+
+    function updateLineup(slot, option) {
+      state.fantasyLineup[slot] = option;
+      document
+        .querySelectorAll(`.chip[data-slot="${slot}"]`)
+        .forEach((chip) => {
+          chip.classList.toggle(
+            "active",
+            chip.getAttribute("data-option") === option
+          );
+        });
+      renderFantasyStats();
+    }
+
+    function renderFantasyStats() {
+      const offensePick = ffOptions.offense[state.fantasyLineup.offense];
+      const defensePick = ffOptions.defense[state.fantasyLineup.defense];
+      const flexPick = ffOptions.flex[state.fantasyLineup.flex];
+
+      const offenseVal = offensePick.return;
+      const defenseVal = defensePick.return;
+      const flexVal = flexPick.return;
+      const risk =
+        (offensePick.risk + defensePick.risk + flexPick.risk) / 3;
+
+      const totalVal = offenseVal + defenseVal + flexVal - risk * 0.6;
+
+      document.getElementById(
+        "ff-offense-label"
+      ).textContent = `Offense (${offensePick.label})`;
+      document.getElementById(
+        "ff-defense-label"
+      ).textContent = `Defense (${defensePick.label})`;
+      document.getElementById(
+        "ff-special-label"
+      ).textContent = `Flex (${flexPick.label})`;
+
+      setStatValue(document.getElementById("ff-offense"), offenseVal);
+      setStatValue(document.getElementById("ff-defense"), defenseVal);
+      setStatValue(document.getElementById("ff-special"), flexVal - 0.2);
+      setStatValue(document.getElementById("ff-total"), totalVal);
+
+      const rankTag = document.getElementById("ff-rank-tag");
+      const rankWord = totalVal > 6 ? "1st among friends" : totalVal > 3 ? "2nd among friends" : "3rd among friends";
+      rankTag.textContent = `Week ${state.matchupWeek} · ${rankWord}`;
+      document.getElementById("lb-you-sub").textContent =
+        "Fantasy Finance · lineup active";
+
+      const weekLabel = document.getElementById("ff-week-label");
+      if (weekLabel) weekLabel.textContent = state.matchupWeek;
+
+      // Legacy matchup block mirrors the panel
+      const matchOff = document.getElementById("ff-match-off");
+      const matchDef = document.getElementById("ff-match-def");
+      const matchSpec = document.getElementById("ff-match-spec");
+      const matchTotal = document.getElementById("ff-match-total");
+      const weekLegacy = document.getElementById("ff-week-label-legacy");
+      setStatValue(matchOff, offenseVal);
+      setStatValue(matchDef, defenseVal);
+      setStatValue(matchSpec, flexVal - 0.2);
+      setStatValue(matchTotal, totalVal);
+      if (weekLegacy) weekLegacy.textContent = state.matchupWeek;
+    }
+
+    function simulateMatchup() {
+      const playerScore = parseFloat(
+        document.getElementById("ff-total").textContent
+      );
+      const opponentScore = +(Math.random() * 6 - 1).toFixed(1);
+      const resultEl =
+        document.getElementById("ff-matchup") ||
+        document.getElementById("ff-matchup-legacy");
+
+      let message = "";
+      if (playerScore > opponentScore + 0.2) {
+        message = `WIN ${state.matchupWeek}-${state.matchupWeek - 1}: You edged your rival ${playerScore.toFixed(
+          1
+        )}% to ${opponentScore.toFixed(1)}%.`;
+        updateXP(250, "Fantasy Finance · matchup win");
+      } else if (playerScore >= opponentScore - 0.2) {
+        message = `TIE ${state.matchupWeek}-${state.matchupWeek - 1}: So close! ${playerScore.toFixed(
+          1
+        )}% vs ${opponentScore.toFixed(1)}%.`;
+        updateXP(120, "Fantasy Finance · tie");
+      } else {
+        message = `LOSS ${state.matchupWeek}-${state.matchupWeek - 1}: Opponent posted ${opponentScore.toFixed(
+          1
+        )}% while you had ${playerScore.toFixed(1)}%.`;
+        updateXP(60, "Fantasy Finance · played the week");
+      }
+
+      if (resultEl) resultEl.textContent = message;
+      state.matchupWeek += 1;
+      renderFantasyStats();
+    }
+
+    // Initial render
+    renderSneakerGoal();
+    renderFantasyStats();
+    updateXP(0);
+    document.getElementById("lb-you-sub").textContent =
+      "Fantasy Finance · lineup active";
+
+    // Nav buttons (home)
+    document.querySelectorAll(".nav-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-target");
+        if (!target) return;
+        if (btn.classList.contains("locked")) {
+          showToast("Keep earning XP to unlock this module.");
+          return;
+        }
+        showScreen(target);
+      });
+    });
+
+    // Back links
+    document.querySelectorAll(".back-link").forEach((link) => {
+      link.addEventListener("click", () => {
+        const target = link.getAttribute("data-target") || "screen-home";
+        showScreen(target);
+      });
+    });
+
+    // SmartBudget – add $15 this week
+    document.getElementById("goal1-add").addEventListener("click", () => {
+      state.sneakerSaved = Math.min(
+        state.sneakerGoal,
+        state.sneakerSaved + 15
+      );
+      renderSneakerGoal();
+      updateXP(40, "SmartBudget weekly savings");
+    });
+
+    // Coin Quest – Spend vs Save
+    document.getElementById("cq-spend").addEventListener("click", () => {
+      renderCoinQuest("spend");
+    });
+
+    document.getElementById("cq-save").addEventListener("click", () => {
+      renderCoinQuest("save");
+    });
+
+    document.getElementById("cq-reset").addEventListener("click", resetCoinQuest);
+
+    document.getElementById("cq-commit").addEventListener("click", () => {
+      if (!state.coinQuestChoice) {
+        showToast("Pick an option to create a plan first.");
+        return;
+      }
+      const deposit = coinScenarios[state.coinQuestChoice].deposit;
+      state.sneakerSaved = Math.min(
+        state.sneakerGoal,
+        state.sneakerSaved + deposit
+      );
+      renderSneakerGoal();
+      updateXP(25, "Coin Quest → SmartBudget boost");
+      showScreen("screen-home");
+    });
+
+    // Fantasy Finance lineup selections
+    document.querySelectorAll(".chip").forEach((chip) => {
+      chip.addEventListener("click", () => {
+        const slot = chip.getAttribute("data-slot");
+        const option = chip.getAttribute("data-option");
+        updateLineup(slot, option);
+      });
+    });
+
+    const lockBtn = document.getElementById("ff-lock");
+    if (lockBtn) {
+      lockBtn.addEventListener("click", () => {
+        state.lineupLocked = true;
+        updateXP(120, "Fantasy Finance · lineup locked");
+        showToast("Lineup locked for the week—simulate your matchup.");
+        document.getElementById("lb-you-sub").textContent =
+          "Fantasy Finance · lineup locked";
+      });
+    }
+
+    const simBtn = document.getElementById("ff-sim");
+    if (simBtn) {
+      simBtn.addEventListener("click", simulateMatchup);
+    }
+  </script>
 </body>
 </html>

@@ -1,0 +1,1354 @@
+{
+  "version": "1.0",
+  "meta": {
+    "name": "Capital U – Interactive Prototype",
+    "device": "iPhone 13 / 390x844",
+    "description": "4-screen interactive mock for Capital U with leaderboard, SmartBudget, Coin Quest, and Fantasy Finance."
+  },
+  "document": {
+    "id": "doc_capitalu",
+    "type": "DOCUMENT",
+    "children": [
+      {
+        "id": "page_main",
+        "type": "PAGE",
+        "name": "Capital U",
+        "children": [
+          {
+            "id": "frame_home_leaderboard",
+            "type": "FRAME",
+            "name": "Home_Leaderboard",
+            "x": 0,
+            "y": 0,
+            "width": 390,
+            "height": 844,
+            "backgroundColor": "#07101F",
+            "children": [
+              {
+                "id": "home_status_bar",
+                "type": "GROUP",
+                "name": "StatusBar",
+                "children": [
+                  {
+                    "id": "home_status_time",
+                    "type": "TEXT",
+                    "name": "Time",
+                    "x": 24,
+                    "y": 32,
+                    "text": "9:41",
+                    "fontSize": 11,
+                    "color": "#CBD5F5"
+                  },
+                  {
+                    "id": "home_status_center",
+                    "type": "TEXT",
+                    "name": "CenterLabel",
+                    "x": 176,
+                    "y": 32,
+                    "text": "Capital U",
+                    "fontSize": 11,
+                    "color": "#CBD5F5"
+                  },
+                  {
+                    "id": "home_status_battery",
+                    "type": "TEXT",
+                    "name": "Battery",
+                    "x": 320,
+                    "y": 32,
+                    "text": "▂▂▂ 74%",
+                    "fontSize": 11,
+                    "color": "#CBD5F5"
+                  }
+                ]
+              },
+              {
+                "id": "home_title",
+                "type": "TEXT",
+                "name": "AppTitle",
+                "x": 120,
+                "y": 80,
+                "text": "Capital U",
+                "fontSize": 22,
+                "fontWeight": "700",
+                "color": "#F9FAFB"
+              },
+              {
+                "id": "home_subtitle",
+                "type": "TEXT",
+                "name": "SeasonSubtitle",
+                "x": 137,
+                "y": 110,
+                "text": "Season 1 · Week 5",
+                "fontSize": 12,
+                "color": "#C7D2FE"
+              },
+              {
+                "id": "home_xp_card",
+                "type": "FRAME",
+                "name": "XP_Card",
+                "x": 24,
+                "y": 140,
+                "width": 342,
+                "height": 86,
+                "cornerRadius": 14,
+                "backgroundColor": "#0B1220",
+                "children": [
+                  {
+                    "id": "home_xp_toprow",
+                    "type": "GROUP",
+                    "name": "XPLabelRow",
+                    "children": [
+                      {
+                        "id": "home_xp_level",
+                        "type": "TEXT",
+                        "name": "LevelLabel",
+                        "x": 16,
+                        "y": 10,
+                        "text": "Level 7 · Money Mentor",
+                        "fontSize": 11,
+                        "color": "#E5E7EB"
+                      },
+                      {
+                        "id": "home_xp_amount",
+                        "type": "TEXT",
+                        "name": "XPAmount",
+                        "x": 214,
+                        "y": 10,
+                        "text": "1,620 / 2,400 XP",
+                        "fontSize": 11,
+                        "color": "#E5E7EB"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "home_xp_bar_bg",
+                    "type": "RECTANGLE",
+                    "name": "XPBar_BG",
+                    "x": 16,
+                    "y": 30,
+                    "width": 310,
+                    "height": 6,
+                    "cornerRadius": 999,
+                    "fill": "#64748B"
+                  },
+                  {
+                    "id": "home_xp_bar_fill",
+                    "type": "RECTANGLE",
+                    "name": "XPBar_Fill",
+                    "x": 16,
+                    "y": 30,
+                    "width": 210,
+                    "height": 6,
+                    "cornerRadius": 999,
+                    "fill": "#22C55E"
+                  },
+                  {
+                    "id": "home_xp_bottomrow",
+                    "type": "GROUP",
+                    "name": "XPBottomRow",
+                    "children": [
+                      {
+                        "id": "home_xp_chip",
+                        "type": "FRAME",
+                        "name": "XPChip",
+                        "x": 16,
+                        "y": 44,
+                        "width": 90,
+                        "height": 20,
+                        "cornerRadius": 999,
+                        "backgroundColor": "#1D4ED8",
+                        "children": [
+                          {
+                            "id": "home_xp_chip_text",
+                            "type": "TEXT",
+                            "name": "ChipText",
+                            "x": 8,
+                            "y": 3,
+                            "text": "+120 XP today",
+                            "fontSize": 10,
+                            "color": "#EFF6FF"
+                          }
+                        ]
+                      },
+                      {
+                        "id": "home_xp_next",
+                        "type": "TEXT",
+                        "name": "NextUnlock",
+                        "x": 160,
+                        "y": 48,
+                        "text": "Next unlock: Big League Play",
+                        "fontSize": 10,
+                        "color": "#E5E7EB"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "home_leaderboard_card",
+                "type": "FRAME",
+                "name": "Friends_Leaderboard",
+                "x": 24,
+                "y": 238,
+                "width": 342,
+                "height": 260,
+                "cornerRadius": 18,
+                "backgroundColor": "#F7FBFF",
+                "children": [
+                  {
+                    "id": "home_lb_title",
+                    "type": "TEXT",
+                    "name": "LeaderboardTitle",
+                    "x": 16,
+                    "y": 10,
+                    "text": "Friends Leaderboard",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#111827"
+                  },
+                  {
+                    "id": "home_lb_row1",
+                    "type": "FRAME",
+                    "name": "Row_1_Emma",
+                    "x": 12,
+                    "y": 34,
+                    "width": 318,
+                    "height": 40,
+                    "cornerRadius": 12,
+                    "backgroundColor": "#EEF2FF",
+                    "children": [
+                      {
+                        "id": "home_lb_row1_rank",
+                        "type": "TEXT",
+                        "x": 8,
+                        "y": 12,
+                        "text": "1",
+                        "fontSize": 11,
+                        "fontWeight": "600",
+                        "color": "#4B5563"
+                      },
+                      {
+                        "id": "home_lb_row1_name",
+                        "type": "TEXT",
+                        "x": 40,
+                        "y": 9,
+                        "text": "Emma",
+                        "fontSize": 13,
+                        "fontWeight": "600",
+                        "color": "#111827"
+                      },
+                      {
+                        "id": "home_lb_row1_sub",
+                        "type": "TEXT",
+                        "x": 40,
+                        "y": 24,
+                        "text": "Coin Quest streak · 9 days",
+                        "fontSize": 10,
+                        "color": "#6B7280"
+                      },
+                      {
+                        "id": "home_lb_row1_xp",
+                        "type": "TEXT",
+                        "x": 240,
+                        "y": 12,
+                        "text": "2,450 XP",
+                        "fontSize": 12,
+                        "fontWeight": "600",
+                        "color": "#1E40AF"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "home_lb_row2",
+                    "type": "FRAME",
+                    "name": "Row_2_Olivia",
+                    "x": 12,
+                    "y": 80,
+                    "width": 318,
+                    "height": 40,
+                    "cornerRadius": 12,
+                    "backgroundColor": "#F3F4FF",
+                    "children": [
+                      {
+                        "id": "home_lb_row2_rank",
+                        "type": "TEXT",
+                        "x": 8,
+                        "y": 12,
+                        "text": "2",
+                        "fontSize": 11,
+                        "fontWeight": "600",
+                        "color": "#4B5563"
+                      },
+                      {
+                        "id": "home_lb_row2_name",
+                        "type": "TEXT",
+                        "x": 40,
+                        "y": 9,
+                        "text": "Olivia",
+                        "fontSize": 13,
+                        "fontWeight": "600",
+                        "color": "#111827"
+                      },
+                      {
+                        "id": "home_lb_row2_sub",
+                        "type": "TEXT",
+                        "x": 40,
+                        "y": 24,
+                        "text": "SmartBudget · 3 goals",
+                        "fontSize": 10,
+                        "color": "#6B7280"
+                      },
+                      {
+                        "id": "home_lb_row2_xp",
+                        "type": "TEXT",
+                        "x": 240,
+                        "y": 12,
+                        "text": "1,980 XP",
+                        "fontSize": 12,
+                        "fontWeight": "600",
+                        "color": "#1E40AF"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "home_lb_row3",
+                    "type": "FRAME",
+                    "name": "Row_3_You",
+                    "x": 12,
+                    "y": 126,
+                    "width": 318,
+                    "height": 40,
+                    "cornerRadius": 12,
+                    "backgroundColor": "#EEF2FF",
+                    "children": [
+                      {
+                        "id": "home_lb_row3_rank",
+                        "type": "TEXT",
+                        "x": 8,
+                        "y": 12,
+                        "text": "3",
+                        "fontSize": 11,
+                        "fontWeight": "600",
+                        "color": "#4B5563"
+                      },
+                      {
+                        "id": "home_lb_row3_name",
+                        "type": "TEXT",
+                        "x": 40,
+                        "y": 9,
+                        "text": "You",
+                        "fontSize": 13,
+                        "fontWeight": "600",
+                        "color": "#111827"
+                      },
+                      {
+                        "id": "home_lb_row3_sub",
+                        "type": "TEXT",
+                        "x": 40,
+                        "y": 24,
+                        "text": "Fantasy Finance · 2–1 record",
+                        "fontSize": 10,
+                        "color": "#6B7280"
+                      },
+                      {
+                        "id": "home_lb_row3_xp",
+                        "type": "TEXT",
+                        "x": 240,
+                        "y": 12,
+                        "text": "1,620 XP",
+                        "fontSize": 12,
+                        "fontWeight": "600",
+                        "color": "#1E40AF"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "home_lb_footer",
+                    "type": "GROUP",
+                    "name": "LBFooter",
+                    "children": [
+                      {
+                        "id": "home_lb_footer_text",
+                        "type": "TEXT",
+                        "x": 16,
+                        "y": 206,
+                        "text": "Global: #128 this week",
+                        "fontSize": 11,
+                        "color": "#6B7280"
+                      },
+                      {
+                        "id": "home_lb_footer_link",
+                        "type": "TEXT",
+                        "x": 210,
+                        "y": 206,
+                        "text": "View classroom board",
+                        "fontSize": 11,
+                        "color": "#1D4ED8"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "home_minty_group",
+                "type": "GROUP",
+                "name": "MintyCoach",
+                "children": [
+                  {
+                    "id": "home_minty_avatar",
+                    "type": "ELLIPSE",
+                    "name": "MintyAvatar",
+                    "x": 40,
+                    "y": 524,
+                    "width": 52,
+                    "height": 52,
+                    "fill": "#FFCC4D"
+                  },
+                  {
+                    "id": "home_minty_bubble",
+                    "type": "FRAME",
+                    "name": "MintySpeech",
+                    "x": 100,
+                    "y": 520,
+                    "width": 250,
+                    "height": 80,
+                    "cornerRadius": 18,
+                    "backgroundColor": "#22C55E",
+                    "children": [
+                      {
+                        "id": "home_minty_text",
+                        "type": "TEXT",
+                        "x": 12,
+                        "y": 10,
+                        "text": "You’re only 780 XP away from unlocking Big League Fantasy Finance. Finish a Coin Quest to climb faster!",
+                        "fontSize": 12,
+                        "color": "#ECFDF3"
+                      },
+                      {
+                        "id": "home_minty_caption",
+                        "type": "TEXT",
+                        "x": 12,
+                        "y": 54,
+                        "text": "Minty · Your money coach",
+                        "fontSize": 10,
+                        "color": "#D1FAE5"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "home_nav_smartbudget",
+                "type": "FRAME",
+                "name": "Nav_SmartBudget",
+                "x": 24,
+                "y": 620,
+                "width": 160,
+                "height": 42,
+                "cornerRadius": 999,
+                "backgroundColor": "#1F6FE5",
+                "children": [
+                  {
+                    "id": "home_nav_smartbudget_label",
+                    "type": "TEXT",
+                    "x": 18,
+                    "y": 12,
+                    "text": "SmartBudget",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#EFF6FF"
+                  }
+                ],
+                "interactions": [
+                  {
+                    "event": "ON_TAP",
+                    "action": "NAVIGATE",
+                    "target": "frame_smartbudget"
+                  }
+                ]
+              },
+              {
+                "id": "home_nav_coinquest",
+                "type": "FRAME",
+                "name": "Nav_CoinQuest",
+                "x": 206,
+                "y": 620,
+                "width": 160,
+                "height": 42,
+                "cornerRadius": 999,
+                "backgroundColor": "#22C55E",
+                "children": [
+                  {
+                    "id": "home_nav_coinquest_label",
+                    "type": "TEXT",
+                    "x": 24,
+                    "y": 12,
+                    "text": "Coin Quest",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#ECFDF3"
+                  }
+                ],
+                "interactions": [
+                  {
+                    "event": "ON_TAP",
+                    "action": "NAVIGATE",
+                    "target": "frame_coinquest"
+                  }
+                ]
+              },
+              {
+                "id": "home_nav_fantasy",
+                "type": "FRAME",
+                "name": "Nav_Fantasy",
+                "x": 24,
+                "y": 670,
+                "width": 342,
+                "height": 42,
+                "cornerRadius": 999,
+                "backgroundColor": "#0EA5E9",
+                "children": [
+                  {
+                    "id": "home_nav_fantasy_label",
+                    "type": "TEXT",
+                    "x": 80,
+                    "y": 12,
+                    "text": "Fantasy Finance Football",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#ECFEFF"
+                  }
+                ],
+                "interactions": [
+                  {
+                    "event": "ON_TAP",
+                    "action": "NAVIGATE",
+                    "target": "frame_fantasy"
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
+            "id": "frame_smartbudget",
+            "type": "FRAME",
+            "name": "SmartBudget_Coach",
+            "x": 420,
+            "y": 0,
+            "width": 390,
+            "height": 844,
+            "backgroundColor": "#F3F4F6",
+            "children": [
+              {
+                "id": "sb_title",
+                "type": "TEXT",
+                "x": 140,
+                "y": 40,
+                "text": "Capital U",
+                "fontSize": 22,
+                "fontWeight": "700",
+                "color": "#0F172A"
+              },
+              {
+                "id": "sb_subtitle",
+                "type": "TEXT",
+                "x": 128,
+                "y": 70,
+                "text": "SmartBudget Coach",
+                "fontSize": 14,
+                "fontWeight": "600",
+                "color": "#111827"
+              },
+              {
+                "id": "sb_create_goal_btn",
+                "type": "FRAME",
+                "name": "CreateGoalButton",
+                "x": 80,
+                "y": 110,
+                "width": 230,
+                "height": 40,
+                "cornerRadius": 999,
+                "backgroundColor": "#2563EB",
+                "children": [
+                  {
+                    "id": "sb_create_goal_label",
+                    "type": "TEXT",
+                    "x": 60,
+                    "y": 11,
+                    "text": "Create New Goal",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#EFF6FF"
+                  }
+                ]
+              },
+              {
+                "id": "sb_goal_card1",
+                "type": "FRAME",
+                "name": "GoalCard_Sneakers",
+                "x": 24,
+                "y": 170,
+                "width": 342,
+                "height": 120,
+                "cornerRadius": 14,
+                "backgroundColor": "#FFFFFF",
+                "children": [
+                  {
+                    "id": "sb_goal1_title",
+                    "type": "TEXT",
+                    "x": 14,
+                    "y": 10,
+                    "text": "Save $150 for new sneakers",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#111827"
+                  },
+                  {
+                    "id": "sb_goal1_meta",
+                    "type": "TEXT",
+                    "x": 14,
+                    "y": 30,
+                    "text": "Goal: $150 · Saved: $63 · Due in 6 weeks",
+                    "fontSize": 11,
+                    "color": "#6B7280"
+                  },
+                  {
+                    "id": "sb_goal1_bar_bg",
+                    "type": "RECTANGLE",
+                    "x": 14,
+                    "y": 52,
+                    "width": 314,
+                    "height": 6,
+                    "cornerRadius": 999,
+                    "fill": "#E5E7EB"
+                  },
+                  {
+                    "id": "sb_goal1_bar_fill",
+                    "type": "RECTANGLE",
+                    "x": 14,
+                    "y": 52,
+                    "width": 132,
+                    "height": 6,
+                    "cornerRadius": 999,
+                    "fill": "#22C55E"
+                  },
+                  {
+                    "id": "sb_goal1_btn_add",
+                    "type": "FRAME",
+                    "x": 14,
+                    "y": 70,
+                    "width": 150,
+                    "height": 32,
+                    "cornerRadius": 999,
+                    "backgroundColor": "#2563EB",
+                    "children": [
+                      {
+                        "id": "sb_goal1_btn_add_label",
+                        "type": "TEXT",
+                        "x": 18,
+                        "y": 9,
+                        "text": "Add $15 this week",
+                        "fontSize": 11,
+                        "fontWeight": "500",
+                        "color": "#EFF6FF"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "sb_goal1_btn_adjust",
+                    "type": "FRAME",
+                    "x": 178,
+                    "y": 70,
+                    "width": 150,
+                    "height": 32,
+                    "cornerRadius": 999,
+                    "backgroundColor": "#F9FAFB",
+                    "stroke": "#D1D5DB",
+                    "children": [
+                      {
+                        "id": "sb_goal1_btn_adjust_label",
+                        "type": "TEXT",
+                        "x": 40,
+                        "y": 9,
+                        "text": "Adjust plan",
+                        "fontSize": 11,
+                        "fontWeight": "500",
+                        "color": "#111827"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "sb_goal_card2",
+                "type": "FRAME",
+                "name": "GoalCard_Emergency",
+                "x": 24,
+                "y": 304,
+                "width": 342,
+                "height": 110,
+                "cornerRadius": 14,
+                "backgroundColor": "#FFFFFF",
+                "children": [
+                  {
+                    "id": "sb_goal2_title",
+                    "type": "TEXT",
+                    "x": 14,
+                    "y": 10,
+                    "text": "Emergency cushion",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#111827"
+                  },
+                  {
+                    "id": "sb_goal2_meta",
+                    "type": "TEXT",
+                    "x": 14,
+                    "y": 30,
+                    "text": "Goal: $300 · Saved: $90 · New",
+                    "fontSize": 11,
+                    "color": "#6B7280"
+                  },
+                  {
+                    "id": "sb_goal2_bar_bg",
+                    "type": "RECTANGLE",
+                    "x": 14,
+                    "y": 52,
+                    "width": 314,
+                    "height": 6,
+                    "cornerRadius": 999,
+                    "fill": "#E5E7EB"
+                  },
+                  {
+                    "id": "sb_goal2_bar_fill",
+                    "type": "RECTANGLE",
+                    "x": 14,
+                    "y": 52,
+                    "width": 94,
+                    "height": 6,
+                    "cornerRadius": 999,
+                    "fill": "#22C55E"
+                  }
+                ]
+              },
+              {
+                "id": "sb_minty_group",
+                "type": "GROUP",
+                "name": "MintyPrompt",
+                "children": [
+                  {
+                    "id": "sb_minty_avatar",
+                    "type": "ELLIPSE",
+                    "x": 40,
+                    "y": 450,
+                    "width": 52,
+                    "height": 52,
+                    "fill": "#FFCC4D"
+                  },
+                  {
+                    "id": "sb_minty_bubble",
+                    "type": "FRAME",
+                    "x": 100,
+                    "y": 446,
+                    "width": 250,
+                    "height": 84,
+                    "cornerRadius": 18,
+                    "backgroundColor": "#22C55E",
+                    "children": [
+                      {
+                        "id": "sb_minty_text",
+                        "type": "TEXT",
+                        "x": 12,
+                        "y": 10,
+                        "text": "Can you save $15 per week for your sneakers? I’ll keep track and cheer you on.",
+                        "fontSize": 12,
+                        "color": "#ECFDF3"
+                      },
+                      {
+                        "id": "sb_minty_caption",
+                        "type": "TEXT",
+                        "x": 12,
+                        "y": 54,
+                        "text": "SmartBudget XP · +40 if you say yes",
+                        "fontSize": 10,
+                        "color": "#D1FAE5"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
+            "id": "frame_coinquest",
+            "type": "FRAME",
+            "name": "CoinQuest_Birthday",
+            "x": 840,
+            "y": 0,
+            "width": 390,
+            "height": 844,
+            "backgroundColor": "#F9FAFB",
+            "children": [
+              {
+                "id": "cq_title",
+                "type": "TEXT",
+                "x": 146,
+                "y": 40,
+                "text": "Coin Quest",
+                "fontSize": 22,
+                "fontWeight": "700",
+                "color": "#0F172A"
+              },
+              {
+                "id": "cq_subtitle",
+                "type": "TEXT",
+                "x": 118,
+                "y": 70,
+                "text": "Birthday Money · Chapter 1",
+                "fontSize": 12,
+                "color": "#4B5563"
+              },
+              {
+                "id": "cq_logo_frame",
+                "type": "FRAME",
+                "name": "Logo",
+                "x": 140,
+                "y": 106,
+                "width": 110,
+                "height": 78,
+                "cornerRadius": 24,
+                "backgroundColor": "#0F172A",
+                "children": [
+                  {
+                    "id": "cq_logo_avatar",
+                    "type": "ELLIPSE",
+                    "x": 34,
+                    "y": 6,
+                    "width": 42,
+                    "height": 42,
+                    "fill": "#FFCC4D"
+                  },
+                  {
+                    "id": "cq_logo_text",
+                    "type": "TEXT",
+                    "x": 16,
+                    "y": 52,
+                    "text": "COIN QUEST",
+                    "fontSize": 12,
+                    "fontWeight": "700",
+                    "color": "#E5E7EB"
+                  }
+                ]
+              },
+              {
+                "id": "cq_body_text",
+                "type": "TEXT",
+                "x": 34,
+                "y": 204,
+                "text": "You just got $20 for your birthday. What do you want to do with it?",
+                "fontSize": 14,
+                "color": "#111827"
+              },
+              {
+                "id": "cq_btn_spend",
+                "type": "FRAME",
+                "name": "SpendButton",
+                "x": 40,
+                "y": 260,
+                "width": 140,
+                "height": 44,
+                "cornerRadius": 999,
+                "backgroundColor": "#EF4444",
+                "children": [
+                  {
+                    "id": "cq_btn_spend_label",
+                    "type": "TEXT",
+                    "x": 38,
+                    "y": 13,
+                    "text": "Spend it",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#FFFFFF"
+                  }
+                ],
+                "interactions": [
+                  {
+                    "event": "ON_TAP",
+                    "action": "NAVIGATE",
+                    "target": "frame_cq_spend_result"
+                  }
+                ]
+              },
+              {
+                "id": "cq_btn_save",
+                "type": "FRAME",
+                "name": "SaveButton",
+                "x": 210,
+                "y": 260,
+                "width": 140,
+                "height": 44,
+                "cornerRadius": 999,
+                "backgroundColor": "#22C55E",
+                "children": [
+                  {
+                    "id": "cq_btn_save_label",
+                    "type": "TEXT",
+                    "x": 44,
+                    "y": 13,
+                    "text": "Save it",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#FFFFFF"
+                  }
+                ],
+                "interactions": [
+                  {
+                    "event": "ON_TAP",
+                    "action": "NAVIGATE",
+                    "target": "frame_cq_save_result"
+                  }
+                ]
+              },
+              {
+                "id": "cq_small_helper",
+                "type": "TEXT",
+                "x": 60,
+                "y": 314,
+                "text": "Choose what you’d really do. There’s no wrong answer—just different paths.",
+                "fontSize": 11,
+                "color": "#6B7280"
+              },
+              {
+                "id": "cq_minty_group",
+                "type": "GROUP",
+                "name": "MintyExplain",
+                "children": [
+                  {
+                    "id": "cq_minty_avatar",
+                    "type": "ELLIPSE",
+                    "x": 40,
+                    "y": 360,
+                    "width": 52,
+                    "height": 52,
+                    "fill": "#FFCC4D"
+                  },
+                  {
+                    "id": "cq_minty_bubble",
+                    "type": "FRAME",
+                    "x": 100,
+                    "y": 356,
+                    "width": 250,
+                    "height": 90,
+                    "cornerRadius": 18,
+                    "backgroundColor": "#22C55E",
+                    "children": [
+                      {
+                        "id": "cq_minty_text",
+                        "type": "TEXT",
+                        "x": 12,
+                        "y": 10,
+                        "text": "I’ll show you how each option changes your savings over the next month. Ready for a quick simulation?",
+                        "fontSize": 12,
+                        "color": "#ECFDF3"
+                      },
+                      {
+                        "id": "cq_minty_caption",
+                        "type": "TEXT",
+                        "x": 12,
+                        "y": 58,
+                        "text": "+150 XP for finishing this quest",
+                        "fontSize": 10,
+                        "color": "#D1FAE5"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
+            "id": "frame_fantasy",
+            "type": "FRAME",
+            "name": "FantasyFinance_Main",
+            "x": 1260,
+            "y": 0,
+            "width": 390,
+            "height": 844,
+            "backgroundColor": "#F9FAFB",
+            "children": [
+              {
+                "id": "ff_title",
+                "type": "TEXT",
+                "x": 140,
+                "y": 40,
+                "text": "Capital U",
+                "fontSize": 22,
+                "fontWeight": "700",
+                "color": "#0F172A"
+              },
+              {
+                "id": "ff_subtitle",
+                "type": "TEXT",
+                "x": 96,
+                "y": 70,
+                "text": "Fantasy Finance Football",
+                "fontSize": 14,
+                "fontWeight": "600",
+                "color": "#111827"
+              },
+              {
+                "id": "ff_draft_btn",
+                "type": "FRAME",
+                "name": "DraftTeamButton",
+                "x": 80,
+                "y": 110,
+                "width": 230,
+                "height": 40,
+                "cornerRadius": 999,
+                "backgroundColor": "#2563EB",
+                "children": [
+                  {
+                    "id": "ff_draft_btn_label",
+                    "type": "TEXT",
+                    "x": 68,
+                    "y": 11,
+                    "text": "Draft Your Team",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#EFF6FF"
+                  }
+                ]
+              },
+              {
+                "id": "ff_body_text",
+                "type": "TEXT",
+                "x": 32,
+                "y": 164,
+                "text": "Pick “players” for your money lineup. Each one is a real company or fund. Watch how their value changes week to week.",
+                "fontSize": 12,
+                "color": "#111827"
+              },
+              {
+                "id": "ff_team_card",
+                "type": "FRAME",
+                "name": "TeamSummaryCard",
+                "x": 24,
+                "y": 220,
+                "width": 342,
+                "height": 150,
+                "cornerRadius": 14,
+                "backgroundColor": "#FFFFFF",
+                "children": [
+                  {
+                    "id": "ff_team_header_name",
+                    "type": "TEXT",
+                    "x": 16,
+                    "y": 10,
+                    "text": "Scott’s Savvy Savers",
+                    "fontSize": 11,
+                    "fontWeight": "600",
+                    "color": "#111827"
+                  },
+                  {
+                    "id": "ff_team_header_tag",
+                    "type": "FRAME",
+                    "x": 214,
+                    "y": 8,
+                    "width": 110,
+                    "height": 20,
+                    "cornerRadius": 999,
+                    "backgroundColor": "#ECFEFF",
+                    "children": [
+                      {
+                        "id": "ff_team_header_tag_text",
+                        "type": "TEXT",
+                        "x": 8,
+                        "y": 3,
+                        "text": "Week 5 · 1st place",
+                        "fontSize": 10,
+                        "color": "#0F766E"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "ff_row_total",
+                    "type": "GROUP",
+                    "name": "Row_TotalGain",
+                    "children": [
+                      {
+                        "id": "ff_row_total_label",
+                        "type": "TEXT",
+                        "x": 16,
+                        "y": 40,
+                        "text": "Total gain",
+                        "fontSize": 11,
+                        "color": "#6B7280"
+                      },
+                      {
+                        "id": "ff_row_total_value",
+                        "type": "TEXT",
+                        "x": 260,
+                        "y": 40,
+                        "text": "+5.7%",
+                        "fontSize": 11,
+                        "fontWeight": "600",
+                        "color": "#15803D"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "ff_row_offense",
+                    "type": "GROUP",
+                    "name": "Row_Offense",
+                    "children": [
+                      {
+                        "id": "ff_row_offense_label",
+                        "type": "TEXT",
+                        "x": 16,
+                        "y": 60,
+                        "text": "Offense (tech)",
+                        "fontSize": 11,
+                        "color": "#6B7280"
+                      },
+                      {
+                        "id": "ff_row_offense_value",
+                        "type": "TEXT",
+                        "x": 260,
+                        "y": 60,
+                        "text": "+8.3%",
+                        "fontSize": 11,
+                        "fontWeight": "600",
+                        "color": "#15803D"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "ff_row_defense",
+                    "type": "GROUP",
+                    "name": "Row_Defense",
+                    "children": [
+                      {
+                        "id": "ff_row_defense_label",
+                        "type": "TEXT",
+                        "x": 16,
+                        "y": 80,
+                        "text": "Defense (bonds)",
+                        "fontSize": 11,
+                        "color": "#6B7280"
+                      },
+                      {
+                        "id": "ff_row_defense_value",
+                        "type": "TEXT",
+                        "x": 260,
+                        "y": 80,
+                        "text": "+1.2%",
+                        "fontSize": 11,
+                        "fontWeight": "600",
+                        "color": "#111827"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "ff_row_special",
+                    "type": "GROUP",
+                    "name": "Row_Special",
+                    "children": [
+                      {
+                        "id": "ff_row_special_label",
+                        "type": "TEXT",
+                        "x": 16,
+                        "y": 100,
+                        "text": "Special teams (cash)",
+                        "fontSize": 11,
+                        "color": "#6B7280"
+                      },
+                      {
+                        "id": "ff_row_special_value",
+                        "type": "TEXT",
+                        "x": 260,
+                        "y": 100,
+                        "text": "−0.1%",
+                        "fontSize": 11,
+                        "fontWeight": "600",
+                        "color": "#B91C1C"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "id": "ff_minty_group",
+                "type": "GROUP",
+                "name": "MintyDiversification",
+                "children": [
+                  {
+                    "id": "ff_minty_avatar",
+                    "type": "ELLIPSE",
+                    "x": 40,
+                    "y": 394,
+                    "width": 52,
+                    "height": 52,
+                    "fill": "#FFCC4D"
+                  },
+                  {
+                    "id": "ff_minty_bubble",
+                    "type": "FRAME",
+                    "x": 100,
+                    "y": 390,
+                    "width": 250,
+                    "height": 96,
+                    "cornerRadius": 18,
+                    "backgroundColor": "#22C55E",
+                    "children": [
+                      {
+                        "id": "ff_minty_text",
+                        "type": "TEXT",
+                        "x": 12,
+                        "y": 10,
+                        "text": "Your tech players scored big this week, but your bond defense kept things from swinging too wildly. That’s called diversification.",
+                        "fontSize": 12,
+                        "color": "#ECFDF3"
+                      },
+                      {
+                        "id": "ff_minty_caption",
+                        "type": "TEXT",
+                        "x": 12,
+                        "y": 62,
+                        "text": "+250 XP for winning this matchup",
+                        "fontSize": 10,
+                        "color": "#D1FAE5"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
+            "id": "frame_cq_spend_result",
+            "type": "FRAME",
+            "name": "CQ_Spend_Result",
+            "x": 840,
+            "y": 920,
+            "width": 320,
+            "height": 220,
+            "backgroundColor": "#FFFFFF",
+            "children": [
+              {
+                "id": "cq_spend_result_text",
+                "type": "TEXT",
+                "x": 20,
+                "y": 20,
+                "text": "You spent the $20 on a game. It felt great today, but your sneakers goal didn’t grow this week.",
+                "fontSize": 12,
+                "color": "#111827"
+              },
+              {
+                "id": "cq_spend_result_xp",
+                "type": "TEXT",
+                "x": 20,
+                "y": 78,
+                "text": "+40 XP · You saw the trade-off.",
+                "fontSize": 11,
+                "color": "#4B5563"
+              },
+              {
+                "id": "cq_spend_result_continue",
+                "type": "FRAME",
+                "x": 96,
+                "y": 150,
+                "width": 128,
+                "height": 40,
+                "cornerRadius": 999,
+                "backgroundColor": "#2563EB",
+                "children": [
+                  {
+                    "id": "cq_spend_result_continue_text",
+                    "type": "TEXT",
+                    "x": 30,
+                    "y": 11,
+                    "text": "Continue",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#EFF6FF"
+                  }
+                ],
+                "interactions": [
+                  {
+                    "event": "ON_TAP",
+                    "action": "NAVIGATE",
+                    "target": "frame_home_leaderboard"
+                  }
+                ]
+              }
+            ]
+          },
+
+          {
+            "id": "frame_cq_save_result",
+            "type": "FRAME",
+            "name": "CQ_Save_Result",
+            "x": 1180,
+            "y": 920,
+            "width": 320,
+            "height": 220,
+            "backgroundColor": "#FFFFFF",
+            "children": [
+              {
+                "id": "cq_save_result_text",
+                "type": "TEXT",
+                "x": 20,
+                "y": 20,
+                "text": "You saved the $20 toward your sneakers. You’re one week closer to your goal—and earned bonus XP for a long-term choice.",
+                "fontSize": 12,
+                "color": "#111827"
+              },
+              {
+                "id": "cq_save_result_xp",
+                "type": "TEXT",
+                "x": 20,
+                "y": 78,
+                "text": "+150 XP · Smart saver bonus.",
+                "fontSize": 11,
+                "color": "#16A34A"
+              },
+              {
+                "id": "cq_save_result_continue",
+                "type": "FRAME",
+                "x": 96,
+                "y": 150,
+                "width": 128,
+                "height": 40,
+                "cornerRadius": 999,
+                "backgroundColor": "#22C55E",
+                "children": [
+                  {
+                    "id": "cq_save_result_continue_text",
+                    "type": "TEXT",
+                    "x": 30,
+                    "y": 11,
+                    "text": "Continue",
+                    "fontSize": 13,
+                    "fontWeight": "600",
+                    "color": "#ECFDF3"
+                  }
+                ],
+                "interactions": [
+                  {
+                    "event": "ON_TAP",
+                    "action": "NAVIGATE",
+                    "target": "frame_home_leaderboard"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
