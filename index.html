@@ -5,92 +5,80 @@
   <title>Capital U – Interactive Prototype</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;700&display=swap");
+    @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0");
 
     :root {
-      --bg: #050b1a;
-      --bg-grad-top: #0ea5e9;
-      --bg-grad-bottom: #f97316;
-      --card-bg: rgba(255, 255, 255, 0.92);
-      --primary: #00c2ff;
-      --primary-dark: #0d99d5;
-      --accent-green: #22c55e;
-      --accent-red: #ff5f6d;
-      --accent-teal: #06b6d4;
-      --text-main: #0b1224;
-      --text-muted: #4b5563;
-      --radius-pill: 999px;
-      --radius-soft: 18px;
+      --surface: #0f1419;
+      --surface-elevated: #1a1f29;
+      --surface-muted: #0a0e13;
+      --border: #2d3748;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --radius: 14px;
+      --pill: 999px;
+      --accent: #06b6d4;
+      --accent-2: #8b5cf6;
+      --teal: #14b8a6;
+      --violet: #8b5cf6;
+      --violet-light: #a78bfa;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      font-family: "SF Pro Text", -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
     }
 
     body {
-      font-family: "Plus Jakarta Sans", "Space Grotesk", system-ui, -apple-system,
-        BlinkMacSystemFont, "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      background: radial-gradient(circle at 20% 10%, rgba(6, 182, 212, 0.45), transparent 35%),
-        radial-gradient(circle at 80% 0%, rgba(249, 115, 22, 0.4), transparent 38%),
-        linear-gradient(135deg, #0b1120, #0f172a 45%, #0b1224);
-      color: var(--text-main);
       min-height: 100vh;
+      background: linear-gradient(135deg, #0a0e13 0%, #1a1f29 100%);
+      color: var(--text);
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px;
+      padding: 20px;
     }
 
     .app-shell {
+      position: relative;
       width: 390px;
       max-width: 100%;
       height: 844px;
       max-height: 100vh;
-      border-radius: 32px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(236, 245, 255, 0.92));
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-      position: relative;
+      border-radius: 28px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(14, 184, 166, 0.15);
       overflow: hidden;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      backdrop-filter: blur(10px);
     }
 
     .status-bar {
-      height: 32px;
+      height: 36px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 4px 16px;
-      font-size: 11px;
-      color: #0f172a;
-      background: linear-gradient(180deg, #e0f2fe, #e5e7eb);
+      padding: 6px 14px;
+      font-size: 12px;
+      color: var(--muted);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface-elevated);
       position: relative;
       z-index: 2;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
     }
 
     .notch {
-      position: absolute;
-      top: 6px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 20px;
-      background: #e2e8f0;
-      border-radius: 999px;
-      box-shadow: 0 2px 4px rgba(148, 163, 184, 0.6);
-      z-index: 1;
+      display: none;
     }
 
     .screen {
       position: absolute;
-      inset: 32px 0 0 0;
-      padding: 16px 16px 20px;
+      inset: 36px 0 72px 0;
+      padding: 16px;
       display: none;
       overflow-y: auto;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(240, 249, 255, 0.9));
+      background: var(--surface);
     }
 
     .screen.active {
@@ -101,109 +89,177 @@
       text-align: center;
       font-weight: 700;
       font-size: 22px;
-      letter-spacing: 0.06em;
       margin-bottom: 4px;
-      color: #0b1224;
-      text-transform: uppercase;
+      color: var(--accent);
+      letter-spacing: 0.02em;
     }
 
     .subtitle {
       text-align: center;
       font-size: 12px;
-      color: var(--text-muted);
+      color: var(--muted);
       margin-bottom: 12px;
-      letter-spacing: 0.02em;
     }
 
-    .xp-card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 12px 14px;
+    .xp-card,
+    .card,
+    .goal-card,
+    .cq-outcome-card,
+    .ff-panel,
+    .ff-profile-card,
+    .ff-league-card,
+    .ff-rank-card,
+    .ff-standings,
+    .ff-matchup {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
       margin-bottom: 12px;
-      border: 1px solid rgba(14, 165, 233, 0.35);
-      color: var(--text-main);
-      box-shadow: 0 16px 36px rgba(6, 182, 212, 0.15);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
     }
 
-    .xp-row {
+    .xp-row,
+    .stat-row,
+    .lb-row,
+    .ff-actions,
+    .cq-btn-row {
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-main);
-      margin-bottom: 6px;
-      letter-spacing: 0.01em;
+      gap: 8px;
     }
 
-    .xp-bar-bg {
+    .xp-row,
+    .xp-next,
+    .goal-meta,
+    .lb-sub,
+    .cq-helper,
+    .info-text,
+    .stat-label {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .xp-bar-bg,
+    .goal-bar-bg,
+    .cq-forecast-bar {
       width: 100%;
       height: 8px;
-      border-radius: 999px;
-      background: #e2e8f0;
+      border-radius: var(--pill);
+      background: #1e293b;
       overflow: hidden;
     }
 
-    .xp-bar-fill {
+    .xp-bar-fill,
+    .goal-bar-fill,
+    .cq-forecast-fill {
       height: 100%;
       width: 0;
-      border-radius: 999px;
-      background: linear-gradient(90deg, #22c55e, #06b6d4, #22d3ee);
+      border-radius: var(--pill);
+      background: linear-gradient(90deg, var(--teal), var(--violet));
       transition: width 0.25s ease-out;
+      box-shadow: 0 0 12px rgba(14, 184, 166, 0.4);
     }
 
     .xp-chip {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      border-radius: 999px;
-      padding: 3px 10px;
-      font-size: 10px;
-      background: linear-gradient(135deg, rgba(14, 165, 233, 0.14), rgba(99, 102, 241, 0.16));
-      border: 1px solid rgba(99, 102, 241, 0.25);
-      color: var(--text-main);
-      margin-top: 6px;
-      letter-spacing: 0.02em;
+      border-radius: var(--pill);
+      padding: 4px 10px;
+      font-size: 11px;
+      background: rgba(14, 184, 166, 0.15);
+      color: var(--teal);
+      border: 1px solid rgba(14, 184, 166, 0.3);
     }
 
-    .xp-next {
-      font-size: 10px;
-      color: var(--text-muted);
-      text-align: right;
-      margin-top: -16px;
-    }
-
-    .card {
-      background: var(--card-bg);
-      border-radius: 18px;
-      padding: 12px 12px 10px;
-      color: var(--text-main);
-      margin-bottom: 12px;
-      border: 1px solid rgba(14, 165, 233, 0.12);
-      box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
-    }
-
-    .card-title {
-      font-size: 13px;
+    .card-title,
+    .goal-title,
+    .cq-outcome-title {
       font-weight: 700;
+      font-size: 14px;
       margin-bottom: 6px;
-      letter-spacing: 0.01em;
+      color: var(--accent);
+    }
+
+    .nav-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+      margin: 10px 0 8px;
+    }
+
+    .nav-btn,
+    .goal-btn,
+    .cq-btn,
+    .cq-actions button,
+    .ff-menu-btn,
+    .ff-mini-btn,
+    .ff-actions button,
+    #nav-fantasy-btn {
+      border-radius: var(--pill);
+      border: 1px solid var(--border);
+      padding: 10px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      background: var(--surface-elevated);
+      color: var(--text);
+      transition: all 0.2s ease;
+    }
+
+    .nav-btn:hover,
+    .goal-btn:hover,
+    .cq-btn:hover,
+    .cq-actions button:hover,
+    .ff-menu-btn:hover,
+    .ff-mini-btn:hover,
+    .ff-actions button:hover {
+      background: rgba(14, 184, 166, 0.1);
+      border-color: var(--teal);
+      transform: translateY(-1px);
+    }
+
+    .nav-btn.primary,
+    .goal-btn.primary,
+    .cq-btn.green,
+    .cq-actions button.primary,
+    .ff-actions button.primary {
+      background: linear-gradient(135deg, var(--teal), var(--violet));
+      color: #ffffff;
+      border-color: transparent;
+      box-shadow: 0 4px 12px rgba(14, 184, 166, 0.3);
+    }
+
+    .nav-btn.green,
+    .nav-btn.teal,
+    .nav-btn.primary {
+      color: #ffffff;
+    }
+
+    .nav-btn.green,
+    .cq-btn.red {
+      background: var(--teal);
+      border-color: var(--teal);
+    }
+
+    .nav-btn.teal {
+      background: var(--violet);
+      border-color: var(--violet);
+    }
+
+    .nav-btn.locked {
+      opacity: 0.6;
+      cursor: default;
     }
 
     .lb-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 7px 8px;
-      border-radius: 12px;
-      font-size: 12px;
-      margin-bottom: 4px;
-    }
-
-    .lb-row:nth-child(2n) {
-      background: #eef2ff;
-    }
-
-    .lb-row:nth-child(2n+1) {
-      background: #f3f4ff;
+      padding: 8px 6px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      margin-bottom: 6px;
+      background: rgba(26, 31, 41, 0.5);
     }
 
     .lb-left {
@@ -215,307 +271,90 @@
     .lb-rank {
       width: 18px;
       text-align: center;
-      font-weight: 600;
-      font-size: 11px;
-      color: #4b5563;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--accent);
     }
 
     .lb-name {
       font-weight: 600;
-      font-size: 12px;
-    }
-
-    .lb-sub {
-      font-size: 10px;
-      color: var(--text-muted);
+      font-size: 13px;
+      color: var(--accent);
     }
 
     .lb-xp {
       font-weight: 600;
       font-size: 12px;
-      color: #1d4ed8;
+      color: var(--accent);
     }
 
     .lb-footer {
       display: flex;
       justify-content: space-between;
-      font-size: 11px;
-      color: var(--text-muted);
+      font-size: 12px;
+      color: var(--muted);
       margin-top: 4px;
     }
 
-    .lb-link {
-      color: #1d4ed8;
+    .lb-link,
+    .back-link {
+      color: var(--accent-2);
       text-decoration: none;
-      font-weight: 500;
-    }
-
-    .nav-row {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 8px;
-      margin: 10px 0 8px;
-    }
-
-    .nav-btn {
-      border-radius: var(--radius-pill);
-      border: none;
-      padding: 10px 12px;
-      font-size: 13px;
-      font-weight: 700;
+      font-weight: 600;
+      font-size: 12px;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      color: #0b1224;
-      box-shadow: 0 10px 24px rgba(6, 182, 212, 0.25);
-      transition: transform 0.12s ease-out, box-shadow 0.12s ease-out, opacity 0.2s;
-      letter-spacing: 0.02em;
-      background: linear-gradient(135deg, #ffffff, #e0f2fe);
-      border: 1px solid rgba(14, 165, 233, 0.32);
     }
 
-    .nav-btn.primary {
-      background: linear-gradient(135deg, #22d3ee, #0ea5e9);
-      color: #031926;
-    }
-
-    .nav-btn.green {
-      background: linear-gradient(135deg, #34d399, #22c55e);
-      color: #032114;
-      box-shadow: 0 10px 24px rgba(34, 197, 94, 0.25);
-    }
-
-    .nav-btn.teal {
-      background: linear-gradient(135deg, #a5b4fc, #6366f1);
-      color: #f8fafc;
-      box-shadow: 0 10px 24px rgba(99, 102, 241, 0.24);
-    }
-
-    .nav-btn.locked {
-      background: #1f2937;
-      box-shadow: none;
-      opacity: 0.5;
-      cursor: default;
-    }
-
-    .nav-btn:active:not(.locked) {
-      transform: translateY(1px) scale(0.995);
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.35);
-    }
-
-    .nav-btn span.lock-icon {
-      font-size: 14px;
+    .back-link {
+      display: inline-flex;
+      gap: 4px;
+      margin-bottom: 8px;
     }
 
     .minty-row {
       display: flex;
-      gap: 8px;
-      margin-top: 10px;
+      gap: 10px;
+      margin-top: 12px;
       align-items: flex-start;
     }
 
     .minty-avatar {
-      width: 46px;
-      height: 46px;
-      border-radius: 999px;
-      background: radial-gradient(circle at 30% 30%, #ffe082 0, #ffca28 45%, #f59e0b 100%);
-      border: 3px solid #facc15;
-      position: relative;
-      box-shadow: 0 4px 10px rgba(250, 204, 21, 0.5);
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: url("minty.png") center center / cover no-repeat;
       flex-shrink: 0;
     }
 
-    .minty-face {
-      position: absolute;
-      inset: 10px;
-      border-radius: 999px;
-      background: #fffbeb;
-      border: 2px solid #f59e0b;
-    }
-
-    .minty-face::before,
-    .minty-face::after {
-      content: "";
-      position: absolute;
-      top: 14px;
-      width: 6px;
-      height: 6px;
-      border-radius: 999px;
-      background: #111827;
-    }
-
-    .minty-face::before {
-      left: 11px;
-    }
-
-    .minty-face::after {
-      right: 11px;
-    }
-
-    .minty-smile {
-      position: absolute;
-      bottom: 11px;
-      left: 50%;
-      width: 18px;
-      height: 9px;
-      border-radius: 0 0 18px 18px;
-      border: 2px solid transparent;
-      border-bottom-color: #111827;
-      transform: translateX(-50%);
-    }
-
+    .minty-face,
+    .minty-smile,
     .minty-leaf {
-      position: absolute;
-      top: -9px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 26px;
-      height: 16px;
-    }
-
-    .minty-leaf::before,
-    .minty-leaf::after {
-      content: "";
-      position: absolute;
-      top: 0;
-      width: 12px;
-      height: 16px;
-      border-radius: 999px 999px 12px 12px;
-      background: linear-gradient(135deg, #4ade80, #16a34a);
-      border: 1px solid rgba(22, 163, 74, 0.8);
-    }
-
-    .minty-leaf::before {
-      left: 0;
-      transform: rotate(-14deg);
-    }
-
-    .minty-leaf::after {
-      right: 0;
-      transform: rotate(14deg);
+      display: none;
     }
 
     .minty-bubble {
-      background: var(--accent-green);
-      color: #ecfdf3;
-      border-radius: 18px;
-      padding: 9px 11px;
+      background: var(--surface-elevated);
+      color: var(--text);
+      border-radius: var(--radius);
+      padding: 10px 12px;
       font-size: 12px;
-      position: relative;
+      border: 1px solid var(--border);
       flex: 1;
-    }
-
-    .minty-bubble::before {
-      content: "";
-      position: absolute;
-      left: -6px;
-      bottom: 12px;
-      border-width: 7px;
-      border-style: solid;
-      border-color: transparent var(--accent-green) transparent transparent;
     }
 
     .minty-caption {
-      font-size: 10px;
-      color: #d1fae5;
-      margin-top: 3px;
-    }
-
-    .back-link {
       font-size: 11px;
-      color: #1d4ed8;
-      margin-bottom: 6px;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      opacity: 0.9;
+      color: var(--muted);
+      margin-top: 4px;
     }
-
-    .back-link:hover {
-      opacity: 1;
-      text-decoration: underline;
-    }
-
-    /* SmartBudget */
-
-    .goal-card {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 10px 12px;
-      margin-bottom: 10px;
-      border: 1px solid #e5e7eb;
-      color: var(--text-main);
-      font-size: 12px;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
-    }
-
-    .goal-title {
-      font-weight: 600;
-      font-size: 13px;
-      margin-bottom: 2px;
-    }
-
-    .goal-meta {
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .goal-bar-bg {
-      width: 100%;
-      height: 6px;
-      border-radius: var(--radius-pill);
-      background: #e5e7eb;
-      overflow: hidden;
-      margin-bottom: 6px;
-    }
-
-    .goal-bar-fill {
-      height: 100%;
-      width: 0;
-      border-radius: var(--radius-pill);
-      background: linear-gradient(90deg, #22c55e, #bbf7d0);
-    }
-
-    .goal-btn-row {
-      display: flex;
-      gap: 6px;
-    }
-
-    .goal-btn {
-      flex: 1;
-      border-radius: var(--radius-pill);
-      border: 1px solid #d1d5db;
-      padding: 7px 8px;
-      font-size: 11px;
-      font-weight: 500;
-      cursor: pointer;
-      background: #f9fafb;
-      color: #111827;
-    }
-
-    .goal-btn.primary {
-      background: var(--primary);
-      border-color: var(--primary-dark);
-      color: #eff6ff;
-    }
-
-    .goal-btn:active {
-      transform: translateY(1px);
-    }
-
-    /* Coin Quest */
 
     .cq-logo {
       width: 120px;
       margin: 6px auto 10px;
-      border-radius: 24px;
-      padding: 8px 8px 10px;
-      background: linear-gradient(180deg, #eef2ff, #dbeafe);
-      box-shadow: 0 8px 24px rgba(148, 163, 184, 0.35);
+      border-radius: 14px;
+      padding: 10px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -526,266 +365,340 @@
       font-size: 14px;
       font-weight: 700;
       letter-spacing: 0.08em;
-      color: #e5e7eb;
+      color: var(--accent);
     }
 
     .cq-body {
       font-size: 13px;
-      color: #111827;
+      color: var(--accent);
       text-align: center;
       margin: 4px 0 10px;
     }
 
-    .cq-btn-row {
-      display: flex;
-      gap: 10px;
-      margin: 6px 0 4px;
-    }
-
-    .cq-btn {
-      flex: 1;
-      border-radius: var(--radius-pill);
-      border: none;
-      padding: 9px 0;
-      font-size: 12px;
-      font-weight: 600;
-      color: #ffffff;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.45);
-    }
-
-    .cq-btn.red {
-      background: linear-gradient(180deg, #ef4444, #b91c1c);
-    }
-
-    .cq-btn.green {
-      background: linear-gradient(180deg, #22c55e, #15803d);
-    }
-
-    .cq-helper {
-      font-size: 11px;
-      color: var(--text-muted);
-      text-align: center;
-      margin-bottom: 8px;
-    }
-
-    .cq-outcome-card {
-      background: #fff;
-      border-radius: 14px;
-      padding: 12px;
-      border: 1px solid #e5e7eb;
-      color: var(--text-main);
-      margin-top: 10px;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
-    }
-
-    .pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      font-size: 11px;
-      background: #eef2ff;
-      color: #312e81;
-      border: 1px solid #c7d2fe;
-      margin-bottom: 6px;
-    }
-
-    .cq-outcome-title {
-      font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 4px;
-    }
-
-    .cq-outcome-copy {
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-bottom: 10px;
-      line-height: 1.4;
-    }
-
     .cq-forecast {
       display: grid;
-      gap: 6px;
+      gap: 8px;
       margin-bottom: 10px;
+      font-size: 12px;
     }
 
     .cq-forecast-row {
       display: flex;
       align-items: center;
       gap: 8px;
-      font-size: 11px;
     }
 
-    .cq-forecast-bar {
-      flex: 1;
-      height: 6px;
-      border-radius: var(--radius-pill);
-      background: #e5e7eb;
-      overflow: hidden;
-    }
-
-    .cq-forecast-fill {
-      height: 100%;
-      width: 0%;
-      background: linear-gradient(90deg, #34d399, #10b981);
-      transition: width 0.2s ease-out;
-    }
-
-    .cq-actions {
+    .chart-legend {
       display: flex;
-      gap: 8px;
-    }
-
-    .cq-actions button {
-      flex: 1;
-      border-radius: var(--radius-pill);
-      border: 1px solid #d1d5db;
-      padding: 8px;
+      gap: 12px;
       font-size: 11px;
+      color: var(--muted);
+      align-items: center;
+    }
+
+    .legend-swatch {
+      width: 12px;
+      height: 6px;
+      border-radius: 999px;
+    }
+
+    .legend-swatch.assets {
+      background: linear-gradient(90deg, var(--teal), var(--violet));
+    }
+
+    .legend-swatch.debt {
+      background: #ef4444;
+      opacity: 0.8;
+    }
+
+    .cq-timeline-chart {
+      position: relative;
+      height: 220px;
+      margin: 12px 0;
+      padding: 16px 12px 32px 40px;
+      background: rgba(26, 31, 41, 0.5);
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+    }
+
+    .cq-chart-svg {
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+    }
+
+    .cq-chart-line {
+      fill: none;
+      stroke-width: 2;
+      transition: stroke-width 0.3s ease, filter 0.3s ease;
+    }
+
+    .cq-chart-line.selected {
+      stroke-width: 3;
+      filter: drop-shadow(0 0 4px currentColor);
+    }
+
+    .cq-chart-dot {
+      transition: r 0.3s ease;
+    }
+
+    .cq-chart-legend {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin: 8px 0 12px;
+      font-size: 11px;
+      color: var(--accent);
+      flex-wrap: wrap;
+    }
+
+    .cq-chart-legend span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .legend-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 999px;
+    }
+
+    .legend-dot.pay {
+      background: var(--teal);
+    }
+
+    .legend-dot.save {
+      background: var(--violet);
+    }
+
+    .legend-dot.invest {
+      background: #f59e0b;
+    }
+
+    .cq-comparison-table {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      margin: 12px 0;
+    }
+
+    .cq-comparison-col {
+      padding: 10px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      font-size: 11px;
+      transition: all 0.2s ease;
+    }
+
+    .cq-comparison-col.selected {
+      background: rgba(139, 92, 246, 0.15);
+      border-color: var(--violet);
+      box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    .cq-comparison-title {
+      font-weight: 700;
+      font-size: 12px;
+      margin-bottom: 8px;
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .cq-comparison-metric {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 4px;
+      color: var(--muted);
+    }
+
+    .cq-comparison-value {
       font-weight: 600;
+      color: var(--accent);
+    }
+
+    .cq-comparison-value.positive {
+      color: #10b981;
+    }
+
+    .cq-comparison-value.negative {
+      color: #ef4444;
+    }
+
+    .cq-choice-grid {
+      display: grid;
+      gap: 10px;
+      margin: 6px 0 10px;
+    }
+
+    .cq-choice {
+      text-align: left;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: var(--surface-elevated);
+      padding: 12px;
       cursor: pointer;
-      background: #f9fafb;
+      transition: border-color 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      display: grid;
+      gap: 6px;
     }
 
-    .cq-actions button.primary {
-      background: #2563eb;
-      color: #eff6ff;
-      border-color: #1d4ed8;
+    .cq-choice:hover {
+      border-color: var(--teal);
+      background: rgba(14, 184, 166, 0.1);
+      box-shadow: 0 4px 10px rgba(14, 184, 166, 0.2);
     }
 
-    /* Fantasy Finance */
+    .cq-choice.active {
+      border-color: var(--violet);
+      box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+      background: rgba(139, 92, 246, 0.15);
+    }
+
+    .cq-choice-title {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cq-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 6px;
+    }
+
+    .cq-stack-item {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      background: var(--surface-elevated);
+      display: grid;
+      gap: 6px;
+    }
+
+    .cq-stack-title {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 13px;
+    }
+
+    .cq-stack-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .cq-stack-value {
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .cq-choice-sub {
+      font-size: 11px;
+      color: var(--teal);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .cq-result-grid {
+      display: grid;
+      gap: 10px;
+    }
+
+    .cq-result-card {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px 12px;
+      background: var(--surface-elevated);
+    }
+
+    .cq-result-card.active {
+      border-color: var(--violet);
+      box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
+      background: rgba(139, 92, 246, 0.15);
+    }
+
+    .cq-result-copy {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .cq-result-stats {
+      display: grid;
+      gap: 4px;
+      font-size: 12px;
+    }
+
+    .cq-result-stats .stat-label {
+      color: var(--muted);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 10px;
+      border-radius: var(--pill);
+      font-size: 11px;
+      background: rgba(139, 92, 246, 0.15);
+      color: var(--violet-light);
+      border: 1px solid rgba(139, 92, 246, 0.3);
+      margin-bottom: 6px;
+    }
 
     .info-text {
-      font-size: 12px;
-      color: var(--text-main);
-      margin-bottom: 10px;
-    }
-
-    .stat-card {
-      background: #ffffff;
-      border-radius: 14px;
-      padding: 10px 10px 8px;
-      border: 1px solid #e5e7eb;
-      color: var(--text-main);
-      font-size: 11px;
-      margin-bottom: 10px;
+      line-height: 1.5;
     }
 
     .stat-header {
       display: flex;
       justify-content: space-between;
-      margin-bottom: 4px;
+      margin-bottom: 6px;
+      font-size: 12px;
     }
 
     .stat-tag {
       padding: 2px 8px;
-      border-radius: var(--radius-pill);
-      background: #ecfeff;
-      color: #0f766e;
-      border: 1px solid #a5f3fc;
-      font-size: 10px;
-    }
-
-    .stat-row {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 3px;
-    }
-
-    .stat-label {
-      color: var(--text-muted);
+      border-radius: var(--pill);
+      background: rgba(14, 184, 166, 0.15);
+      color: var(--teal);
+      border: 1px solid rgba(14, 184, 166, 0.3);
+      font-size: 11px;
     }
 
     .stat-value {
       font-weight: 600;
+      color: var(--text);
     }
 
     .stat-value.positive {
-      color: #15803d;
+      color: #10b981;
     }
 
     .stat-value.negative {
-      color: #b91c1c;
+      color: #ef4444;
     }
 
-    .ff-panel {
-      background: linear-gradient(180deg, #d7f5d8, #b7e4b6);
-      border-radius: 18px;
-      padding: 12px;
-      border: 1px solid #9fd49d;
-      color: #0b2e16;
-      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.15);
-    }
-
-    .ff-banner {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: linear-gradient(180deg, #0f3f1f, #14532d);
-      color: #ecfdf3;
-      padding: 10px 12px;
-      border-radius: 14px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-      margin-bottom: 10px;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-    }
-
-    .ff-week-badge {
-      background: rgba(255, 255, 255, 0.16);
-      padding: 4px 10px;
-      border-radius: var(--radius-pill);
-      font-size: 11px;
-    }
-
-    .ff-menu-row {
+    .ff-menu-row,
+    .ff-mini-btns {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 6px;
       margin-bottom: 10px;
     }
 
-    .ff-menu-btn {
-      border: 1px solid rgba(20, 83, 45, 0.35);
-      background: rgba(255, 255, 255, 0.4);
-      border-radius: 10px;
-      padding: 8px 6px;
-      font-size: 11px;
-      font-weight: 700;
-      color: #0f3f1f;
-      box-shadow: 0 6px 14px rgba(15, 23, 42, 0.08);
-      cursor: pointer;
-    }
-
     .ff-mini-btns {
-      display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 6px;
-      margin: 6px 0 10px;
-    }
-
-    .ff-mini-btn {
-      border: 1px dashed rgba(20, 83, 45, 0.35);
-      background: rgba(255, 255, 255, 0.65);
-      border-radius: 10px;
-      padding: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #0f3f1f;
-      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
-      cursor: pointer;
-    }
-
-    .ff-lineup-card {
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(241, 253, 242, 0.9));
-      border-radius: 14px;
-      padding: 10px 12px 12px;
-      border: 1px solid #b7e4b6;
-      color: #0b2e16;
-      margin-bottom: 10px;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
     }
 
     .ff-line {
@@ -794,7 +707,7 @@
 
     .ff-label {
       font-size: 11px;
-      color: #14532d;
+      color: var(--accent);
       margin-bottom: 4px;
       font-weight: 700;
     }
@@ -807,29 +720,18 @@
 
     .chip {
       padding: 7px 10px;
-      border-radius: var(--radius-pill);
-      border: 1px solid #b7e4b6;
-      background: rgba(255, 255, 255, 0.9);
+      border-radius: var(--pill);
+      border: 1px solid var(--border);
+      background: var(--surface-elevated);
       font-size: 11px;
       cursor: pointer;
-      color: #0f172a;
+      color: var(--text);
     }
 
     .chip.active {
-      background: linear-gradient(180deg, #22c55e, #16a34a);
-      color: #ecfdf3;
-      border-color: #15803d;
-      box-shadow: 0 8px 18px rgba(34, 197, 94, 0.3);
-    }
-
-    .ff-profile-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 14px;
-      padding: 10px 12px;
-      border: 1px solid #b7e4b6;
-      margin-bottom: 10px;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
-      color: #0b2e16;
+      background: linear-gradient(135deg, var(--teal), var(--violet));
+      color: #ffffff;
+      border-color: transparent;
     }
 
     .ff-profile-grid {
@@ -840,51 +742,34 @@
     }
 
     .ff-profile-label {
-      color: #14532d;
+      color: var(--accent);
       font-weight: 700;
     }
 
-    .ff-list {
+    .ff-list,
+    .ff-league-list {
       list-style: none;
       padding: 0;
       margin: 6px 0 0;
       display: grid;
-      gap: 4px;
+      gap: 6px;
       font-size: 11px;
     }
 
     .ff-pill-row {
       display: flex;
       flex-wrap: wrap;
-      gap: 4px;
+      gap: 6px;
       margin-top: 6px;
     }
 
     .ff-pill {
-      background: rgba(15, 63, 31, 0.08);
-      border: 1px solid #b7e4b6;
-      border-radius: var(--radius-pill);
-      padding: 4px 8px;
-      font-size: 10px;
-      color: #0f3f1f;
-    }
-
-    .ff-league-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 14px;
-      padding: 10px 12px;
-      border: 1px solid #b7e4b6;
-      margin-bottom: 10px;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
-      color: #0b2e16;
-    }
-
-    .ff-league-list {
-      list-style: none;
-      padding: 0;
-      margin: 6px 0 0;
-      display: grid;
-      gap: 4px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--pill);
+      padding: 5px 8px;
+      font-size: 11px;
+      color: var(--text);
     }
 
     .ff-league-item {
@@ -892,17 +777,18 @@
       align-items: center;
       gap: 6px;
       font-size: 11px;
+      color: var(--accent);
     }
 
     .ff-radio {
       width: 14px;
       height: 14px;
       border-radius: 999px;
-      border: 2px solid #15803d;
+      border: 2px solid var(--teal);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: #ecfdf3;
+      background: var(--surface);
     }
 
     .ff-radio::after {
@@ -910,7 +796,7 @@
       width: 7px;
       height: 7px;
       border-radius: 999px;
-      background: #15803d;
+      background: var(--teal);
       opacity: 0;
     }
 
@@ -918,77 +804,15 @@
       opacity: 1;
     }
 
-    .ff-actions {
-      display: flex;
-      gap: 8px;
-      margin-top: 8px;
-    }
-
-    .ff-actions button {
-      flex: 1;
-      border-radius: var(--radius-pill);
-      border: none;
-      padding: 9px 10px;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      color: #0f3f1f;
-      background: rgba(255, 255, 255, 0.85);
-      box-shadow: 0 8px 20px rgba(15, 23, 42, 0.12);
-      border: 1px solid #b7e4b6;
-    }
-
-    .ff-actions button.primary {
-      background: linear-gradient(180deg, #16a34a, #15803d);
-      color: #ecfdf3;
-      border-color: #15803d;
-    }
-
-    .ff-rank-card {
-      background: rgba(255, 255, 255, 0.9);
-      border-radius: 14px;
-      padding: 10px 12px;
-      border: 1px solid #b7e4b6;
-      color: #0b2e16;
-      margin-bottom: 10px;
-      box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
-    }
-
-    .ff-standings {
-      background: rgba(15, 63, 31, 0.08);
-      border: 1px dashed #15803d;
-      border-radius: 12px;
-      padding: 10px;
-      margin-bottom: 10px;
-      color: #0f3f1f;
-      font-size: 12px;
-    }
-
-    .ff-standings .card-title {
-      color: #0f3f1f;
-      margin-bottom: 6px;
-      font-size: 12px;
-    }
-
     .ff-standings ul {
       list-style: decimal;
       padding-left: 16px;
       margin: 4px 0 0;
       display: grid;
-      gap: 2px;
-    }
-
-    .ff-matchup {
+      gap: 4px;
+      color: var(--accent);
       font-size: 12px;
-      color: #0f3f1f;
-      background: rgba(255, 255, 255, 0.9);
-      border: 1px dashed #16a34a;
-      border-radius: 12px;
-      padding: 10px;
-      margin-top: 8px;
     }
-
-    /* Toast / unlock banner */
 
     .toast {
       position: absolute;
@@ -996,14 +820,14 @@
       bottom: 14px;
       transform: translateX(-50%);
       padding: 8px 12px;
-      border-radius: var(--radius-pill);
+      border-radius: var(--pill);
       font-size: 12px;
-      background: rgba(22, 163, 74, 0.95);
-      color: #ecfdf3;
-      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+      background: linear-gradient(135deg, var(--teal), var(--violet));
+      color: #ffffff;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.25s ease-out;
+      transition: opacity 0.2s ease-out;
       max-width: 90%;
       text-align: center;
     }
@@ -1012,16 +836,47 @@
       opacity: 1;
     }
 
-    /* Simple scrollbar styling */
-    .screen::-webkit-scrollbar {
-      width: 6px;
+    .tab-bar {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 64px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      background: var(--surface-elevated);
+      border-top: 1px solid var(--border);
+      box-shadow: 0 -6px 18px rgba(0, 0, 0, 0.3);
     }
-    .screen::-webkit-scrollbar-track {
+
+    .tab-btn {
+      border: none;
       background: transparent;
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      flex-direction: column;
+      transition: color 0.1s ease;
+      padding: 8px 0;
+      width: 100%;
+      height: 100%;
     }
-    .screen::-webkit-scrollbar-thumb {
-      background: #1f2933;
-      border-radius: 999px;
+
+    .tab-btn.active {
+      color: var(--teal);
+    }
+
+    .tab-icon {
+      font-family: "Material Symbols Rounded";
+      font-weight: normal;
+      font-style: normal;
+      font-size: 20px;
+      line-height: 1;
     }
   </style>
 </head>
@@ -1029,9 +884,6 @@
   <div class="app-shell">
     <div class="notch"></div>
     <div class="status-bar">
-      <span>9:41</span>
-      <span>Capital U</span>
-      <span>▂▂▂ 74%</span>
     </div>
 
     <!-- HOME / LEADERBOARD -->
@@ -1106,18 +958,6 @@
         </div>
       </div>
 
-      <div class="nav-row">
-        <button class="nav-btn primary" data-target="screen-smartbudget">
-          SmartBudget
-        </button>
-        <button class="nav-btn green" data-target="screen-coinquest">
-          Coin Quest
-        </button>
-      </div>
-      <button id="nav-fantasy-btn" class="nav-btn teal" style="width:100%;margin-top:4px;" data-target="screen-fantasy">
-        Fantasy Finance Football
-      </button>
-
       <div class="minty-row">
         <div class="minty-avatar">
           <div class="minty-face"></div>
@@ -1183,80 +1023,136 @@
     <section id="screen-coinquest" class="screen">
       <div class="back-link" data-target="screen-home">← Back to Home</div>
       <h1 class="app-title">Coin Quest</h1>
-      <p class="subtitle" style="color:#4b5563;">Birthday Money · Chapter 1</p>
+      <p class="subtitle" style="color:#4b5563;">Windfall · Choose Your Path</p>
 
-      <div class="cq-logo">
-        <div class="minty-avatar" style="width:40px;height:40px;border-width:2px;box-shadow:none;">
-          <div class="minty-face"></div>
-          <div class="minty-smile"></div>
-          <div class="minty-leaf"></div>
+      <div class="card">
+        <div class="cq-title">Money falls from the sky! You gain $10,000.</div>
+        <div class="cq-body" style="text-align:left;margin-bottom:10px;">
+          Quick snapshot of what you’re working with:
         </div>
-        <div class="cq-title">COIN QUEST</div>
+        <div class="cq-stack">
+          <div class="cq-stack-item">
+            <div class="cq-stack-title">Income</div>
+            <div class="cq-stack-row">
+              <span>Take-home</span>
+              <span class="cq-stack-value">$500 / month</span>
+            </div>
+          </div>
+          <div class="cq-stack-item">
+            <div class="cq-stack-title">Loan</div>
+            <div class="cq-stack-row">
+              <span>Balance</span>
+              <span class="cq-stack-value">$10,000</span>
+            </div>
+            <div class="cq-stack-row">
+              <span>Rate & term</span>
+              <span class="cq-stack-value">5% · 5 years left</span>
+            </div>
+            <div class="cq-stack-row">
+              <span>Monthly payment</span>
+              <span class="cq-stack-value">≈ $190 / month</span>
+            </div>
+          </div>
+          <div class="cq-stack-item">
+            <div class="cq-stack-title">Savings</div>
+            <div class="cq-stack-row">
+              <span>Windfall today</span>
+              <span class="cq-stack-value">$10,000</span>
+            </div>
+            <div class="cq-stack-row">
+              <span>Monthly savings</span>
+              <span class="cq-stack-value">$310 / month</span>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <p class="cq-body">
-        You just got <strong>$20</strong> for your birthday. What do you want to
-        do with it?
-      </p>
-
-      <div class="cq-btn-row">
-        <button id="cq-spend" class="cq-btn red">
-          Spend it (+40 XP)
+      <div class="cq-choice-grid">
+        <button class="cq-choice" id="cq-pay-loan" data-choice="pay">
+          <div class="cq-choice-title">
+            <span class="material-symbols-rounded" style="font-size:18px;">paid</span>
+            Pay off the loan now
+          </div>
+          <div class="cq-choice-sub">Go Debt Free!</div>
         </button>
-        <button id="cq-save" class="cq-btn green">
-          Save it (+150 XP)
+        <button class="cq-choice" id="cq-save-cash" data-choice="save">
+          <div class="cq-choice-title">
+            <span class="material-symbols-rounded" style="font-size:18px;">savings</span>
+            Put windfall into savings
+          </div>
+          <div class="cq-choice-sub">Fill Your Emergency Fund!</div>
+        </button>
+        <button class="cq-choice" id="cq-invest" data-choice="invest">
+          <div class="cq-choice-title">
+            <span class="material-symbols-rounded" style="font-size:18px;">trending_up</span>
+            Invest it all
+          </div>
+          <div class="cq-choice-sub">Make Your Money Earn Money!</div>
         </button>
       </div>
-      <p class="cq-helper">
-        Choose what you’d really do. There’s no wrong answer—just different paths.
-      </p>
 
-      <div class="minty-row">
-        <div class="minty-avatar">
-          <div class="minty-face"></div>
-          <div class="minty-smile"></div>
-          <div class="minty-leaf"></div>
-        </div>
-        <div class="minty-bubble">
-          I’ll show you how this choice affects your savings over the next month.
-          Finish the quest and you’ll jump up the leaderboard.
-          <div class="minty-caption">+XP based on your decision</div>
-        </div>
-      </div>
+      <p class="cq-helper">Pick a path to compare results.</p>
+    </section>
 
-      <div id="cq-outcome" class="cq-outcome-card" style="display:none;">
-        <div class="pill" id="cq-pill">Forecast unlocked</div>
-        <div class="cq-outcome-title" id="cq-outcome-title">See how your $20 grows</div>
-        <div class="cq-outcome-copy" id="cq-outcome-copy">
-          We’ll show your savings over the next four weeks once you make a choice.
+    <!-- COIN QUEST RESULTS -->
+    <section id="screen-coinquest-results" class="screen">
+      <div class="back-link" data-target="screen-coinquest">← Back to Choices</div>
+      <h1 class="app-title">Coin Quest</h1>
+      <p class="subtitle" style="color:#4b5563;">Windfall · Results</p>
+
+      <div id="cq-results" class="cq-outcome-card" style="display:none;">
+        <div class="pill" id="cq-pill">Path selected</div>
+        <div class="cq-outcome-title" id="cq-outcome-title">Here's what happens</div>
+        <div class="cq-outcome-copy" id="cq-outcome-copy">Compare the three paths at a glance.</div>
+
+        <div class="cq-timeline-chart" id="cq-timeline-chart">
+          <!-- Chart rendered here by JavaScript -->
         </div>
 
-        <div class="cq-forecast" id="cq-forecast">
-          <div class="cq-forecast-row">
-            <span>Week 1</span>
-            <div class="cq-forecast-bar"><div class="cq-forecast-fill" id="cq-week-1"></div></div>
-            <span id="cq-week-1-label">$0</span>
+        <div class="cq-chart-legend">
+          <span><span class="legend-dot pay"></span> Pay Loan</span>
+          <span><span class="legend-dot save"></span> Save</span>
+          <span><span class="legend-dot invest"></span> Invest</span>
+        </div>
+
+        <div class="cq-comparison-table" id="cq-comparison">
+          <!-- Comparison columns rendered here -->
+        </div>
+
+        <div class="cq-result-grid">
+          <div class="cq-result-card" data-key="pay">
+            <div class="card-title" style="margin-bottom:4px;">Pay off the loan now</div>
+            <div class="cq-result-copy">Debt free today; $500/mo stacks in cash right away.</div>
+            <div class="cq-result-stats">
+              <div><span class="stat-label">Debt in 1 yr</span><span class="stat-value positive">$0</span></div>
+              <div><span class="stat-label">Cash in 1 yr</span><span class="stat-value">~$6,000</span></div>
+              <div><span class="stat-label">Interest avoided</span><span class="stat-value positive">~$1,300</span></div>
+            </div>
           </div>
-          <div class="cq-forecast-row">
-            <span>Week 2</span>
-            <div class="cq-forecast-bar"><div class="cq-forecast-fill" id="cq-week-2"></div></div>
-            <span id="cq-week-2-label">$0</span>
+
+          <div class="cq-result-card" data-key="save">
+            <div class="card-title" style="margin-bottom:4px;">Save everything</div>
+            <div class="cq-result-copy">Loan keeps accruing 5%; savings grow safely.</div>
+            <div class="cq-result-stats">
+              <div><span class="stat-label">Debt in 1 yr</span><span class="stat-value negative">~$10,250</span></div>
+              <div><span class="stat-label">Cash in 1 yr</span><span class="stat-value">~$16,000</span></div>
+              <div><span class="stat-label">Net after 5 yrs</span><span class="stat-value">~$37k saved − interest</span></div>
+            </div>
           </div>
-          <div class="cq-forecast-row">
-            <span>Week 3</span>
-            <div class="cq-forecast-bar"><div class="cq-forecast-fill" id="cq-week-3"></div></div>
-            <span id="cq-week-3-label">$0</span>
-          </div>
-          <div class="cq-forecast-row">
-            <span>Week 4</span>
-            <div class="cq-forecast-bar"><div class="cq-forecast-fill" id="cq-week-4"></div></div>
-            <span id="cq-week-4-label">$0</span>
+
+          <div class="cq-result-card" data-key="invest">
+            <div class="card-title" style="margin-bottom:4px;">Invest everything</div>
+            <div class="cq-result-copy">Keep the 5% loan; aim for ~6–8% returns (with risk).</div>
+            <div class="cq-result-stats">
+              <div><span class="stat-label">Debt in 1 yr</span><span class="stat-value negative">~$10,250</span></div>
+              <div><span class="stat-label">Investments in 1 yr</span><span class="stat-value positive">~$16,900</span></div>
+              <div><span class="stat-label">Net after 5 yrs</span><span class="stat-value positive">~$44k value − interest</span></div>
+            </div>
           </div>
         </div>
 
         <div class="cq-actions">
           <button id="cq-reset">Try a different choice</button>
-          <button id="cq-commit" class="primary">Commit plan to SmartBudget (+25 XP)</button>
         </div>
       </div>
     </section>
@@ -1387,6 +1283,24 @@
 
     <!-- Toast -->
     <div id="toast" class="toast"></div>
+    <nav class="tab-bar">
+      <button class="tab-btn active" data-target="screen-home">
+        <span class="tab-icon">home</span>
+        <span>Home</span>
+      </button>
+      <button class="tab-btn" data-target="screen-smartbudget">
+        <span class="tab-icon">wallet</span>
+        <span>SmartBudget</span>
+      </button>
+      <button class="tab-btn" data-target="screen-coinquest">
+        <span class="tab-icon">money_bag</span>
+        <span>CoinQuest</span>
+      </button>
+      <button class="tab-btn" data-target="screen-fantasy">
+        <span class="tab-icon">finance_mode</span>
+        <span>FantasyFinance</span>
+      </button>
+    </nav>
   </div>
 
   <script>
@@ -1409,25 +1323,34 @@
       matchupWeek: 5
     };
 
-    const coinScenarios = {
-      spend: {
-        pill: "Fast fun, slower progress",
-        title: "You grabbed the instant win",
-        copy: "You bought a game pass. Fun today, but your sneakers goal stays put. Try committing a little of that gift to your goal.",
-        forecast: [0, 0, 0, 0],
-        xp: 40,
-        xpLabel: "Coin Quest · saw the trade-off",
-        deposit: 5
+    const coinPaths = {
+      pay: {
+        pill: "Debt free day 1",
+        title: "Pay off the loan now",
+        copy: "Clear the 5% loan immediately and let every $500/mo stack in savings from here on.",
+        xp: 0,
+        xpLabel: ""
       },
       save: {
-        pill: "Builder move",
-        title: "You stashed the $20",
-        copy: "You saved the full $20 and add $1 each week from chores. You’ll have enough for your sneakers in just a few weeks.",
-        forecast: [20, 28, 36, 44],
-        xp: 150,
-        xpLabel: "Coin Quest · saver bonus",
-        deposit: 12
+        pill: "Safety first",
+        title: "Save every dollar",
+        copy: "Keep the 5% loan but build a cash cushion; you’ll owe some interest, but the money stays liquid.",
+        xp: 0,
+        xpLabel: ""
+      },
+      invest: {
+        pill: "Growth mindset",
+        title: "Invest every dollar",
+        copy: "Keep the 5% loan and invest the $10k windfall plus $500/mo into the market for growth (with risk).",
+        xp: 0,
+        xpLabel: ""
       }
+    };
+
+    const coinChartData = {
+      pay: { assets1: 6000, debt1: 0 },
+      save: { assets1: 16000, debt1: 10250 },
+      invest: { assets1: 16900, debt1: 10250 }
     };
 
     const ffOptions = {
@@ -1450,10 +1373,24 @@
 
     const screens = document.querySelectorAll(".screen");
     const toastEl = document.getElementById("toast");
+    const tabButtons = document.querySelectorAll(".tab-btn");
 
     function showScreen(id) {
       screens.forEach((s) => s.classList.remove("active"));
       document.getElementById(id).classList.add("active");
+      tabButtons.forEach((btn) => {
+        btn.classList.toggle(
+          "active",
+          btn.getAttribute("data-target") === id
+        );
+      });
+    }
+
+    function navigateTo(target) {
+      if (!target) return;
+      showScreen(target);
+      const screenEl = document.getElementById(target);
+      if (screenEl) screenEl.scrollTop = 0;
     }
 
     function showToast(message) {
@@ -1501,22 +1438,25 @@
       const xpChip = document.getElementById("xp-chip");
       xpChip.textContent = "+" + state.xpToday + " XP today";
 
-      document.getElementById("lb-you-xp").textContent = formatXP(state.xp);
+      const lbXp = document.getElementById("lb-you-xp");
+      if (lbXp) lbXp.textContent = formatXP(state.xp);
 
-      // Simple "rank" change if XP > 1900
       const youRow = document.getElementById("lb-you-row");
-      if (state.xp >= 1900) {
+      if (youRow && state.xp >= 1900) {
         youRow.querySelector(".lb-rank").textContent = "2";
-        document.getElementById("lb-global-label").textContent =
-          "Global: #96 this week";
+        const globalLabel = document.getElementById("lb-global-label");
+        if (globalLabel) globalLabel.textContent = "Global: #96 this week";
       }
 
-      // Fantasy Finance stays unlocked and nudges you to play
       const fantasyBtn = document.getElementById("nav-fantasy-btn");
       const xpNextLabel = document.getElementById("xp-next-label");
-      fantasyBtn.classList.remove("locked");
-      fantasyBtn.innerHTML = "Fantasy Finance Football";
-      xpNextLabel.textContent = "Tip: Win a Fantasy matchup for bonus XP";
+      if (fantasyBtn) {
+        fantasyBtn.classList.remove("locked");
+        fantasyBtn.innerHTML = "Fantasy Finance Football";
+      }
+      if (xpNextLabel) {
+        xpNextLabel.textContent = "Tip: Win a Fantasy matchup for bonus XP";
+      }
 
       if (sourceLabel) {
         showToast("+" + delta + " XP · " + sourceLabel);
@@ -1531,36 +1471,247 @@
       ).textContent = `Goal: $${state.sneakerGoal} · Saved: $${state.sneakerSaved}`;
     }
 
+    function calculateProjections(choiceKey) {
+      const monthlyIncome = 500;
+      const windfall = 10000;
+      const loanBalance = 10000;
+      const loanRate = 0.05;
+      const loanMonthly = 190;
+      const savingsRate = 0.02;
+      const investmentRate = 0.07;
+
+      const projections = {
+        pay: [],
+        save: [],
+        invest: []
+      };
+
+      // Pay Loan: Use windfall to pay off loan, then save everything
+      for (let year = 0; year <= 5; year++) {
+        const netWorth = monthlyIncome * 12 * year;
+        projections.pay.push({ year, netWorth });
+      }
+
+      // Save: Keep loan, put windfall in savings, make loan payments
+      for (let year = 0; year <= 5; year++) {
+        let savings = windfall;
+        let debt = loanBalance;
+        const monthsPassed = year * 12;
+
+        // Add monthly savings after loan payments
+        const monthlySavings = monthlyIncome - loanMonthly;
+        savings += monthlySavings * monthsPassed;
+
+        // Apply savings interest (compounded annually)
+        savings *= Math.pow(1 + savingsRate, year);
+
+        // Apply loan interest
+        debt *= Math.pow(1 + loanRate, year);
+
+        // If loan is paid off (5 years), no more debt
+        if (year >= 5) debt = 0;
+
+        const netWorth = savings - debt;
+        projections.save.push({ year, netWorth });
+      }
+
+      // Invest: Keep loan, invest windfall + monthly savings
+      for (let year = 0; year <= 5; year++) {
+        let investments = windfall;
+        let debt = loanBalance;
+        const monthsPassed = year * 12;
+
+        // Add monthly investments after loan payments
+        const monthlyInvestment = monthlyIncome - loanMonthly;
+
+        // Compound investment returns (simplified: add monthly contributions first, then compound)
+        const totalContributions = windfall + (monthlyInvestment * monthsPassed);
+        investments = totalContributions * Math.pow(1 + investmentRate, year);
+
+        // Apply loan interest
+        debt *= Math.pow(1 + loanRate, year);
+
+        // If loan is paid off (5 years), no more debt
+        if (year >= 5) debt = 0;
+
+        const netWorth = investments - debt;
+        projections.invest.push({ year, netWorth });
+      }
+
+      return projections;
+    }
+
+    function renderTimelineChart(selectedChoice) {
+      const projections = calculateProjections();
+      const chartContainer = document.getElementById("cq-timeline-chart");
+
+      if (!chartContainer) return;
+
+      // Find max value for scaling
+      let maxValue = 0;
+      ['pay', 'save', 'invest'].forEach(key => {
+        projections[key].forEach(point => {
+          if (point.netWorth > maxValue) maxValue = point.netWorth;
+        });
+      });
+
+      // Add some padding to max
+      maxValue = Math.ceil(maxValue / 5000) * 5000;
+
+      // Chart dimensions
+      const width = 280;
+      const height = 160;
+      const padding = { top: 10, right: 10, bottom: 20, left: 35 };
+      const chartWidth = width - padding.left - padding.right;
+      const chartHeight = height - padding.top - padding.bottom;
+
+      // Create SVG
+      let svg = `<svg class="cq-chart-svg" viewBox="0 0 ${width} ${height}" xmlns="http://www.w3.org/2000/svg">`;
+
+      // Grid lines (horizontal)
+      for (let i = 0; i <= 4; i++) {
+        const y = padding.top + (chartHeight / 4) * i;
+        svg += `<line x1="${padding.left}" y1="${y}" x2="${width - padding.right}" y2="${y}" stroke="#2d3748" stroke-width="1"/>`;
+
+        // Y-axis labels
+        const value = maxValue - (maxValue / 4) * i;
+        const label = value >= 1000 ? `$${(value / 1000).toFixed(0)}k` : `$${value}`;
+        svg += `<text x="${padding.left - 5}" y="${y + 4}" text-anchor="end" font-size="9" fill="#94a3b8">${label}</text>`;
+      }
+
+      // X-axis labels (years)
+      for (let year = 0; year <= 5; year++) {
+        const x = padding.left + (chartWidth / 5) * year;
+        svg += `<text x="${x}" y="${height - 5}" text-anchor="middle" font-size="9" fill="#94a3b8">Yr ${year}</text>`;
+      }
+
+      // Helper function to convert data to coordinates
+      const toX = (year) => padding.left + (chartWidth / 5) * year;
+      const toY = (value) => padding.top + chartHeight - (value / maxValue) * chartHeight;
+
+      // Colors for each choice
+      const colors = {
+        pay: '#14b8a6',
+        save: '#8b5cf6',
+        invest: '#f59e0b'
+      };
+
+      // Draw lines for each choice
+      ['pay', 'save', 'invest'].forEach(key => {
+        const points = projections[key];
+        const isSelected = key === selectedChoice;
+        const strokeWidth = isSelected ? 3 : 2;
+        const className = isSelected ? 'selected' : '';
+
+        // Build path
+        let pathD = '';
+        points.forEach((point, index) => {
+          const x = toX(point.year);
+          const y = toY(point.netWorth);
+          if (index === 0) {
+            pathD += `M ${x} ${y}`;
+          } else {
+            pathD += ` L ${x} ${y}`;
+          }
+        });
+
+        svg += `<path d="${pathD}" class="cq-chart-line ${className}" stroke="${colors[key]}" stroke-width="${strokeWidth}" fill="none"/>`;
+
+        // Add dots at each point
+        points.forEach(point => {
+          const x = toX(point.year);
+          const y = toY(point.netWorth);
+          svg += `<circle cx="${x}" cy="${y}" r="${isSelected ? 4 : 3}" fill="${colors[key]}" class="cq-chart-dot"/>`;
+        });
+      });
+
+      svg += '</svg>';
+      chartContainer.innerHTML = svg;
+    }
+
+    function renderComparisonTable(selectedChoice) {
+      const projections = calculateProjections();
+      const comparisonContainer = document.getElementById("cq-comparison");
+
+      if (!comparisonContainer) return;
+
+      const choices = [
+        { key: 'pay', title: 'Pay Loan', icon: 'paid' },
+        { key: 'save', title: 'Save', icon: 'savings' },
+        { key: 'invest', title: 'Invest', icon: 'trending_up' }
+      ];
+
+      let html = '';
+
+      choices.forEach(choice => {
+        const data = projections[choice.key];
+        const isSelected = choice.key === selectedChoice;
+        const year1 = data.find(p => p.year === 1).netWorth;
+        const year5 = data.find(p => p.year === 5).netWorth;
+
+        const formatValue = (val) => {
+          const isPositive = val >= 0;
+          const className = isPositive ? 'positive' : 'negative';
+          return `<span class="cq-comparison-value ${className}">$${Math.round(val).toLocaleString()}</span>`;
+        };
+
+        html += `
+          <div class="cq-comparison-col ${isSelected ? 'selected' : ''}">
+            <div class="cq-comparison-title">
+              <span class="material-symbols-rounded" style="font-size:14px;">${choice.icon}</span>
+              ${choice.title}
+            </div>
+            <div class="cq-comparison-metric">
+              <span>Year 1</span>
+              ${formatValue(year1)}
+            </div>
+            <div class="cq-comparison-metric">
+              <span>Year 5</span>
+              ${formatValue(year5)}
+            </div>
+          </div>
+        `;
+      });
+
+      comparisonContainer.innerHTML = html;
+    }
+
     function renderCoinQuest(choice) {
       state.coinQuestChoice = choice;
-      const data = coinScenarios[choice];
-      const outcomeCard = document.getElementById("cq-outcome");
+      const data = coinPaths[choice];
+      if (!data) return;
 
       document.getElementById("cq-pill").textContent = data.pill;
       document.getElementById("cq-outcome-title").textContent = data.title;
       document.getElementById("cq-outcome-copy").textContent = data.copy;
 
-      const maxVal = Math.max(...data.forecast, 1);
-      data.forecast.forEach((value, idx) => {
-        const pct = (value / maxVal) * 100;
-        const bar = document.getElementById(`cq-week-${idx + 1}`);
-        const label = document.getElementById(`cq-week-${idx + 1}-label`);
-        bar.style.width = pct + "%";
-        label.textContent = formatMoney(value);
+      document.querySelectorAll(".cq-choice").forEach((btn) => {
+        btn.classList.toggle("active", btn.getAttribute("data-choice") === choice);
       });
 
-      outcomeCard.style.display = "block";
+      document.querySelectorAll(".cq-result-card").forEach((card) => {
+        card.classList.toggle("active", card.getAttribute("data-key") === choice);
+      });
+
+      // Render the new visualizations
+      renderTimelineChart(choice);
+      renderComparisonTable(choice);
+
+      document.getElementById("cq-results").style.display = "block";
       updateXP(data.xp, data.xpLabel);
+      navigateTo("screen-coinquest-results");
     }
 
     function resetCoinQuest() {
       state.coinQuestChoice = null;
-      document.getElementById("cq-outcome").style.display = "none";
-      [1, 2, 3, 4].forEach((week) => {
-        document.getElementById(`cq-week-${week}`).style.width = "0%";
-        document.getElementById(`cq-week-${week}-label`).textContent = "$0";
-      });
+      document.getElementById("cq-results").style.display = "none";
+      document
+        .querySelectorAll(".cq-choice, .cq-result-card")
+        .forEach((el) => el.classList.remove("active"));
+      navigateTo("screen-coinquest");
     }
+
+    function renderCoinChart() {}
 
     function updateLineup(slot, option) {
       state.fantasyLineup[slot] = option;
@@ -1606,8 +1757,10 @@
       const rankTag = document.getElementById("ff-rank-tag");
       const rankWord = totalVal > 6 ? "1st among friends" : totalVal > 3 ? "2nd among friends" : "3rd among friends";
       rankTag.textContent = `Week ${state.matchupWeek} · ${rankWord}`;
-      document.getElementById("lb-you-sub").textContent =
-        "Fantasy Finance · lineup active";
+      const lbSub = document.getElementById("lb-you-sub");
+      if (lbSub) {
+        lbSub.textContent = "Fantasy Finance · lineup active";
+      }
 
       const weekLabel = document.getElementById("ff-week-label");
       if (weekLabel) weekLabel.textContent = state.matchupWeek;
@@ -1661,8 +1814,10 @@
     renderSneakerGoal();
     renderFantasyStats();
     updateXP(0);
-    document.getElementById("lb-you-sub").textContent =
-      "Fantasy Finance · lineup active";
+    const lbSubInit = document.getElementById("lb-you-sub");
+    if (lbSubInit) {
+      lbSubInit.textContent = "Fantasy Finance · lineup active";
+    }
 
     // Nav buttons (home)
     document.querySelectorAll(".nav-btn").forEach((btn) => {
@@ -1673,7 +1828,7 @@
           showToast("Keep earning XP to unlock this module.");
           return;
         }
-        showScreen(target);
+        navigateTo(target);
       });
     });
 
@@ -1681,7 +1836,16 @@
     document.querySelectorAll(".back-link").forEach((link) => {
       link.addEventListener("click", () => {
         const target = link.getAttribute("data-target") || "screen-home";
-        showScreen(target);
+        navigateTo(target);
+      });
+    });
+
+    // Tab bar navigation
+    tabButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const target = btn.getAttribute("data-target");
+        if (!target) return;
+        navigateTo(target);
       });
     });
 
@@ -1695,31 +1859,19 @@
       updateXP(40, "SmartBudget weekly savings");
     });
 
-    // Coin Quest – Spend vs Save
-    document.getElementById("cq-spend").addEventListener("click", () => {
-      renderCoinQuest("spend");
+    // Coin Quest – Choose your path
+    document.querySelectorAll(".cq-choice").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const choice = btn.getAttribute("data-choice");
+        if (!choice) return;
+        renderCoinQuest(choice);
+      });
     });
 
-    document.getElementById("cq-save").addEventListener("click", () => {
-      renderCoinQuest("save");
-    });
-
-    document.getElementById("cq-reset").addEventListener("click", resetCoinQuest);
-
-    document.getElementById("cq-commit").addEventListener("click", () => {
-      if (!state.coinQuestChoice) {
-        showToast("Pick an option to create a plan first.");
-        return;
-      }
-      const deposit = coinScenarios[state.coinQuestChoice].deposit;
-      state.sneakerSaved = Math.min(
-        state.sneakerGoal,
-        state.sneakerSaved + deposit
-      );
-      renderSneakerGoal();
-      updateXP(25, "Coin Quest → SmartBudget boost");
-      showScreen("screen-home");
-    });
+    const cqReset = document.getElementById("cq-reset");
+    if (cqReset) {
+      cqReset.addEventListener("click", resetCoinQuest);
+    }
 
     // Fantasy Finance lineup selections
     document.querySelectorAll(".chip").forEach((chip) => {
@@ -1736,8 +1888,10 @@
         state.lineupLocked = true;
         updateXP(120, "Fantasy Finance · lineup locked");
         showToast("Lineup locked for the week—simulate your matchup.");
-        document.getElementById("lb-you-sub").textContent =
-          "Fantasy Finance · lineup locked";
+        const lbSubLock = document.getElementById("lb-you-sub");
+        if (lbSubLock) {
+          lbSubLock.textContent = "Fantasy Finance · lineup locked";
+        }
       });
     }
 
