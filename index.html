@@ -119,6 +119,86 @@
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
     }
 
+    .ff-matchup {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ff-matchup::before {
+      content: "";
+      position: absolute;
+      inset: -30% 40% auto -10%;
+      height: 160px;
+      background: radial-gradient(circle at top, rgba(14, 184, 166, 0.18), transparent 60%);
+      pointer-events: none;
+    }
+
+    .ff-matchup-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .ff-matchup-title {
+      font-weight: 700;
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .ff-week-chip {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--pill);
+      border: 1px solid var(--border);
+      background: rgba(139, 92, 246, 0.18);
+      color: var(--violet-light);
+    }
+
+    .ff-matchup-row {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .ff-team {
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px;
+      background: rgba(26, 31, 41, 0.8);
+    }
+
+    .ff-team-label {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+    }
+
+    .ff-team-value {
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--text);
+    }
+
+    .ff-team-value.positive {
+      color: var(--teal);
+    }
+
+    .ff-team-value.negative {
+      color: #f87171;
+    }
+
+    #ff-lineups-card .stock-list-item {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      background: rgba(26, 31, 41, 0.8);
+      margin-bottom: 8px;
+    }
+
     .xp-row,
     .stat-row,
     .lb-row,
@@ -878,6 +958,318 @@
       font-size: 20px;
       line-height: 1;
     }
+
+    /* Fantasy Finance Stock Cards */
+    .draft-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(168px, 1fr));
+      gap: 10px;
+    }
+
+    .stock-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      position: relative;
+      overflow: hidden;
+      height: 100%;
+    }
+
+    .stock-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--teal), var(--violet));
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .stock-card.selected::before {
+      opacity: 1;
+    }
+
+    .stock-card:hover {
+      border-color: var(--teal);
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 8px 20px rgba(14, 184, 166, 0.2);
+    }
+
+    .stock-card.selected {
+      border-color: var(--violet);
+      background: rgba(139, 92, 246, 0.1);
+    }
+
+    .stock-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }
+
+    .stock-card-title {
+      flex: 1;
+    }
+
+    .stock-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .stock-ticker {
+      font-size: 11px;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+
+    .stock-position-badge {
+      padding: 3px 8px;
+      border-radius: var(--pill);
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stock-position-badge.growth {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+
+    .stock-position-badge.stable {
+      background: rgba(16, 185, 129, 0.15);
+      color: #10b981;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+
+    .stock-position-badge.volatile {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+
+    .stock-card-metrics {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin: 8px 0;
+    }
+
+    .stock-metric {
+      font-size: 10px;
+    }
+
+    .stock-metric-label {
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .stock-metric-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .stock-metric-value.positive {
+      color: #10b981;
+    }
+
+    .stock-metric-value.negative {
+      color: #ef4444;
+    }
+
+    .stock-sparkline {
+      height: 20px;
+      display: flex;
+      align-items: flex-end;
+      gap: 1px;
+      margin: 6px 0;
+    }
+
+    .stock-sparkline-bar {
+      flex: 1;
+      background: var(--teal);
+      opacity: 0.3;
+      border-radius: 2px 2px 0 0;
+      transition: opacity 0.2s;
+    }
+
+    .stock-card:hover .stock-sparkline-bar {
+      opacity: 0.6;
+    }
+
+    .stock-risk-meter {
+      display: flex;
+      gap: 3px;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .stock-risk-label {
+      font-size: 9px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-right: 4px;
+    }
+
+    .stock-risk-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--border);
+    }
+
+    .stock-risk-dot.active {
+      background: var(--teal);
+    }
+
+    .stock-draft-status {
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stock-price {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .stock-draft-btn {
+      padding: 4px 12px;
+      border-radius: var(--pill);
+      font-size: 11px;
+      font-weight: 600;
+      border: 1px solid var(--teal);
+      background: rgba(14, 184, 166, 0.1);
+      color: var(--teal);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .stock-draft-btn:hover {
+      background: var(--teal);
+      color: #ffffff;
+    }
+
+    .stock-draft-btn.drafted {
+      border-color: var(--border);
+      background: transparent;
+      color: var(--muted);
+      cursor: default;
+    }
+
+    .draft-header {
+      margin-bottom: 12px;
+    }
+
+    .draft-stats {
+      display: flex;
+      gap: 8px;
+      margin: 8px 0;
+    }
+
+    .draft-stat-chip {
+      flex: 1;
+      padding: 6px 8px;
+      background: rgba(26, 31, 41, 0.5);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      text-align: center;
+    }
+
+    .draft-stat-label {
+      font-size: 9px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 2px;
+    }
+
+    .draft-stat-value {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .portfolio-summary {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+
+    .portfolio-total {
+      font-size: 24px;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--teal), var(--violet));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 4px;
+    }
+
+    .portfolio-change {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .stock-list-item {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 10px;
+      margin-bottom: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .stock-list-info {
+      flex: 1;
+    }
+
+    .stock-list-name {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .stock-list-ticker {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .stock-list-perf {
+      text-align: right;
+    }
+
+    .stock-list-value {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 2px;
+    }
+
+    .stock-list-change {
+      font-size: 11px;
+      font-weight: 600;
+    }
   </style>
 </head>
 <body>
@@ -965,8 +1357,8 @@
           <div class="minty-leaf"></div>
         </div>
         <div class="minty-bubble">
-          <strong>Fantasy Finance</strong> is ready—set your lineup and simulate
-          a matchup. Finish a Coin Quest or add to a savings goal to climb the
+          <strong>Fantasy Finance</strong> is ready—set your lineup and track your
+          matchup. Finish a Coin Quest or add to a savings goal to climb the
           leaderboard faster.
           <div class="minty-caption">Minty · Your money coach</div>
         </div>
@@ -1157,126 +1549,233 @@
       </div>
     </section>
 
-    <!-- FANTASY FINANCE -->
+    <!-- FANTASY FINANCE - DRAFT -->
     <section id="screen-fantasy" class="screen">
       <div class="back-link" data-target="screen-home">← Back to Home</div>
-      <h1 class="app-title">Capital U</h1>
-      <p class="subtitle" style="margin-bottom:10px;">Fantasy Finance Football</p>
+      <h1 class="app-title">Fantasy Finance</h1>
+      <p class="subtitle" style="margin-bottom:10px;">Draft Your Portfolio</p>
 
-      <button class="nav-btn teal" style="width:100%;margin-bottom:12px;">
-        Draft Your Team
-      </button>
-
-      <p class="info-text">
-        Draft your money team, lock in a lineup, and simulate your weekly matchup. Inspired by retro fantasy dashboards.
-      </p>
-
-      <div class="ff-panel">
-        <div class="ff-banner">
-          Fantasy Finance League
-          <span class="ff-week-badge">Week <span id="ff-week-label">5</span></span>
-        </div>
-
-        <div class="ff-menu-row">
-          <button class="ff-menu-btn">Make League</button>
-          <button class="ff-menu-btn">Join League</button>
-          <button class="ff-menu-btn">Manage</button>
-        </div>
-
-        <div class="ff-profile-card">
-          <div class="card-title" style="font-size:12px;margin-bottom:6px;">Edit My FFS Team</div>
-          <div class="ff-profile-grid">
-            <div><span class="ff-profile-label">Team:</span> Scott’s Savvy Savers</div>
-            <div><span class="ff-profile-label">QB Name (Age):</span> Scott W. (47)</div>
-            <div><span class="ff-profile-label">Coaches:</span> Wife, Broker, Banker, Father</div>
-            <div><span class="ff-profile-label">Play Style/Risk:</span> Med-High Risk</div>
-            <div><span class="ff-profile-label">Gain Level:</span> High</div>
-            <div><span class="ff-profile-label">Risk Level:</span> Medium</div>
+      <div class="draft-header">
+        <div class="draft-stats">
+          <div class="draft-stat-chip">
+            <div class="draft-stat-label">Budget</div>
+            <div class="draft-stat-value" id="draft-budget">$1,000</div>
           </div>
-          <div class="ff-pill-row">
-            <span class="ff-pill">Offense Line: US Index</span>
-            <span class="ff-pill">Wide Receivers: Nvidia, Netflix</span>
-            <span class="ff-pill">Running Backs: Coca-Cola, Kroger</span>
-            <span class="ff-pill">Tight Ends: Microsoft, Pfizer</span>
-          </div>
-          <div class="ff-pill-row" style="margin-top:6px;">
-            <span class="ff-pill">Defense Line: TIPS, CD Ladder</span>
-            <span class="ff-pill">Defense Backs: Bonds, Index</span>
-            <span class="ff-pill">Special Teams: Gold, Oil, Private Equity</span>
-          </div>
-        </div>
-
-        <div class="ff-league-card">
-          <div class="card-title" style="font-size:12px;margin-bottom:6px;">Leagues</div>
-          <div class="ff-mini-btns">
-            <button class="ff-mini-btn">Stock Players</button>
-            <button class="ff-mini-btn">Bond Players</button>
-            <button class="ff-mini-btn">Cash Players</button>
-            <button class="ff-mini-btn">Other Players</button>
-          </div>
-          <div class="ff-profile-label" style="margin-bottom:4px;">League to edit</div>
-          <ul class="ff-league-list">
-            <li class="ff-league-item active"><span class="ff-radio"></span> CS6750 HciFF$</li>
-            <li class="ff-league-item"><span class="ff-radio"></span> Church: Faith Fantasy Finance$</li>
-            <li class="ff-league-item"><span class="ff-radio"></span> Family, Friends, & Finance$ (FFF)</li>
-            <li class="ff-league-item"><span class="ff-radio"></span> Billionaire Wannabes FFS</li>
-          </ul>
-        </div>
-
-        <div class="ff-rank-card">
-          <div class="stat-header">
-            <span style="font-weight:700;font-size:12px;">Your Money Squad</span>
-            <span class="stat-tag" id="ff-rank-tag">Week 5 · 3rd among friends</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label">Total gain</span>
-            <span class="stat-value positive" id="ff-total">+5.7%</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label" id="ff-offense-label">Offense (tech)</span>
-            <span class="stat-value positive" id="ff-offense">+8.3%</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label" id="ff-defense-label">Defense (bonds)</span>
-            <span class="stat-value" id="ff-defense">+1.2%</span>
-          </div>
-          <div class="stat-row">
-            <span class="stat-label" id="ff-special-label">Flex (cash)</span>
-            <span class="stat-value negative" id="ff-special">−0.1%</span>
-          </div>
-        </div>
-
-        <div class="ff-standings">
-          <div class="card-title" style="font-size:12px;">League Standings</div>
-          <ul>
-            <li>Scott’s Savers (3.2% / 2 sales)</li>
-            <li>Money Mike (1.2% / 1 sale)</li>
-            <li>You · Adam’s Accts (10.5% / 5 sales)</li>
-            <li>Season rank: Top 3 of 8</li>
-          </ul>
-        </div>
-
-        <div class="ff-matchup" id="ff-matchup-legacy">
-          <div style="font-weight:700;margin-bottom:6px;">Matchup Breakdown</div>
-          <div>WK <span id="ff-week-label-legacy">5</span> Matchup: You vs. Money Mike</div>
-          <div>Offense: <span id="ff-match-off">8.3%</span> vs 5.2%</div>
-          <div>Defense: <span id="ff-match-def">1.2%</span> vs 0.9%</div>
-          <div>Special: <span id="ff-match-spec">-0.1%</span> vs -0.4%</div>
-          <div style="margin-top:6px;">Totals: <span id="ff-match-total">9.4%</span> vs 5.7%</div>
         </div>
       </div>
 
-      <div class="minty-row">
-        <div class="minty-avatar">
-          <div class="minty-face"></div>
-          <div class="minty-smile"></div>
-          <div class="minty-leaf"></div>
+      <div class="draft-grid">
+        <!-- Stock Card 1 -->
+        <div class="stock-card" data-stock="nvda">
+          <div class="stock-card-header">
+            <div class="stock-card-title">
+              <div class="stock-name">Nvidia</div>
+              <div class="stock-ticker">NVDA</div>
+            </div>
+          <div class="stock-position-badge volatile">Volatile</div>
         </div>
-        <div class="minty-bubble">
-          Your tech “offense” scored big, but your bond “defense” kept your score
-          from swinging too wildly. That balance is called
-          <strong>diversification</strong>.
-          <div class="minty-caption">+250 XP when you win a simulated matchup</div>
+
+        <div class="stock-card-metrics">
+          <div class="stock-metric">
+            <div class="stock-metric-label">YTD Return</div>
+            <div class="stock-metric-value positive">+118.7%</div>
+          </div>
+          <div class="stock-metric">
+            <div class="stock-metric-label">30-Day</div>
+            <div class="stock-metric-value positive">+23.4%</div>
+          </div>
+        </div>
+
+          <div class="stock-risk-meter">
+            <span class="stock-risk-label">Risk</span>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot active"></div>
+          </div>
+
+          <div class="stock-draft-status">
+            <div class="stock-price">$495.22</div>
+            <button class="stock-draft-btn">Draft</button>
+          </div>
+        </div>
+
+        <!-- Stock Card 2 -->
+        <div class="stock-card" data-stock="msft">
+          <div class="stock-card-header">
+            <div class="stock-card-title">
+              <div class="stock-name">Microsoft</div>
+              <div class="stock-ticker">MSFT</div>
+            </div>
+          <div class="stock-position-badge stable">Stable</div>
+        </div>
+
+        <div class="stock-card-metrics">
+          <div class="stock-metric">
+            <div class="stock-metric-label">YTD Return</div>
+            <div class="stock-metric-value positive">+31.2%</div>
+          </div>
+          <div class="stock-metric">
+            <div class="stock-metric-label">30-Day</div>
+            <div class="stock-metric-value positive">+6.4%</div>
+          </div>
+        </div>
+
+          <div class="stock-risk-meter">
+            <span class="stock-risk-label">Risk</span>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot"></div>
+          </div>
+
+          <div class="stock-draft-status">
+            <div class="stock-price">$412.78</div>
+            <button class="stock-draft-btn">Draft</button>
+          </div>
+        </div>
+
+        <!-- Stock Card 3 -->
+        <div class="stock-card" data-stock="meta">
+          <div class="stock-card-header">
+            <div class="stock-card-title">
+              <div class="stock-name">Meta Platforms</div>
+              <div class="stock-ticker">META</div>
+            </div>
+          <div class="stock-position-badge growth">Growth</div>
+        </div>
+
+        <div class="stock-card-metrics">
+          <div class="stock-metric">
+            <div class="stock-metric-label">YTD Return</div>
+            <div class="stock-metric-value positive">+34.2%</div>
+          </div>
+          <div class="stock-metric">
+            <div class="stock-metric-label">30-Day</div>
+            <div class="stock-metric-value positive">+7.9%</div>
+          </div>
+        </div>
+
+          <div class="stock-risk-meter">
+            <span class="stock-risk-label">Risk</span>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot"></div>
+          </div>
+
+          <div class="stock-draft-status">
+            <div class="stock-price">$309.14</div>
+            <button class="stock-draft-btn">Draft</button>
+          </div>
+        </div>
+
+        <!-- Stock Card 4 -->
+        <div class="stock-card" data-stock="gme">
+          <div class="stock-card-header">
+            <div class="stock-card-title">
+              <div class="stock-name">GameStop</div>
+              <div class="stock-ticker">GME</div>
+            </div>
+          <div class="stock-position-badge volatile">Volatile</div>
+        </div>
+
+        <div class="stock-card-metrics">
+          <div class="stock-metric">
+            <div class="stock-metric-label">YTD Return</div>
+            <div class="stock-metric-value negative">-12.1%</div>
+          </div>
+          <div class="stock-metric">
+            <div class="stock-metric-label">30-Day</div>
+            <div class="stock-metric-value positive">+3.1%</div>
+          </div>
+        </div>
+
+          <div class="stock-risk-meter">
+            <span class="stock-risk-label">Risk</span>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot active"></div>
+          </div>
+
+          <div class="stock-draft-status">
+            <div class="stock-price">$18.44</div>
+            <button class="stock-draft-btn">Draft</button>
+          </div>
+        </div>
+
+        <!-- Stock Card 5 -->
+        <div class="stock-card" data-stock="aapl">
+          <div class="stock-card-header">
+            <div class="stock-card-title">
+              <div class="stock-name">Apple Inc.</div>
+              <div class="stock-ticker">AAPL</div>
+            </div>
+          <div class="stock-position-badge stable">Stable</div>
+        </div>
+
+        <div class="stock-card-metrics">
+          <div class="stock-metric">
+            <div class="stock-metric-label">YTD Return</div>
+            <div class="stock-metric-value positive">+24.3%</div>
+          </div>
+          <div class="stock-metric">
+            <div class="stock-metric-label">30-Day</div>
+            <div class="stock-metric-value positive">+8.1%</div>
+          </div>
+        </div>
+
+          <div class="stock-risk-meter">
+            <span class="stock-risk-label">Risk</span>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot active"></div>
+            <div class="stock-risk-dot"></div>
+          </div>
+
+          <div class="stock-draft-status">
+            <div class="stock-price">$182.45</div>
+            <button class="stock-draft-btn">Draft</button>
+          </div>
+        </div>
+      </div>
+
+      <button class="nav-btn primary" style="width:100%;margin-top:12px;" onclick="navigateTo('screen-fantasy-matchup')">
+        View MatchUp →
+      </button>
+    </section>
+
+    <!-- FANTASY FINANCE - MATCHUP -->
+    <section id="screen-fantasy-matchup" class="screen">
+      <div class="back-link" data-target="screen-fantasy">← Back to Draft</div>
+      <h1 class="app-title">Fantasy Finance</h1>
+      <p class="subtitle" style="margin-bottom:12px;">Weekly MatchUp</p>
+
+      <div class="ff-matchup" id="ff-matchup-legacy">
+        <div class="ff-matchup-header">
+          <div class="ff-matchup-title">Matchup Breakdown</div>
+          <div class="ff-week-chip">Week <span id="ff-week-label-legacy">5</span></div>
+        </div>
+        <div class="ff-matchup-row">
+          <div class="ff-team">
+            <div class="ff-team-label">You</div>
+            <div class="ff-team-value" id="ff-match-total-you">+0.0% ($0)</div>
+          </div>
+          <div class="ff-team">
+            <div class="ff-team-label">Opponent</div>
+            <div class="ff-team-value" id="ff-match-total-opp">+0.0% ($0)</div>
+          </div>
+        </div>
+        <div class="info-text" style="margin-top:10px;">Projected gain based on drafted holdings within the $1,000 budget.</div>
+      </div>
+
+      <div class="card" id="ff-lineups-card">
+        <div class="card-title" style="margin-bottom:6px;">Drafted stocks</div>
+        <div class="stat-row" style="align-items:flex-start;">
+          <div style="flex:1;">
+            <div class="stat-label" style="margin-bottom:6px;">You</div>
+            <div id="ff-your-lineup"></div>
+          </div>
+          <div style="flex:1;">
+            <div class="stat-label" style="margin-bottom:6px;">Opponent</div>
+            <div id="ff-opponent-lineup"></div>
+          </div>
         </div>
       </div>
     </section>
@@ -1304,6 +1803,22 @@
   </div>
 
   <script>
+    // Stock database
+    const stocksDB = {
+      // User draftable
+      nvda: { name: 'Nvidia', ticker: 'NVDA', price: 495.22, ytd: 118.7, thirtyDay: 23.4, position: 'Volatile', risk: 3 },
+      msft: { name: 'Microsoft', ticker: 'MSFT', price: 412.78, ytd: 31.2, thirtyDay: 6.4, position: 'Stable', risk: 2 },
+      meta: { name: 'Meta Platforms', ticker: 'META', price: 309.14, ytd: 34.2, thirtyDay: 7.9, position: 'Growth', risk: 2 },
+      gme: { name: 'GameStop', ticker: 'GME', price: 18.44, ytd: -12.1, thirtyDay: 3.1, position: 'Volatile', risk: 3 },
+      aapl: { name: 'Apple Inc.', ticker: 'AAPL', price: 182.45, ytd: 24.3, thirtyDay: 8.1, position: 'Stable', risk: 2 },
+      // Opponent pool
+      tsla: { name: 'Tesla', ticker: 'TSLA', price: 248.92, ytd: 67.8, thirtyDay: -4.2, position: 'Growth', risk: 3 },
+      amd: { name: 'AMD', ticker: 'AMD', price: 108.73, ytd: 52.4, thirtyDay: 6.8, position: 'Growth', risk: 3 },
+      amzn: { name: 'Amazon', ticker: 'AMZN', price: 178.35, ytd: 42.1, thirtyDay: 11.3, position: 'Growth', risk: 3 },
+      goog: { name: 'Alphabet', ticker: 'GOOG', price: 138.12, ytd: 15.6, thirtyDay: 5.3, position: 'Stable', risk: 2 },
+      nflx: { name: 'Netflix', ticker: 'NFLX', price: 410.22, ytd: 27.5, thirtyDay: 4.6, position: 'Growth', risk: 2 }
+    };
+
     // Simple global state for the prototype
     const state = {
       xp: 1620,
@@ -1320,8 +1835,14 @@
         flex: "index"
       },
       lineupLocked: false,
-      matchupWeek: 5
+      matchupWeek: 5,
+      draftedStocks: [],  // Array of stock ticker symbols
+      draftBudget: 1000,
+      maxPicks: 5
     };
+
+    // Opponent lineup prioritized to stay under $1000 total
+    const opponentLineup = ['tsla', 'amzn', 'nflx', 'goog']; // ~$975 total
 
     const coinPaths = {
       pay: {
@@ -1391,6 +1912,12 @@
       showScreen(target);
       const screenEl = document.getElementById(target);
       if (screenEl) screenEl.scrollTop = 0;
+
+      // Update matchup stats when visiting the matchup screen
+      if (target === 'screen-fantasy-matchup') {
+        renderFantasyStats();
+        renderMatchupLineups();
+      }
     }
 
     function showToast(message) {
@@ -1455,7 +1982,7 @@
         fantasyBtn.innerHTML = "Fantasy Finance Football";
       }
       if (xpNextLabel) {
-        xpNextLabel.textContent = "Tip: Win a Fantasy matchup for bonus XP";
+        xpNextLabel.textContent = "Tip: Lock your Fantasy lineup for XP boosts";
       }
 
       if (sourceLabel) {
@@ -1713,6 +2240,109 @@
 
     function renderCoinChart() {}
 
+    function renderPortfolio() {
+      if (state.draftedStocks.length === 0) {
+        // Show empty state
+        const holdingsContainer = document.querySelector('#screen-fantasy-portfolio .card-title');
+        if (holdingsContainer && holdingsContainer.nextElementSibling) {
+          const emptyMessage = `
+            <div style="padding: 40px 20px; text-align: center;">
+              <p style="color: var(--muted); font-size: 14px; margin-bottom: 12px;">No stocks drafted yet</p>
+              <button class="nav-btn primary" onclick="navigateTo('screen-fantasy')">Start Drafting →</button>
+            </div>
+          `;
+          // Replace holdings
+          const firstHolding = holdingsContainer.nextElementSibling;
+          if (firstHolding.classList && firstHolding.classList.contains('stock-list-item')) {
+            let currentEl = firstHolding;
+            while (currentEl && currentEl.classList.contains('stock-list-item')) {
+              const next = currentEl.nextElementSibling;
+              currentEl.remove();
+              currentEl = next;
+            }
+          }
+          holdingsContainer.insertAdjacentHTML('afterend', emptyMessage);
+        }
+
+        // Hide portfolio summary
+        const summary = document.querySelector('.portfolio-summary');
+        if (summary) summary.style.display = 'none';
+
+        return;
+      }
+
+      // Calculate total value and performance
+      let totalValue = 0;
+      let totalReturn = 0;
+
+      state.draftedStocks.forEach(ticker => {
+        const stock = stocksDB[ticker];
+        totalValue += stock.price;
+        totalReturn += stock.ytd;
+      });
+
+      const avgReturn = totalReturn / state.draftedStocks.length;
+      const initialInvestment = 1000 - state.draftBudget;
+      const gainAmount = (initialInvestment * avgReturn) / 100;
+
+      // Update portfolio summary
+      const portfolioTotal = document.querySelector('.portfolio-total');
+      const portfolioChange = document.querySelector('.portfolio-change');
+
+      if (portfolioTotal) {
+        const sign = gainAmount >= 0 ? '+' : '';
+        portfolioTotal.textContent = `${sign}$${Math.round(gainAmount).toLocaleString()}`;
+      }
+
+      if (portfolioChange) {
+        portfolioChange.className = 'portfolio-change';
+        portfolioChange.classList.add(avgReturn >= 0 ? 'positive' : 'negative');
+        const sign = avgReturn >= 0 ? '+' : '';
+        portfolioChange.textContent = `${sign}${avgReturn.toFixed(1)}% Average Return`;
+      }
+
+      // Show portfolio summary
+      const summary = document.querySelector('.portfolio-summary');
+      if (summary) summary.style.display = 'block';
+
+      // Render holdings
+      const holdingsTitle = document.querySelector('#screen-fantasy-portfolio .card-title');
+      if (holdingsTitle) {
+        // Remove existing holdings and empty state
+        let currentEl = holdingsTitle.nextElementSibling;
+        while (currentEl && (currentEl.classList.contains('stock-list-item') || currentEl.tagName === 'DIV')) {
+          const next = currentEl.nextElementSibling;
+          if (currentEl.classList.contains('card')) break; // Stop before leaderboard
+          currentEl.remove();
+          currentEl = next;
+        }
+
+        // Add new holdings
+        let holdingsHTML = '';
+        state.draftedStocks.forEach(ticker => {
+          const stock = stocksDB[ticker];
+          const valuePerStock = stock.price * (1 + stock.ytd / 100);
+          const changeClass = stock.ytd >= 0 ? 'positive' : 'negative';
+          const sign = stock.ytd >= 0 ? '+' : '';
+
+          holdingsHTML += `
+            <div class="stock-list-item">
+              <div class="stock-list-info">
+                <div class="stock-list-name">${stock.name}</div>
+                <div class="stock-list-ticker">${stock.ticker} • ${stock.position}</div>
+              </div>
+              <div class="stock-list-perf">
+                <div class="stock-list-value">$${Math.round(valuePerStock).toLocaleString()}</div>
+                <div class="stock-list-change ${changeClass}">${sign}${stock.ytd}%</div>
+              </div>
+            </div>
+          `;
+        });
+
+        holdingsTitle.insertAdjacentHTML('afterend', holdingsHTML);
+      }
+    }
+
     function updateLineup(slot, option) {
       state.fantasyLineup[slot] = option;
       document
@@ -1739,24 +2369,25 @@
 
       const totalVal = offenseVal + defenseVal + flexVal - risk * 0.6;
 
-      document.getElementById(
-        "ff-offense-label"
-      ).textContent = `Offense (${offensePick.label})`;
-      document.getElementById(
-        "ff-defense-label"
-      ).textContent = `Defense (${defensePick.label})`;
-      document.getElementById(
-        "ff-special-label"
-      ).textContent = `Flex (${flexPick.label})`;
+      const offenseLabel = document.getElementById("ff-offense-label");
+      const defenseLabel = document.getElementById("ff-defense-label");
+      const flexLabel = document.getElementById("ff-special-label");
+      if (offenseLabel) offenseLabel.textContent = `Offense (${offensePick.label})`;
+      if (defenseLabel) defenseLabel.textContent = `Defense (${defensePick.label})`;
+      if (flexLabel) flexLabel.textContent = `Flex (${flexPick.label})`;
 
-      setStatValue(document.getElementById("ff-offense"), offenseVal);
-      setStatValue(document.getElementById("ff-defense"), defenseVal);
-      setStatValue(document.getElementById("ff-special"), flexVal - 0.2);
-      setStatValue(document.getElementById("ff-total"), totalVal);
+      const offValEl = document.getElementById("ff-offense");
+      const defValEl = document.getElementById("ff-defense");
+      const flexValEl = document.getElementById("ff-special");
+      if (offValEl) setStatValue(offValEl, offenseVal);
+      if (defValEl) setStatValue(defValEl, defenseVal);
+      if (flexValEl) setStatValue(flexValEl, flexVal - 0.2);
+      const totalEl = document.getElementById("ff-total");
+      if (totalEl) setStatValue(totalEl, totalVal);
 
       const rankTag = document.getElementById("ff-rank-tag");
       const rankWord = totalVal > 6 ? "1st among friends" : totalVal > 3 ? "2nd among friends" : "3rd among friends";
-      rankTag.textContent = `Week ${state.matchupWeek} · ${rankWord}`;
+      if (rankTag) rankTag.textContent = `Week ${state.matchupWeek} · ${rankWord}`;
       const lbSub = document.getElementById("lb-you-sub");
       if (lbSub) {
         lbSub.textContent = "Fantasy Finance · lineup active";
@@ -1771,48 +2402,100 @@
       const matchSpec = document.getElementById("ff-match-spec");
       const matchTotal = document.getElementById("ff-match-total");
       const weekLegacy = document.getElementById("ff-week-label-legacy");
-      setStatValue(matchOff, offenseVal);
-      setStatValue(matchDef, defenseVal);
-      setStatValue(matchSpec, flexVal - 0.2);
-      setStatValue(matchTotal, totalVal);
+      if (matchOff) setStatValue(matchOff, offenseVal);
+      if (matchDef) setStatValue(matchDef, defenseVal);
+      if (matchSpec) setStatValue(matchSpec, flexVal - 0.2);
+      if (matchTotal) setStatValue(matchTotal, totalVal);
       if (weekLegacy) weekLegacy.textContent = state.matchupWeek;
     }
 
-    function simulateMatchup() {
-      const playerScore = parseFloat(
-        document.getElementById("ff-total").textContent
-      );
-      const opponentScore = +(Math.random() * 6 - 1).toFixed(1);
-      const resultEl =
-        document.getElementById("ff-matchup") ||
-        document.getElementById("ff-matchup-legacy");
+    function renderMatchupLineups() {
+      const yourList = document.getElementById("ff-your-lineup");
+      const oppList = document.getElementById("ff-opponent-lineup");
+      if (!yourList || !oppList) return;
 
-      let message = "";
-      if (playerScore > opponentScore + 0.2) {
-        message = `WIN ${state.matchupWeek}-${state.matchupWeek - 1}: You edged your rival ${playerScore.toFixed(
-          1
-        )}% to ${opponentScore.toFixed(1)}%.`;
-        updateXP(250, "Fantasy Finance · matchup win");
-      } else if (playerScore >= opponentScore - 0.2) {
-        message = `TIE ${state.matchupWeek}-${state.matchupWeek - 1}: So close! ${playerScore.toFixed(
-          1
-        )}% vs ${opponentScore.toFixed(1)}%.`;
-        updateXP(120, "Fantasy Finance · tie");
-      } else {
-        message = `LOSS ${state.matchupWeek}-${state.matchupWeek - 1}: Opponent posted ${opponentScore.toFixed(
-          1
-        )}% while you had ${playerScore.toFixed(1)}%.`;
-        updateXP(60, "Fantasy Finance · played the week");
-      }
+      const renderList = (tickers, emptyText) => {
+        if (!tickers || tickers.length === 0) {
+          return `<p class="info-text" style="margin-bottom:0;">${emptyText}</p>`;
+        }
 
-      if (resultEl) resultEl.textContent = message;
-      state.matchupWeek += 1;
-      renderFantasyStats();
+        return tickers
+          .map((ticker) => {
+            const stock = stocksDB[ticker];
+            if (!stock) return '';
+            const changeClass = stock.ytd >= 0 ? 'positive' : 'negative';
+            const sign = stock.ytd >= 0 ? '+' : '';
+            return `
+              <div class="stock-list-item" style="padding:8px 10px;margin-bottom:6px;">
+                <div class="stock-list-info">
+                  <div class="stock-list-name">${stock.name}</div>
+                  <div class="stock-list-ticker">${stock.ticker} • ${stock.position}</div>
+                </div>
+                <div class="stock-list-perf">
+                  <div class="stock-list-value">$${Math.round(stock.price).toLocaleString()}</div>
+                  <div class="stock-list-change ${changeClass}">${sign}${stock.ytd}%</div>
+                </div>
+              </div>
+            `;
+          })
+          .join("");
+      };
+
+      yourList.innerHTML = renderList(state.draftedStocks, "No picks yet—draft some stocks.");
+      oppList.innerHTML = renderList(opponentLineup, "Opponent hasn't set a lineup.");
+
+      renderMatchupBreakdown();
+    }
+
+    function calculateLineupPerformance(tickers) {
+      let totalCost = 0;
+      let totalValue = 0;
+      if (!tickers || tickers.length === 0) return { totalCost: 0, pct: 0, gain: 0 };
+
+      tickers.forEach((ticker) => {
+        const stock = stocksDB[ticker];
+        if (!stock) return;
+        totalCost += stock.price;
+        totalValue += stock.price * (1 + stock.ytd / 100);
+      });
+
+      if (totalCost === 0) return { totalCost: 0, pct: 0, gain: 0 };
+      const gain = totalValue - totalCost;
+      return { totalCost, pct: (gain / totalCost) * 100, gain };
+    }
+
+    function renderMatchupBreakdown() {
+      const you = calculateLineupPerformance(state.draftedStocks);
+      const opp = calculateLineupPerformance(opponentLineup);
+
+      const youEl = document.getElementById("ff-match-total-you");
+      const oppEl = document.getElementById("ff-match-total-opp");
+      const totalEl = document.getElementById("ff-total");
+      const rivalEl = document.getElementById("ff-rival-projection");
+
+      const formatLine = (perf) => {
+        const sign = perf.pct >= 0 ? "+" : "";
+        return `${sign}${perf.pct.toFixed(1)}% ($${Math.round(perf.gain).toLocaleString()})`;
+      };
+
+      const applyValue = (el, perf) => {
+        if (!el) return;
+        el.textContent = formatLine(perf);
+        el.classList.remove("positive", "negative");
+        if (perf.pct > 0) el.classList.add("positive");
+        if (perf.pct < 0) el.classList.add("negative");
+      };
+
+      applyValue(youEl, you);
+      applyValue(oppEl, opp);
+      if (totalEl) setStatValue(totalEl, you.pct);
+      if (rivalEl) setStatValue(rivalEl, opp.pct);
     }
 
     // Initial render
     renderSneakerGoal();
     renderFantasyStats();
+    renderMatchupLineups();
     updateXP(0);
     const lbSubInit = document.getElementById("lb-you-sub");
     if (lbSubInit) {
@@ -1887,7 +2570,7 @@
       lockBtn.addEventListener("click", () => {
         state.lineupLocked = true;
         updateXP(120, "Fantasy Finance · lineup locked");
-        showToast("Lineup locked for the week—simulate your matchup.");
+        showToast("Lineup locked for the week—check your matchup stats.");
         const lbSubLock = document.getElementById("lb-you-sub");
         if (lbSubLock) {
           lbSubLock.textContent = "Fantasy Finance · lineup locked";
@@ -1895,10 +2578,81 @@
       });
     }
 
-    const simBtn = document.getElementById("ff-sim");
-    if (simBtn) {
-      simBtn.addEventListener("click", simulateMatchup);
+    // Update draft stats display
+    function updateDraftStats() {
+      const budgetEl = document.getElementById('draft-budget');
+
+      if (budgetEl) {
+        budgetEl.textContent = `$${state.draftBudget.toLocaleString()}`;
+      }
     }
+
+    // Draft a stock from its card
+    function draftStock(card) {
+      if (!card) return;
+
+      const stockTicker = card.getAttribute('data-stock');
+      const stock = stocksDB[stockTicker];
+      const button = card.querySelector('.stock-draft-btn');
+
+      if (!stock) return;
+
+      // If already drafted, deselect it
+      if (card.classList.contains('selected') || state.draftedStocks.includes(stockTicker)) {
+        state.draftedStocks = state.draftedStocks.filter((t) => t !== stockTicker);
+        state.draftBudget += stock.price;
+        card.classList.remove('selected');
+        if (button) {
+          button.textContent = 'Draft';
+          button.classList.remove('drafted');
+        }
+        updateDraftStats();
+        renderMatchupLineups();
+        showToast(`${stock.name} removed from your lineup.`);
+        return;
+      }
+
+      // Check limits and budget
+      if (state.draftedStocks.length >= state.maxPicks) {
+        showToast('Maximum picks reached (5/5)');
+        return;
+      }
+
+      if (state.draftBudget < stock.price) {
+        showToast('Not enough budget for this stock!');
+        return;
+      }
+
+      state.draftedStocks.push(stockTicker);
+      state.draftBudget -= stock.price;
+
+      card.classList.add('selected');
+      if (button) {
+        button.textContent = 'Drafted';
+        button.classList.add('drafted');
+      }
+
+      updateDraftStats();
+      showToast(`${stock.name} added to portfolio!`);
+
+      // Log for debugging
+      console.log('Drafted:', stockTicker, 'Total picks:', state.draftedStocks.length);
+      renderMatchupLineups();
+    }
+
+    // Fantasy Finance Draft Interactions
+    document.querySelectorAll('.stock-draft-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        draftStock(this.closest('.stock-card'));
+      });
+    });
+
+    // Clicking anywhere on the stock card drafts it
+    document.querySelectorAll('.stock-card').forEach(card => {
+      card.addEventListener('click', () => draftStock(card));
+    });
   </script>
 </body>
 </html>
