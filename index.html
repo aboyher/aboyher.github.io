@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>Capital U – Interactive Prototype</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0");
 
@@ -103,7 +104,6 @@
 
     .xp-card,
     .card,
-    .goal-card,
     .cq-outcome-card,
     .ff-panel,
     .ff-profile-card,
@@ -212,7 +212,6 @@
 
     .xp-row,
     .xp-next,
-    .goal-meta,
     .lb-sub,
     .cq-helper,
     .info-text,
@@ -222,7 +221,6 @@
     }
 
     .xp-bar-bg,
-    .goal-bar-bg,
     .cq-forecast-bar {
       width: 100%;
       height: 8px;
@@ -232,7 +230,6 @@
     }
 
     .xp-bar-fill,
-    .goal-bar-fill,
     .cq-forecast-fill {
       height: 100%;
       width: 0;
@@ -255,7 +252,6 @@
     }
 
     .card-title,
-    .goal-title,
     .cq-outcome-title {
       font-weight: 700;
       font-size: 14px;
@@ -271,7 +267,6 @@
     }
 
     .nav-btn,
-    .goal-btn,
     .cq-btn,
     .cq-actions button,
     .ff-menu-btn,
@@ -290,7 +285,6 @@
     }
 
     .nav-btn:hover,
-    .goal-btn:hover,
     .cq-btn:hover,
     .cq-actions button:hover,
     .ff-menu-btn:hover,
@@ -302,7 +296,6 @@
     }
 
     .nav-btn.primary,
-    .goal-btn.primary,
     .cq-btn.green,
     .cq-actions button.primary,
     .ff-actions button.primary {
@@ -426,6 +419,63 @@
       font-size: 11px;
       color: var(--muted);
       margin-top: 4px;
+    }
+
+    .coach-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      text-align: center;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .coach-avatar {
+      width: 128px;
+      height: 128px;
+      margin: 0 auto 14px;
+      border-radius: 28px;
+      background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.08), transparent 60%),
+        linear-gradient(135deg, rgba(20, 184, 166, 0.2), rgba(139, 92, 246, 0.2));
+      border: 1px solid var(--border);
+      position: relative;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .coach-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .coach-options {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .coach-option {
+      width: 100%;
+      padding: 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .coach-option:hover {
+      border-color: var(--teal);
+      background: rgba(14, 184, 166, 0.12);
+      box-shadow: 0 6px 16px rgba(14, 184, 166, 0.18);
     }
 
     .cq-logo {
@@ -608,6 +658,99 @@
       color: #ef4444;
     }
 
+    .cq-trajectory-card {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 12px;
+      margin-top: 8px;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .cq-trajectory-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--accent);
+      letter-spacing: 0.02em;
+      text-transform: uppercase;
+    }
+
+    .cq-trajectory-chart {
+      width: 100%;
+      height: 220px;
+      overflow: hidden;
+    }
+
+    .cq-trajectory-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 8px;
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    .cq-legend-block {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .cq-legend-segment {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .cq-trajectory-dot {
+      width: 16px;
+      height: 6px;
+      border-radius: 999px;
+      display: inline-block;
+    }
+
+    .cq-legend-line {
+      width: 28px;
+      height: 3px;
+      border-radius: 999px;
+      background: var(--legend-line-color, var(--accent));
+    }
+
+    .cq-legend-line.dotted {
+      background: repeating-linear-gradient(
+        to right,
+        var(--legend-line-color, var(--accent)) 0,
+        var(--legend-line-color, var(--accent)) 4px,
+        transparent 4px,
+        transparent 8px
+      );
+    }
+
+    .cq-results-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .cq-section-title {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--accent);
+      margin: 6px 0 12px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      display: inline-block;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 4px;
+    }
+
     .cq-choice-grid {
       display: grid;
       gap: 10px;
@@ -691,36 +834,63 @@
 
     .cq-result-grid {
       display: grid;
-      gap: 10px;
+      gap: 12px;
     }
 
     .cq-result-card {
+      position: relative;
+      overflow: hidden;
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 10px 12px;
-      background: var(--surface-elevated);
+      padding: 14px;
+      background: radial-gradient(circle at 20% 20%, rgba(14, 184, 166, 0.12), transparent 55%), radial-gradient(circle at 80% 0%, rgba(139, 92, 246, 0.12), transparent 45%), var(--surface-elevated);
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .cq-result-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      border-radius: inherit;
+      pointer-events: none;
     }
 
     .cq-result-card.active {
       border-color: var(--violet);
-      box-shadow: 0 8px 16px rgba(139, 92, 246, 0.3);
-      background: rgba(139, 92, 246, 0.15);
+      box-shadow: 0 12px 26px rgba(139, 92, 246, 0.35);
+      transform: translateY(-2px);
     }
 
     .cq-result-copy {
       font-size: 12px;
-      color: var(--muted);
-      margin-bottom: 8px;
+      color: #cbd5e1;
+      margin-bottom: 10px;
+      line-height: 1.5;
     }
 
     .cq-result-stats {
       display: grid;
-      gap: 4px;
+      gap: 6px;
       font-size: 12px;
+    }
+
+    .cq-result-stats > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 8px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.02);
     }
 
     .cq-result-stats .stat-label {
       color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      font-size: 11px;
     }
 
     .pill {
@@ -1292,7 +1462,6 @@
           <div id="xp-bar-fill" class="xp-bar-fill"></div>
         </div>
         <div style="display:flex;justify-content:space-between;align-items:center;margin-top:6px;">
-          <div id="xp-chip" class="xp-chip">+0 XP today</div>
           <div class="xp-next" id="xp-next-label">Next unlock: Fantasy Finance</div>
         </div>
       </div>
@@ -1368,45 +1537,19 @@
     <!-- SMARTBUDGET -->
     <section id="screen-smartbudget" class="screen">
       <div class="back-link" data-target="screen-home">← Back to Home</div>
-      <h1 class="app-title">Capital U</h1>
-      <p class="subtitle" style="margin-bottom:10px;">SmartBudget Coach</p>
+      <h1 class="app-title">SmartBudget Coach</h1>
+      <p class="subtitle">What is your top financial goal?</p>
 
-      <button class="nav-btn primary" style="width:100%;margin-bottom:12px;">
-        Create New Goal
-      </button>
+      <div class="coach-card">
+        <div class="coach-avatar">
+          <img src="profile.png" alt="SmartBudget Coach avatar" />
+        </div>
 
-      <div class="goal-card">
-        <div class="goal-title">Save $150 for new sneakers</div>
-        <div class="goal-meta" id="goal1-meta">Goal: $150 · Saved: $63</div>
-        <div class="goal-bar-bg">
-          <div id="goal1-bar" class="goal-bar-fill" style="width:42%;"></div>
-        </div>
-        <div class="goal-btn-row">
-          <button id="goal1-add" class="goal-btn primary">
-            Add $15 this week (+40 XP)
-          </button>
-          <button class="goal-btn">Adjust plan</button>
-        </div>
-      </div>
-
-      <div class="goal-card">
-        <div class="goal-title">Emergency cushion</div>
-        <div class="goal-meta">Goal: $300 · Saved: $90 · New</div>
-        <div class="goal-bar-bg">
-          <div class="goal-bar-fill" style="width:30%;"></div>
-        </div>
-      </div>
-
-      <div class="minty-row">
-        <div class="minty-avatar">
-          <div class="minty-face"></div>
-          <div class="minty-smile"></div>
-          <div class="minty-leaf"></div>
-        </div>
-        <div class="minty-bubble">
-          Can you save <strong>$15 per week</strong> for your sneakers? I’ll keep
-          track and turn your progress into <strong>XP</strong>.
-          <div class="minty-caption">SmartBudget XP · +40 if you tap the button</div>
+        <div class="coach-options">
+          <button class="coach-option">Pay off debt</button>
+          <button class="coach-option">Save for a goal</button>
+          <button class="coach-option">Build an emergency fund</button>
+          <button class="coach-option">Track my spending</button>
         </div>
       </div>
     </section>
@@ -1492,60 +1635,42 @@
       <h1 class="app-title">Coin Quest</h1>
       <p class="subtitle" style="color:#4b5563;">Windfall · Results</p>
 
-      <div id="cq-results" class="cq-outcome-card" style="display:none;">
-        <div class="pill" id="cq-pill">Path selected</div>
-        <div class="cq-outcome-title" id="cq-outcome-title">Here's what happens</div>
-        <div class="cq-outcome-copy" id="cq-outcome-copy">Compare the three paths at a glance.</div>
-
-        <div class="cq-timeline-chart" id="cq-timeline-chart">
-          <!-- Chart rendered here by JavaScript -->
+      <div id="cq-results" class="cq-results-stack" style="display:none;">
+        <div class="cq-outcome-card">
+          <div class="pill" id="cq-pill">Path selected</div>
+          <div class="cq-outcome-title" id="cq-outcome-title">Here's what happens</div>
         </div>
 
-        <div class="cq-chart-legend">
-          <span><span class="legend-dot pay"></span> Pay Loan</span>
-          <span><span class="legend-dot save"></span> Save</span>
-          <span><span class="legend-dot invest"></span> Invest</span>
-        </div>
-
-        <div class="cq-comparison-table" id="cq-comparison">
-          <!-- Comparison columns rendered here -->
-        </div>
-
-        <div class="cq-result-grid">
-          <div class="cq-result-card" data-key="pay">
-            <div class="card-title" style="margin-bottom:4px;">Pay off the loan now</div>
-            <div class="cq-result-copy">Debt free today; $500/mo stacks in cash right away.</div>
-            <div class="cq-result-stats">
-              <div><span class="stat-label">Debt in 1 yr</span><span class="stat-value positive">$0</span></div>
-              <div><span class="stat-label">Cash in 1 yr</span><span class="stat-value">~$6,000</span></div>
-              <div><span class="stat-label">Interest avoided</span><span class="stat-value positive">~$1,300</span></div>
-            </div>
+        <div class="cq-outcome-card">
+          <div class="cq-section-title">Net Worth</div>
+          <p class="subtitle" style="margin:4px 0 8px;color:#94a3b8;">Comparison of the three choices ranked by highest net worth.</p>
+          <div class="cq-comparison-table" id="cq-comparison">
+            <!-- Comparison columns rendered here -->
           </div>
 
-          <div class="cq-result-card" data-key="save">
-            <div class="card-title" style="margin-bottom:4px;">Save everything</div>
-            <div class="cq-result-copy">Loan keeps accruing 5%; savings grow safely.</div>
-            <div class="cq-result-stats">
-              <div><span class="stat-label">Debt in 1 yr</span><span class="stat-value negative">~$10,250</span></div>
-              <div><span class="stat-label">Cash in 1 yr</span><span class="stat-value">~$16,000</span></div>
-              <div><span class="stat-label">Net after 5 yrs</span><span class="stat-value">~$37k saved − interest</span></div>
+            <div class="cq-trajectory-card">
+              <div class="cq-trajectory-header">Debt vs Net Worth (Years 1–5)</div>
+              <div class="cq-trajectory-chart" id="cq-trajectory-chart"></div>
+              <div class="cq-trajectory-legend">
+                <div class="cq-legend-block">
+                  <div class="cq-legend-segment">
+                    <div class="cq-legend-line solid" style="--legend-line-color:#94a3b8;"></div>
+                    <span>Net Worth</span>
+                  </div>
+                  <div class="cq-legend-segment">
+                    <div class="cq-legend-line dotted" style="--legend-line-color:#94a3b8;"></div>
+                    <span>Debt</span>
+                  </div>
+                </div>
+                <div class="cq-legend-block">
+                  <div class="cq-legend-segment"><span class="cq-trajectory-dot" style="background: #f59e0b;"></span> Invest</div>
+                  <div class="cq-legend-segment"><span class="cq-trajectory-dot" style="background: #14b8a6;"></span> Pay Loan</div>
+                  <div class="cq-legend-segment"><span class="cq-trajectory-dot" style="background: #8b5cf6;"></span> Save</div>
+                </div>
+              </div>
             </div>
-          </div>
-
-          <div class="cq-result-card" data-key="invest">
-            <div class="card-title" style="margin-bottom:4px;">Invest everything</div>
-            <div class="cq-result-copy">Keep the 5% loan; aim for ~6–8% returns (with risk).</div>
-            <div class="cq-result-stats">
-              <div><span class="stat-label">Debt in 1 yr</span><span class="stat-value negative">~$10,250</span></div>
-              <div><span class="stat-label">Investments in 1 yr</span><span class="stat-value positive">~$16,900</span></div>
-              <div><span class="stat-label">Net after 5 yrs</span><span class="stat-value positive">~$44k value − interest</span></div>
-            </div>
-          </div>
         </div>
 
-        <div class="cq-actions">
-          <button id="cq-reset">Try a different choice</button>
-        </div>
       </div>
     </section>
 
@@ -1823,12 +1948,9 @@
     const state = {
       xp: 1620,
       xpTarget: 2400,
-      xpToday: 0,
       fantasyUnlocked: true,
       unlockThreshold: 1800,
       coinQuestChoice: null,
-      sneakerGoal: 150,
-      sneakerSaved: 63,
       fantasyLineup: {
         offense: "tech",
         defense: "bonds",
@@ -1846,21 +1968,21 @@
 
     const coinPaths = {
       pay: {
-        pill: "Debt free day 1",
+        pill: "Your choice",
         title: "Pay off the loan now",
         copy: "Clear the 5% loan immediately and let every $500/mo stack in savings from here on.",
         xp: 0,
         xpLabel: ""
       },
       save: {
-        pill: "Safety first",
+        pill: "Your choice",
         title: "Save every dollar",
         copy: "Keep the 5% loan but build a cash cushion; you’ll owe some interest, but the money stays liquid.",
         xp: 0,
         xpLabel: ""
       },
       invest: {
-        pill: "Growth mindset",
+        pill: "Your choice",
         title: "Invest every dollar",
         copy: "Keep the 5% loan and invest the $10k windfall plus $500/mo into the market for growth (with risk).",
         xp: 0,
@@ -1950,7 +2072,6 @@
 
     function updateXP(delta, sourceLabel) {
       state.xp += delta;
-      state.xpToday += delta;
       if (state.xp < 0) state.xp = 0;
       if (state.xp > state.xpTarget) state.xp = state.xpTarget;
 
@@ -1961,9 +2082,6 @@
 
       const pct = (state.xp / state.xpTarget) * 100;
       document.getElementById("xp-bar-fill").style.width = pct + "%";
-
-      const xpChip = document.getElementById("xp-chip");
-      xpChip.textContent = "+" + state.xpToday + " XP today";
 
       const lbXp = document.getElementById("lb-you-xp");
       if (lbXp) lbXp.textContent = formatXP(state.xp);
@@ -1990,22 +2108,24 @@
       }
     }
 
-    function renderSneakerGoal() {
-      const pct = Math.min(100, (state.sneakerSaved / state.sneakerGoal) * 100);
-      document.getElementById("goal1-bar").style.width = pct + "%";
-      document.getElementById(
-        "goal1-meta"
-      ).textContent = `Goal: $${state.sneakerGoal} · Saved: $${state.sneakerSaved}`;
-    }
-
-    function calculateProjections(choiceKey) {
+    function calculateProjections() {
       const monthlyIncome = 500;
       const windfall = 10000;
       const loanBalance = 10000;
       const loanRate = 0.05;
-      const loanMonthly = 190;
       const savingsRate = 0.02;
-      const investmentRate = 0.07;
+      const investmentRate = 0.07; // per requirement
+
+      const totalMonths = 60;
+      const monthlyLoanRate = loanRate / 12;
+      const monthlyInvestmentRate = investmentRate / 12;
+
+      const calcMonthlyPayment = (principal, rate, months) => {
+        const r = rate / 12;
+        return (principal * r * Math.pow(1 + r, months)) / (Math.pow(1 + r, months) - 1);
+      };
+
+      const loanMonthly = calcMonthlyPayment(loanBalance, loanRate, totalMonths);
 
       const projections = {
         pay: [],
@@ -2013,56 +2133,55 @@
         invest: []
       };
 
-      // Pay Loan: Use windfall to pay off loan, then save everything
-      for (let year = 0; year <= 5; year++) {
-        const netWorth = monthlyIncome * 12 * year;
-        projections.pay.push({ year, netWorth });
+      const pushSnapshot = (bucket, month, savings, investments, debt) => {
+        if (month % 12 === 0) {
+          const year = month / 12;
+          const netWorth = (savings + investments) - debt;
+          bucket.push({ year, netWorth, savings, investments, debt });
+        }
+      };
+
+      // Pay: wipe loan with windfall, save full income monthly (no growth)
+      let paySavings = 0;
+      let payDebt = 0;
+      pushSnapshot(projections.pay, 0, paySavings, 0, payDebt);
+      for (let m = 1; m <= totalMonths; m++) {
+        paySavings += monthlyIncome; // no growth assumption for cash savings
+        pushSnapshot(projections.pay, m, paySavings, 0, payDebt);
       }
 
-      // Save: Keep loan, put windfall in savings, make loan payments
-      for (let year = 0; year <= 5; year++) {
-        let savings = windfall;
-        let debt = loanBalance;
-        const monthsPassed = year * 12;
+      // Save: keep loan, put windfall into savings, amortize loan monthly, no savings growth (per amortization example)
+      let saveSavings = windfall;
+      let saveDebt = loanBalance;
+      pushSnapshot(projections.save, 0, saveSavings, 0, saveDebt);
+      for (let m = 1; m <= totalMonths; m++) {
+        const interestPayment = saveDebt * monthlyLoanRate;
+        const principalPayment = loanMonthly - interestPayment;
+        saveDebt = Math.max(0, saveDebt - principalPayment);
 
-        // Add monthly savings after loan payments
-        const monthlySavings = monthlyIncome - loanMonthly;
-        savings += monthlySavings * monthsPassed;
-
-        // Apply savings interest (compounded annually)
-        savings *= Math.pow(1 + savingsRate, year);
-
-        // Apply loan interest
-        debt *= Math.pow(1 + loanRate, year);
-
-        // If loan is paid off (5 years), no more debt
-        if (year >= 5) debt = 0;
-
-        const netWorth = savings - debt;
-        projections.save.push({ year, netWorth });
+        const toSavings = monthlyIncome - loanMonthly;
+        saveSavings += toSavings;
+        pushSnapshot(projections.save, m, saveSavings, 0, saveDebt);
       }
 
-      // Invest: Keep loan, invest windfall + monthly savings
-      for (let year = 0; year <= 5; year++) {
-        let investments = windfall;
-        let debt = loanBalance;
-        const monthsPassed = year * 12;
+      // Invest: grow windfall at investmentRate; surplus goes to cash savings while paying amortized loan
+      let investInvestments = windfall;
+      let investSavings = 0;
+      let investDebt = loanBalance;
+      pushSnapshot(projections.invest, 0, investSavings, investInvestments, investDebt);
+      for (let m = 1; m <= totalMonths; m++) {
+        // Grow invested windfall
+        investInvestments *= 1 + monthlyInvestmentRate;
 
-        // Add monthly investments after loan payments
-        const monthlyInvestment = monthlyIncome - loanMonthly;
+        // Add monthly surplus (after loan payment) to savings
+        investSavings += monthlyIncome - loanMonthly;
 
-        // Compound investment returns (simplified: add monthly contributions first, then compound)
-        const totalContributions = windfall + (monthlyInvestment * monthsPassed);
-        investments = totalContributions * Math.pow(1 + investmentRate, year);
+        // Amortize loan
+        const interestPayment = investDebt * monthlyLoanRate;
+        const principalPayment = loanMonthly - interestPayment;
+        investDebt = Math.max(0, investDebt - principalPayment);
 
-        // Apply loan interest
-        debt *= Math.pow(1 + loanRate, year);
-
-        // If loan is paid off (5 years), no more debt
-        if (year >= 5) debt = 0;
-
-        const netWorth = investments - debt;
-        projections.invest.push({ year, netWorth });
+        pushSnapshot(projections.invest, m, investSavings, investInvestments, investDebt);
       }
 
       return projections;
@@ -2166,7 +2285,11 @@
         { key: 'pay', title: 'Pay Loan', icon: 'paid' },
         { key: 'save', title: 'Save', icon: 'savings' },
         { key: 'invest', title: 'Invest', icon: 'trending_up' }
-      ];
+      ].map(choice => {
+        const data = projections[choice.key];
+        const yr5 = data.find(p => p.year === 5) || { netWorth: 0 };
+        return { ...choice, netWorth5: yr5.netWorth };
+      }).sort((a, b) => b.netWorth5 - a.netWorth5);
 
       let html = '';
 
@@ -2203,6 +2326,125 @@
       comparisonContainer.innerHTML = html;
     }
 
+    let cqTrajectoryChart = null;
+
+    function renderTrajectoryChart(selectedChoice) {
+      const projections = calculateProjections();
+      const container = document.getElementById("cq-trajectory-chart");
+      if (!container) return;
+
+      container.innerHTML = '<canvas></canvas>';
+      const ctx = container.querySelector('canvas').getContext('2d');
+
+      const years = [1, 2, 3, 4, 5];
+      const colors = {
+        payNet: '#14b8a6',
+        payDebt: '#0ea5e9',
+        saveNet: '#8b5cf6',
+        saveDebt: '#6366f1',
+        investNet: '#f59e0b',
+        investDebt: '#f97316'
+      };
+
+      const datasets = [
+        {
+          label: 'Pay · Net Worth',
+          data: years.map(y => projections.pay.find(p => p.year === y)?.netWorth || 0),
+          borderColor: colors.payNet,
+          backgroundColor: colors.payNet,
+          tension: 0.25,
+          borderWidth: selectedChoice === 'pay' ? 3 : 2,
+          pointRadius: selectedChoice === 'pay' ? 4 : 3
+        },
+        {
+          label: 'Pay · Debt',
+          data: years.map(y => projections.pay.find(p => p.year === y)?.debt || 0),
+          borderColor: colors.payDebt,
+          backgroundColor: colors.payDebt,
+          borderDash: [6, 4],
+          tension: 0.25,
+          borderWidth: selectedChoice === 'pay' ? 3 : 2,
+          pointRadius: selectedChoice === 'pay' ? 4 : 3
+        },
+        {
+          label: 'Save · Net Worth',
+          data: years.map(y => projections.save.find(p => p.year === y)?.netWorth || 0),
+          borderColor: colors.saveNet,
+          backgroundColor: colors.saveNet,
+          tension: 0.25,
+          borderWidth: selectedChoice === 'save' ? 3 : 2,
+          pointRadius: selectedChoice === 'save' ? 4 : 3
+        },
+        {
+          label: 'Save · Debt',
+          data: years.map(y => projections.save.find(p => p.year === y)?.debt || 0),
+          borderColor: colors.saveDebt,
+          backgroundColor: colors.saveDebt,
+          borderDash: [6, 4],
+          tension: 0.25,
+          borderWidth: selectedChoice === 'save' ? 3 : 2,
+          pointRadius: selectedChoice === 'save' ? 4 : 3
+        },
+        {
+          label: 'Invest · Net Worth',
+          data: years.map(y => projections.invest.find(p => p.year === y)?.netWorth || 0),
+          borderColor: colors.investNet,
+          backgroundColor: colors.investNet,
+          tension: 0.25,
+          borderWidth: selectedChoice === 'invest' ? 3 : 2,
+          pointRadius: selectedChoice === 'invest' ? 4 : 3
+        },
+        {
+          label: 'Invest · Debt',
+          data: years.map(y => projections.invest.find(p => p.year === y)?.debt || 0),
+          borderColor: colors.investDebt,
+          backgroundColor: colors.investDebt,
+          borderDash: [6, 4],
+          tension: 0.25,
+          borderWidth: selectedChoice === 'invest' ? 3 : 2,
+          pointRadius: selectedChoice === 'invest' ? 4 : 3
+        }
+      ];
+
+      if (cqTrajectoryChart) {
+        cqTrajectoryChart.destroy();
+      }
+
+      cqTrajectoryChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: years.map(y => `Year ${y}`),
+          datasets
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: {
+              callbacks: {
+                label: (ctx) => `${ctx.dataset.label}: $${Math.round(ctx.parsed.y).toLocaleString()}`
+              }
+            }
+          },
+          animation: false,
+          scales: {
+            y: {
+              beginAtZero: true,
+              ticks: {
+                callback: (val) => `$${val.toLocaleString()}`
+              },
+              grid: { color: 'rgba(255,255,255,0.05)' }
+            },
+            x: {
+              grid: { color: 'rgba(255,255,255,0.04)' }
+            }
+          }
+        }
+      });
+    }
+
+
     function renderCoinQuest(choice) {
       state.coinQuestChoice = choice;
       const data = coinPaths[choice];
@@ -2210,7 +2452,8 @@
 
       document.getElementById("cq-pill").textContent = data.pill;
       document.getElementById("cq-outcome-title").textContent = data.title;
-      document.getElementById("cq-outcome-copy").textContent = data.copy;
+      const copyEl = document.getElementById("cq-outcome-copy");
+      if (copyEl) copyEl.textContent = data.copy;
 
       document.querySelectorAll(".cq-choice").forEach((btn) => {
         btn.classList.toggle("active", btn.getAttribute("data-choice") === choice);
@@ -2221,8 +2464,8 @@
       });
 
       // Render the new visualizations
-      renderTimelineChart(choice);
       renderComparisonTable(choice);
+      renderTrajectoryChart(choice);
 
       document.getElementById("cq-results").style.display = "block";
       updateXP(data.xp, data.xpLabel);
@@ -2493,7 +2736,6 @@
     }
 
     // Initial render
-    renderSneakerGoal();
     renderFantasyStats();
     renderMatchupLineups();
     updateXP(0);
@@ -2532,16 +2774,6 @@
       });
     });
 
-    // SmartBudget – add $15 this week
-    document.getElementById("goal1-add").addEventListener("click", () => {
-      state.sneakerSaved = Math.min(
-        state.sneakerGoal,
-        state.sneakerSaved + 15
-      );
-      renderSneakerGoal();
-      updateXP(40, "SmartBudget weekly savings");
-    });
-
     // Coin Quest – Choose your path
     document.querySelectorAll(".cq-choice").forEach((btn) => {
       btn.addEventListener("click", () => {
@@ -2550,11 +2782,6 @@
         renderCoinQuest(choice);
       });
     });
-
-    const cqReset = document.getElementById("cq-reset");
-    if (cqReset) {
-      cqReset.addEventListener("click", resetCoinQuest);
-    }
 
     // Fantasy Finance lineup selections
     document.querySelectorAll(".chip").forEach((chip) => {
