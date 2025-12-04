@@ -739,6 +739,33 @@
       gap: 12px;
     }
 
+    /* Coin Quest results layout tweaks (reduce height to avoid scrollbar) */
+    #screen-coinquest-results {
+      padding: 12px 12px 10px;
+    }
+
+    #screen-coinquest-results .cq-results-stack {
+      gap: 10px;
+    }
+
+    #screen-coinquest-results .cq-outcome-card,
+    #screen-coinquest-results .cq-trajectory-card {
+      padding: 10px;
+    }
+
+    #screen-coinquest-results .cq-comparison-table {
+      margin: 8px 0;
+    }
+
+    #screen-coinquest-results .cq-trajectory-chart {
+      height: 180px;
+    }
+
+    #screen-coinquest-results .cq-trajectory-legend {
+      margin-top: 6px;
+      gap: 10px;
+    }
+
     .cq-section-title {
       font-size: 13px;
       font-weight: 800;
@@ -1084,6 +1111,81 @@
 
     .toast.show {
       opacity: 1;
+    }
+
+    /* Minty assistant bubble */
+    .assistant-bubble {
+      position: absolute;
+      right: 14px;
+      bottom: 82px; /* sits above the tab bar */
+      border: none;
+      background: transparent;
+      box-shadow: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      padding: 0;
+      transition: transform 0.12s ease;
+      z-index: 5;
+    }
+
+    .assistant-bubble:hover {
+      transform: translateY(-1px);
+    }
+
+    .assistant-bubble img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    .assistant-panel {
+      position: absolute;
+      right: 14px;
+      bottom: 142px;
+      width: 260px;
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.45);
+      padding: 10px;
+      display: none;
+      z-index: 5;
+    }
+
+    .assistant-panel.open {
+      display: block;
+    }
+
+    .assistant-panel-title {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .assistant-panel input {
+      width: 100%;
+      padding: 10px 12px;
+      border-radius: var(--radius);
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text);
+      font-size: 13px;
+      outline: none;
+    }
+
+    .assistant-panel input::placeholder {
+      color: var(--muted);
+    }
+
+    .assistant-greeting {
+      font-size: 12px;
+      color: var(--muted);
+      margin-bottom: 8px;
+      line-height: 1.4;
     }
 
     .tab-bar {
@@ -1513,26 +1615,12 @@
           <div class="lb-xp">980 XP</div>
         </div>
 
-        <div class="lb-footer">
-          <span id="lb-global-label">Global: #128 this week</span>
-          <a href="javascript:void(0)" class="lb-link">View classroom board</a>
-        </div>
+      <div class="lb-footer">
+        <span id="lb-global-label">Global: #128 this week</span>
+        <a href="javascript:void(0)" class="lb-link">View classroom board</a>
       </div>
-
-      <div class="minty-row">
-        <div class="minty-avatar">
-          <div class="minty-face"></div>
-          <div class="minty-smile"></div>
-          <div class="minty-leaf"></div>
-        </div>
-        <div class="minty-bubble">
-          <strong>Fantasy Finance</strong> is ready—set your lineup and track your
-          matchup. Finish a Coin Quest or add to a savings goal to climb the
-          leaderboard faster.
-          <div class="minty-caption">Minty · Your money coach</div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
     <!-- SMARTBUDGET -->
     <section id="screen-smartbudget" class="screen">
@@ -1905,6 +1993,16 @@
       </div>
     </section>
 
+    <!-- Assistant bubble -->
+    <div id="assistant-panel" class="assistant-panel">
+      <div class="assistant-panel-title">Ask Minty</div>
+      <div class="assistant-greeting">Hey! I’m Minty—type a quick money question and I’ll point you in the right direction.</div>
+      <input id="assistant-input" type="text" placeholder="Type a quick question..." aria-label="Assistant input" />
+    </div>
+    <button id="assistant-bubble" class="assistant-bubble" aria-label="Open assistant">
+      <img src="minty.png" alt="Minty assistant" />
+    </button>
+
     <!-- Toast -->
     <div id="toast" class="toast"></div>
     <nav class="tab-bar">
@@ -2017,6 +2115,9 @@
     const screens = document.querySelectorAll(".screen");
     const toastEl = document.getElementById("toast");
     const tabButtons = document.querySelectorAll(".tab-btn");
+    const assistantBubble = document.getElementById("assistant-bubble");
+    const assistantPanel = document.getElementById("assistant-panel");
+    const assistantInput = document.getElementById("assistant-input");
 
     function showScreen(id) {
       screens.forEach((s) => s.classList.remove("active"));
@@ -2048,6 +2149,13 @@
       setTimeout(() => {
         toastEl.classList.remove("show");
       }, 2200);
+    }
+
+    function toggleAssistant() {
+      if (!assistantPanel) return;
+      const isOpen = assistantPanel.classList.toggle("open");
+      if (assistantBubble) assistantBubble.setAttribute("aria-pressed", isOpen ? "true" : "false");
+      if (isOpen && assistantInput) assistantInput.focus();
     }
 
     function formatXP(x) {
@@ -2773,6 +2881,10 @@
         navigateTo(target);
       });
     });
+
+    if (assistantBubble) {
+      assistantBubble.addEventListener("click", () => toggleAssistant());
+    }
 
     // Coin Quest – Choose your path
     document.querySelectorAll(".cq-choice").forEach((btn) => {
